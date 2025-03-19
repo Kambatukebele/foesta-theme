@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <title>My page title</title>
     {{ content_for_header }}
+    {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
-    <header>header</header>
+    <header class="text-9xl text-red-600 font-extrabold underline">header</header>
     {{ content_for_layout }}
     <footer>footer</footer>
   </body>
