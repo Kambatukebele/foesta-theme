@@ -13,7 +13,25 @@
   "sections": {
     "announcement": {
       "type": "announcement-bar",
-      "settings": {}
+      "blocks": {
+        "announcement_jQef8r": {
+          "type": "announcement",
+          "settings": {
+            "announcement_title": "30% OFF. Code: THIRTY",
+            "announcement_title_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_jQef8r"
+      ],
+      "settings": {
+        "announcement_title_size": 14,
+        "announcement_bar_background": "#0a0a0a",
+        "announcement_bar_color": "#f7f7f7",
+        "announcement_bar_padding_top": 10,
+        "announcement_bar_padding_bottom": 10
+      }
     },
     "header": {
       "type": "header",
