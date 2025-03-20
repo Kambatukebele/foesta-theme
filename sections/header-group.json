@@ -1,6 +1,15 @@
 {
   "type": "header",
   "name": "Header group",
-  "sections": {},
-  "order": []
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "sections": {}
+    },
+    "header": {
+      "type": "header",
+      "sections": {}
+    }
+  },
+  "order": ["announcement", "header"]
 }
