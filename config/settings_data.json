@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "heading_font": "poppins_n6",
+    "body_font": "poppins_n4",
     "facebook": "#",
     "instagram": "#",
     "linkedin": "",
@@ -19,6 +21,7 @@
     "twitter": "",
     "youtube": "",
     "twitch": "",
+    "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -75,8 +78,7 @@
           "shadow": "#121212"
         }
       }
-    },
-    "content_for_index": []
+    }
   },
   "presets": {
     "Default": {
