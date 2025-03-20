@@ -1,209 +1,62 @@
 <!-- Header -->
-<section class="w-full h-full py-3 border-b border-gray-200 relative">
-  <div class="container flex justify-between items-center">
-    <div class="lg:w-1/3">
+<style>
+  .grid-areas-layout {
+    grid-template-areas: 'left center right';
+  }
+  .area-1 {
+    grid-area: left;
+  }
+  .area-2 {
+    grid-area: center;
+  }
+  .area-3 {
+    grid-area: right;
+  }
+</style>
+<section class="w-full h-full py-3 {% if section.settings.is_enable_header_bottom_border == true -%} border-b border-gray-200 {%- endif %} relative">
+  <div class="container grid grid-rows-1 grid-areas-layout">
+    <div class="area-1">
       <a class="w-36 block" href="#">
-        <img
-          class="w-full h-full object-center object-cover"
-          src="./src/images/foesta..webp"
-          alt="logo"
-        >
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 200 | image_tag }}
+        {% else %}
+          {{ shop.name }}
+        {%- endif -%}
       </a>
     </div>
-    <div
-      class="flex order-2 justify-center items-center lg:hidden lg:order-none"
-    >
-      <span id="hamburgerMenu">
-        <svg
-          width="42px"
-          height="42px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM17 17.25H7C6.59 17.25 6.25 16.91 6.25 16.5C6.25 16.09 6.59 15.75 7 15.75H17C17.41 15.75 17.75 16.09 17.75 16.5C17.75 16.91 17.41 17.25 17 17.25ZM17 12.75H7C6.59 12.75 6.25 12.41 6.25 12C6.25 11.59 6.59 11.25 7 11.25H17C17.41 11.25 17.75 11.59 17.75 12C17.75 12.41 17.41 12.75 17 12.75ZM17 8.25H7C6.59 8.25 6.25 7.91 6.25 7.5C6.25 7.09 6.59 6.75 7 6.75H17C17.41 6.75 17.75 7.09 17.75 7.5C17.75 7.91 17.41 8.25 17 8.25Z"
-              fill="#292D32"
-            ></path>
-          </g>
-        </svg>
-      </span>
-      <span id="closeMenu" class="hidden">
-        <svg
-          width="42px"
-          height="42px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
-              stroke="#1C274C"
-              stroke-width="1.5"
-            ></path>
-            <path
-              d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5"
-              stroke="#1C274C"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            ></path>
-          </g>
-        </svg>
-      </span>
-    </div>
+    {% render 'icon-menus' %}
     <!-- Menu -->
     <div
       id="menu"
-      class="absolute order-1 bg-gray-100 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[67px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:w-1/3 lg:bg-transparent lg:order-none"
+      class="absolute area-2 bg-gray-100 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[67px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
     >
       <ul
         class="flex flex-col justify-start items-start gap-3 lg:flex-row lg:gap-8"
       >
-        <li class="text-base text-gray-900 font-normal">
-          <a href="#"> Home </a>
-        </li>
-        <li class="text-base text-gray-900 font-normal">
-          <a href="#"> Shop</a>
-        </li>
-        <li class="text-base text-gray-900 font-normal">
-          <a href="#"> About us </a>
-        </li>
-        <li class="text-base text-gray-900 font-normal">
-          <a href="#"> Blog </a>
-        </li>
-        <li class="text-base text-gray-900 font-normal">
-          <a href="#"> Contact us </a>
-        </li>
+        {%- for main-menu in section.settings.menu.links -%}
+          <li
+            style="color:{{ section.settings.menu_text_color }}"
+            class="text-base font-normal {{ section.settings.menu_text_transform }}"
+          >
+            <a href="{{ main-menu.url }}">{{ main-menu.title }}</a>
+          </li>
+        {%- endfor -%}
       </ul>
     </div>
     <!-- Icons -->
     <div
-      class="flex justify-start items-start gap-3 lg:w-1/3 lg:gap-5 lg:justify-end"
+      class="flex justify-end area-3 items-center gap-3 lg:gap-5"
     >
-      <span id="searchIcon" class="hidden lg:block">
-        <svg
-          width="28px"
-          height="28px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
-              stroke="#000000"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </g>
-        </svg>
+      <span id="searchIcon" class="hidden lg:block lg:w-7 lg:h-7">
+        {{ 'icon-search.svg' | inline_asset_content }}
       </span>
-      <span class="hidden lg:block">
-        <svg
-          width="28px"
-          height="28px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-              stroke="#000000"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </g>
-        </svg>
+      <span class="hidden lg:block lg:w-7 lg:h-7">{{ 'icon-heart.svg' | inline_asset_content }} </span>
+      <span class="hidden lg:block lg:w-7 lg:h-7">
+        {{ 'icon-user.svg' | inline_asset_content }}
       </span>
-      <span class="hidden lg:block">
-        <svg
-          width="28px"
-          height="28px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-              stroke="#000000"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </g>
-        </svg>
-      </span>
-      <span id="cartIcon" class="cursor-pointer">
-        <svg
-          width="28px"
-          height="28px"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z"
-              stroke="#000000"
-              stroke-width="1.5"
-            ></path>
-            <path
-              d="M16.5 18.0001C17.3284 18.0001 18 18.6716 18 19.5001C18 20.3285 17.3284 21.0001 16.5 21.0001C15.6716 21.0001 15 20.3285 15 19.5001C15 18.6716 15.6716 18.0001 16.5 18.0001Z"
-              stroke="#000000"
-              stroke-width="1.5"
-            ></path>
-            <path
-              d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7"
-              stroke="#000000"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            ></path>
-          </g>
-        </svg>
+      <span id="cartIcon" class="relative cursor-pointer block w-7 h-7">
+        {{ 'icon-cart.svg' | inline_asset_content }}
+        <small class="absolute  -top-2 -right-1 text-base">0</small>
       </span>
     </div>
   </div>
@@ -284,7 +137,51 @@
   "enabled_on": { "groups": ["header"] },
   "tag": "header",
   "limit": 1,
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "info": "Choose menu for your header"
+    },
+    {
+      "type": "color",
+      "id": "menu_text_color",
+      "label": "Menu text color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "menu_text_transform",
+      "label": "Menu text transform",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "normal-case"
+        },
+        {
+          "label": "Uppercase",
+          "value": "uppercase"
+        },
+        {
+          "label": "Capitalize",
+          "value": "capitalize"
+        }
+      ],
+      "default": "normal-case",
+      "info": "Select the case for the text menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_enable_header_bottom_border",
+      "label": "Enable bottom header border",
+      "default": true
+    }
+  ],
   "presets": [{ "name": "Header" }]
 }
 {% endschema %}
