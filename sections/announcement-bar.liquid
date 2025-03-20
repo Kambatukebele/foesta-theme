@@ -1,24 +1,29 @@
-<section class="announcement bg-black py-2 px-4" id="announcement">
+<section class="announcement px-4" id="announcement">
   <div class="container lg:flex lg:justify-between lg:items-center">
     <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-3">
       {% render 'icon-socials' %}
     </div>
     <div>
-      <a href="#" class="text-sm font-normal text-white text-center block">Welcome to our website </a>
+      <a
+        href="{{ section.blocks.first.settings.announcement_title_url }}"
+        class="text-sm font-normal text-center block announcement_title"
+      >
+        {{ section.blocks.first.settings.announcement_title }}
+      </a>
     </div>
     <div
       class="hidden lg:text-base lg:flex lg:justify-center lg:items-center lg:gap-3 lg:w"
     >
       <div class="lg:w-24">
-        <select class="text-white w-full" name="language" id="lang">
+        <select class=" w-full announcement_bar_lang" name="language" id="lang">
           <option class="" value="english">English</option>
           <option value="french">French</option>
           <option value="spanish">Spanish</option>
           <option value="german">German</option>
         </select>
       </div>
-      <div class="lg:w-24 text-white">
-        <select name="money" id="money">
+      <div class="lg:w-24 ">
+        <select class="announcement_bar_currency" name="money" id="money">
           <option value="us">US Dollars $</option>
           <option value="cz">Czechia CZK kc</option>
           <option value="Eu">Euro €</option>
@@ -27,6 +32,18 @@
     </div>
   </div>
 </section>
+
+{% style %}
+  .announcement{
+    background-color: {{ section.settings.announcement_bar_background }};
+    color: {{ section.settings.announcement_bar_color }};
+    padding-top: {{ section.settings.announcement_bar_padding_top }}px;
+    padding-bottom: {{ section.settings.announcement_bar_padding_bottom }}px;
+  }
+  .announcement_title, .announcement_bar_lang, .announcement_bar_currency{
+    font-size: {{ section.settings.announcement_title_size }}px;
+  }
+{% endstyle %}
 <!-- Announcement bar -->
 
 {% schema %}
@@ -36,10 +53,103 @@
   "tag": "section",
   "enabled_on": { "groups": ["header"] },
   "limit": 1,
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background and text color"
+    },
+    {
+      "type": "range",
+      "id": "announcement_title_size",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "label": "Announcement title size",
+      "unit": "px",
+      "default": 12,
+      "info": "Choose the size for the announcement title"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_background",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Add the background color"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_color",
+      "label": "Text Color",
+      "default": "#ffffff",
+      "info": "Add the color text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing top and bottom"
+    },
+    {
+      "type": "range",
+      "id": "announcement_bar_padding_top",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "label": "Padding top",
+      "unit": "px",
+      "default": 12,
+      "info": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "announcement_bar_padding_bottom",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "label": "Padding bottom",
+      "unit": "px",
+      "default": 12,
+      "info": "Padding bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Announcement",
+      "type": "announcement",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Announcement title"
+        },
+        {
+          "type": "text",
+          "id": "announcement_title",
+          "label": "Announcement title",
+          "default": "Welcome to our website",
+          "info": "Announce something amazing"
+        },
+        {
+          "type": "url",
+          "id": "announcement_title_url",
+          "label": "Announcement URL",
+          "info": "Add a URL"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Announcement bar"
+      "name": "Announcement bar",
+      "settings": {
+        "announcement_bar_background": "#000000",
+        "announcement_bar_color": "#ffffff",
+        "announcement_bar_padding_top": 10,
+        "announcement_bar_padding_bottom": 10
+      },
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
     }
   ]
 }
