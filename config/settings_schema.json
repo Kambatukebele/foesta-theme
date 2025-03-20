@@ -8,6 +8,80 @@
     "theme_support_email": "info@ezagrowllc.com"
   },
   {
+    "name": "Theme color",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#ffffff",
+            "info": "Background color"
+          },
+          {
+            "type": "color_background",
+            "id": "background-gradient",
+            "label": "Background gradient",
+            "info": "Background gradient"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#121212",
+            "info": "Text color"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "Button",
+            "default": "#121212",
+            "info": "Button background color"
+          },
+          {
+            "type": "color",
+            "id": "button-label",
+            "label": "Button label",
+            "default": "#ffffff",
+            "info": "Button label color"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_label",
+            "label": "Secondary button label",
+            "default": "#121212",
+            "info": "Secondary button label color"
+          },
+          {
+            "type": "color",
+            "id": "shadow",
+            "label": "Shadow",
+            "default": "#000000",
+            "info": "Shadow color"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "background": {
+            "solid": "background",
+            "gradient": "background-gradient"
+          },
+          "links": "secondary_button_label",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button-label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "secondary_button_label"
+        }
+      }
+    ]
+  },
+  {
     "name": "Social links",
     "settings": [
       {
