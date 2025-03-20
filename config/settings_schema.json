@@ -6,5 +6,68 @@
     "theme_version": "1.0.0",
     "theme_documentation_url": "https://kambatukebele.com/foesta/",
     "theme_support_email": "info@ezagrowllc.com"
+  },
+  {
+    "name": "Social links",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "facebook",
+        "label": "Facebook",
+        "info": "Enter your facebook profile link"
+      },
+      {
+        "type": "url",
+        "id": "instagram",
+        "label": "Instagram",
+        "info": "Enter your instagram profile link"
+      },
+      {
+        "type": "url",
+        "id": "linkedin",
+        "label": "Linkedin",
+        "info": "Enter your linkedin profile link"
+      },
+      {
+        "type": "url",
+        "id": "pinterrest",
+        "label": "Pinterrest",
+        "info": "Enter your pinterrest profile link"
+      },
+      {
+        "type": "url",
+        "id": "snapchat",
+        "label": "Snapchat",
+        "info": "Enter your snapchat profile link"
+      },
+      {
+        "type": "url",
+        "id": "tiktok",
+        "label": "Tiktok",
+        "info": "Enter your tiktok profile link"
+      },
+      {
+        "type": "url",
+        "id": "tumblr",
+        "label": "Tumblr",
+        "info": "Enter your tumblr profile link"
+      },
+      {
+        "type": "url",
+        "id": "twitter",
+        "label": "Twitter",
+        "info": "Enter your twitter profile link"
+      },
+      {
+        "type": "url",
+        "id": "youtube",
+        "label": "Youtube",
+        "info": "Enter your youtube profile link"
+      }
+    ]
   }
 ]
