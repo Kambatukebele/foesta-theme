@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>My page title</title>
+    <title>{{ page_title }}</title>
     {{ content_for_header }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>
-    <header class="text-9xl text-red-600 font-extrabold underline">header</header>
+    {%- sections 'header-group' -%}
     {{ content_for_layout }}
     <footer>footer</footer>
   </body>
