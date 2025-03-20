@@ -52,5 +52,6 @@
     {{ content_for_layout }}
     {%- sections 'footer-group' -%}
     {{ 'header.js' | asset_url | script_tag }}
+    {{ 'footer.js' | asset_url | script_tag }}
   </body>
 </html>
