@@ -1,4 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "hero_ri3xxF": {
+      "type": "hero",
+      "blocks": {
+        "hero_block_xQ7mU4": {
+          "type": "hero_block",
+          "settings": {
+            "image": "shopify://shop_images/slider-2.webp",
+            "heading_h1": "Winter style delights",
+            "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
+            "button_text": "Shop now",
+            "button_url": ""
+          }
+        },
+        "hero_block_JiH4rQ": {
+          "type": "hero_block",
+          "settings": {
+            "image": "shopify://shop_images/slider-1.webp",
+            "heading_h1": "Spring style inspirations",
+            "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
+            "button_text": "Shop now",
+            "button_url": ""
+          }
+        },
+        "hero_block_GP7yhe": {
+          "type": "hero_block",
+          "settings": {
+            "image": "shopify://shop_images/slider-3.webp",
+            "heading_h1": "Summer style sensation",
+            "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
+            "button_text": "Shop now",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "hero_block_xQ7mU4",
+        "hero_block_JiH4rQ",
+        "hero_block_GP7yhe"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero_ri3xxF"
+  ]
 }

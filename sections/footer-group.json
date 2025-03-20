@@ -1,6 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer group",
-  "sections": {},
-  "order": []
+  "sections": {
+    "footer_ny4CRw": {
+      "type": "footer",
+      "blocks": {
+        "contact_info_Abz7T4": {
+          "type": "contact_info",
+          "settings": {
+            "contact_info_title": "kamba",
+            "contact_info_description": "Find a locations nearest you",
+            "contact_info_phone_title": "Hotline",
+            "contact_info_phone_number": "(+00) 123 456 789",
+            "contact_info_address_title": "Address",
+            "contact_info_address_description": "512 Howard Street #19 San Francisco, CA 94103, USA"
+          }
+        },
+        "quick_links_Kmbi4K": {
+          "type": "quick_links",
+          "settings": {
+            "quick_links_title": "Quick links",
+            "quick_links_first_text": "My account",
+            "quick_links_first_url": "",
+            "quick_links_second_text": "Cart",
+            "quick_links_second_url": "",
+            "quick_links_third_text": "About",
+            "quick_links_third_url": "",
+            "quick_links_fourth_text": "Product compare",
+            "quick_links_fourth_url": "",
+            "quick_links_fifth_text": "Contact us",
+            "quick_links_fifth_url": "",
+            "quick_links_sixth_text": "Compare product",
+            "quick_links_sixth_url": ""
+          }
+        },
+        "information_m4zV9e": {
+          "type": "information",
+          "settings": {
+            "information_title": "Information",
+            "information_first_text": "My account",
+            "information_first_url": "",
+            "information_second_text": "My account",
+            "information_second_url": "",
+            "information_third_text": "My account",
+            "information_third_url": "",
+            "information_fifth_text": "My account",
+            "information_fifth_url": ""
+          }
+        },
+        "keep_in_touch_b4tFTT": {
+          "type": "keep_in_touch",
+          "settings": {
+            "keep_in_touch_title": "Let's keep in touch",
+            "keep_in_touch_description": "Subscribe to our newsletter to receive updates",
+            "keep_in_touch_button_text": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "contact_info_Abz7T4",
+        "quick_links_Kmbi4K",
+        "information_m4zV9e",
+        "keep_in_touch_b4tFTT"
+      ],
+      "settings": {
+        "footer_background_color": "#e7e7e7",
+        "footer_padding_top_bottom_small_screen": "py-6",
+        "footer_padding_top_bottom_large_screen": "lg:py-12"
+      }
+    }
+  },
+  "order": [
+    "footer_ny4CRw"
+  ]
 }
