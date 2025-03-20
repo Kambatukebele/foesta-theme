@@ -50,7 +50,7 @@
   <body>
     {%- sections 'header-group' -%}
     {{ content_for_layout }}
-    <footer>footer</footer>
+    {%- sections 'footer-group' -%}
     {{ 'header.js' | asset_url | script_tag }}
   </body>
 </html>
