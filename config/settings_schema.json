@@ -76,6 +76,29 @@
     ]
   },
   {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Choose a heading and body font"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading font",
+        "info": "Heading font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body font",
+        "info": "Body font",
+        "default": "helvetica_n4"
+      }
+    ]
+  },
+  {
     "name": "Social links",
     "settings": [
       {
