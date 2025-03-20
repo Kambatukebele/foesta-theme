@@ -35,7 +35,12 @@
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "main-menu",
+        "menu_text_color": "#0a0a0a",
+        "menu_text_transform": "uppercase",
+        "is_enable_header_bottom_border": true
+      }
     }
   },
   "order": [
