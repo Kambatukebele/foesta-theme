@@ -2,10 +2,49 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>{{ page_title }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% comment %} {% render 'meta-tags' %} {% endcomment %}
     {{ content_for_header }}
     {{ 'tailwind.output.css' | asset_url | stylesheet_tag }}
+    <style>
+      {{ settings.heading_font | font_face }}
+      {{ settings.body_font | font_face }}
+    </style>
+    {% comment %} {{ settings.body_font | font_face }} {% endcomment %}
+
+    <style>
+      body {
+        font-family: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+        font-weight: {{ settings.body_font.weight }};
+        font-style: {{ settings.body_font.style }};
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+        font-weight: {{ settings.header_font.weight }};
+        font-style: {{ settings.header_font.style }};
+      }
+    </style>
   </head>
 
   <body>
