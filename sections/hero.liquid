@@ -1,0 +1,141 @@
+<section class="w-full relative overflow-hidden">
+  <div
+    id="slider"
+    class="flex transition-transform duration-700 ease-in-out"
+  >
+    {% if section.blocks.size > 0 %}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'hero_block' -%}
+            <div class="min-w-full h-full relative">
+              <div
+                class="min-w-full h-[256px] sm:h-[350px] md:h-[450px] lg:h-screen"
+              >
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1920
+                    | image_tag: class: 'w-full h-full object-cover object-center'
+                  }}
+                {% endif %}
+              </div>
+              <div
+                class="lg:absolute lg:container lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
+              >
+                <div
+                  class="flex justify-center items-center flex-col px-4 py-8 gap-6 lg:justify-start lg:items-start lg:px-0 lg:py-0 lg:w-[600px]"
+                >
+                  <h1
+                    class="text-3xl font-extrabold text-center text-gray-950 lg:text-left md:text-5xl 2xl:text-7xl"
+                  >
+                    {{ block.settings.heading_h1 }}
+                  </h1>
+                  <p
+                    class="text-base font-normal text-gray-800 text-center sm:text-lg lg:text-left"
+                  >
+                    {{ block.settings.body_description }}
+                  </p>
+                  <button
+                    class="bg-black text-white text-base rounded-full py-4 px-10"
+                  >
+                    <a href="{{ block.settings.button_url }}">
+                      {{ block.settings.button_text }}
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+    {% else %}
+      <div class="min-w-full h-full relative">
+        <div
+          class="min-w-full h-[256px] sm:h-[350px] md:h-[450px] lg:h-screen"
+        >
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover object-center' }}
+        </div>
+        <div
+          class="lg:absolute lg:container lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
+        >
+          <div
+            class="flex justify-center items-center flex-col px-4 py-8 gap-6 lg:justify-start lg:items-start lg:px-0 lg:py-0 lg:w-[600px]"
+          >
+            <h1
+              class="text-3xl font-extrabold text-center text-gray-950 lg:text-left md:text-5xl 2xl:text-7xl"
+            >
+              Summer style <br>
+              sensations
+            </h1>
+            <p
+              class="text-base font-normal text-gray-800 text-center sm:text-lg lg:text-left"
+            >
+              Having plain clothing makes you look ordinary. We can assist you
+              <br>
+              in choosing the right dresses with Foesta.
+            </p>
+            <button
+              class="bg-black text-white text-base rounded-full py-4 px-10"
+            >
+              <a href="#">Shop now</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "class": "hero",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Hero block",
+      "type": "hero_block",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select an image"
+        },
+        {
+          "type": "text",
+          "id": "heading_h1",
+          "label": "Heading text",
+          "default": "Welcome to our lovely store"
+        },
+        {
+          "type": "textarea",
+          "id": "body_description",
+          "label": "Description",
+          "default": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
