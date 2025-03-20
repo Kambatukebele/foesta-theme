@@ -64,6 +64,12 @@
       },
       {
         "type": "url",
+        "id": "twitch",
+        "label": "Twitch",
+        "info": "Enter your twitch profile link"
+      },
+      {
+        "type": "url",
         "id": "youtube",
         "label": "Youtube",
         "info": "Enter your youtube profile link"
