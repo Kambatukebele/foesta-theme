@@ -8,6 +8,21 @@
     "theme_support_email": "info@ezagrowllc.com"
   },
   {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Add your logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "Add dimension is 300x300px"
+      }
+    ]
+  },
+  {
     "name": "Theme color",
     "settings": [
       {
