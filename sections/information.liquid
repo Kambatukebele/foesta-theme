@@ -1,0 +1,82 @@
+<!-- Information -->
+<section class="w-full h-fit border-b-gray-200 border-b">
+  <div
+    class="container grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+  >
+    {% if section.blocks.size > 0 %}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'information_block' -%}
+            <div
+              class="flex flex-col justify-center items-center gap-4 w-full h-[200px] lg:border-r lg:border-gray-200 lg:py-10"
+            >
+              <span>
+                {{ block.settings.information_image_svg }}
+              </span>
+              <div class="flex flex-col justify-center items-center gap-2">
+                <span class="text-xl font-bold text-gray-950">
+                  {{ block.settings.information_heading }}
+                </span>
+                <span class="text-base font-light text-gray-700">
+                  {{ block.settings.information_subheading }}
+                </span>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    {% endif %}
+  </div>
+</section>
+<!-- End Information -->
+
+{% schema %}
+{
+  "name": "Information",
+  "class": "information",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Information settings"
+    },
+    {
+      "type": "color",
+      "id": "information_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "information_block",
+      "name": "Information block",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "html",
+          "id": "information_image_svg",
+          "label": "Information",
+          "info": "You have to add only svg html code"
+        },
+        {
+          "type": "text",
+          "id": "information_heading",
+          "label": "Information heading",
+          "default": "Word wide Shipping"
+        },
+        {
+          "type": "text",
+          "id": "information_subheading",
+          "label": "Information sub heading",
+          "default": "Word Wide Free Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Information"
+    }
+  ]
+}
+{% endschema %}
