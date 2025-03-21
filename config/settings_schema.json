@@ -175,5 +175,88 @@
         "info": "Enter your youtube profile link"
       }
     ]
+  },
+  {
+    "name": "Featured collection card",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Featured collection card"
+      },
+      {
+        "type": "select",
+        "id": "featured_collection_card_border_radius",
+        "label": "Border radius",
+        "options": [
+          {
+            "label": "None",
+            "value": "rounded-none"
+          },
+          {
+            "label": "Rounded",
+            "value": "rounded"
+          },
+          {
+            "label": "Rounded small",
+            "value": "rounded-sm"
+          },
+          {
+            "label": "Rounded medium",
+            "value": "rounded-md"
+          },
+          {
+            "label": "Rounded large",
+            "value": "rounded-lg"
+          },
+          {
+            "label": "Rounded extra large",
+            "value": "rounded-xl"
+          },
+          {
+            "label": "Rounded 2 extra large",
+            "value": "rounded-2xl"
+          }
+        ],
+        "default": "rounded-md",
+        "info": "Change the border radius for the featured collection card"
+      },
+      {
+        "type": "select",
+        "id": "featured_collection_card_shadow",
+        "label": "Featured collection card shadow",
+        "options": [
+          {
+            "label": "None",
+            "value": "shadow-none"
+          },
+          {
+            "label": "Shadow simple",
+            "value": "shadow"
+          },
+          {
+            "label": "Shadow small",
+            "value": "shadow-sm"
+          },
+          {
+            "label": "Shadow medium",
+            "value": "shadow-md"
+          },
+          {
+            "label": "Shadow large",
+            "value": "shadow-lg"
+          },
+          {
+            "label": "Shadow extra large",
+            "value": "shadow-xl"
+          },
+          {
+            "label": "Shadow 2 extra large",
+            "value": "shadow-2xl"
+          }
+        ],
+        "default": "shadow-md",
+        "info": "Change the shadow for the featured collection card"
+      }
+    ]
   }
 ]
