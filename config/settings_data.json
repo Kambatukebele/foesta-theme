@@ -21,6 +21,8 @@
     "tumblr": "",
     "twitter": "",
     "youtube": "",
+    "featured_collection_card_border_radius": "rounded-2xl",
+    "featured_collection_card_shadow": "shadow-none",
     "twitch": "",
     "content_for_index": [],
     "color_schemes": {
