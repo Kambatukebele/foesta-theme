@@ -1,0 +1,22 @@
+{% comment %}
+  This is the card collection. Use it only for the featured collection
+  Accept: image, collectionName, buttonName, buttonNameURL, borderRadius, shadow
+{% endcomment %}
+
+<div class="w-[280px] shrink-0 h-[391px] overflow-hidden relative snap-center {{ shadow }} {{ borderRadius }}">
+  {%- if image != blank -%}
+    {{ image | image_url: width: 400 | image_tag: class: 'w-full h-full object-cover object-center block' }}
+  {%- else -%}
+    {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover block object-center border border-gray-100' }}
+  {%- endif -%}
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 w-full px-8 -translate-y-1/2 flex justify-between items-center flex-col gap-4"
+  >
+    <span class="text-2xl font-bold text-white">{{ collectionName }}</span>
+    <button
+      class="bg-white text-black text-base rounded-full py-3 px-10 hover:bg-black hover:text-white duration-100 ease-in-out cursor-pointer"
+    >
+      <a href="{{ buttonNameURL }}">{{ buttonName }}</a>
+    </button>
+  </div>
+</div>
