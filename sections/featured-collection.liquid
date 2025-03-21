@@ -1,0 +1,236 @@
+<!-- Collections -->
+<section
+  style="background-color: {{ section.settings.featured_collection_bg }}"
+  id="collectionScrolling"
+  class="w-full h-fit relative {{ section.settings.featured_collection_paddingY_small }} {{ section.settings.featured_collection_paddingY_large }}"
+>
+  <div class="container">
+    <div
+      id="sliderCollections"
+      class="flex gap-4 snap-x snap-mandatory transition-transform duration-700 ease-in-out overflow-x-scroll scroll-smooth"
+    >
+      {% if section.settings.featured_collection_list != blank %}
+        {% for featured in section.settings.featured_collection_list %}
+          {% render 'card-collection',
+            image: featured.featured_image,
+            collectionName: featured.title,
+            buttonNameURL: featured.url,
+            buttonName: 'Shop now',
+            borderRadius: settings.featured_collection_card_border_radius,
+            shadow: settings.featured_collection_card_shadow
+          %}
+        {%- endfor -%}
+      {% else %}
+        {%- for block in (1..10) -%}
+          {% render 'card-collection',
+            collectionName: 'New sales',
+            buttonName: 'Shop now',
+            buttonNameURL: '',
+            borderRadius: settings.featured_collection_card_border_radius,
+            shadow: settings.featured_collection_card_shadow
+          %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <!-- Make this a component or a render -->
+    {% render 'chevron' %}
+    <!-- End Make this a component or a render -->
+  </div>
+</section>
+<!-- End Collections -->
+
+<style>
+  /* This is for the collection and trending product section */
+  #sliderCollections,
+  #sliderProductTrending {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+
+  #sliderCollections::-webkit-scrollbar,
+  sliderProductTrending::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  /* This is for the collection and trending product section */
+</style>
+
+<!-- Script for collection and trending product on home page -->
+<script>
+  const productCards = document.querySelectorAll('.productCard');
+  const productIcons = document.querySelectorAll('.productIcon');
+
+  productCards.forEach((productCard, index) => {
+    productIcons.forEach((productIcon, k_index) => {
+      if (index === k_index) {
+        productCard.addEventListener('mouseenter', () => {
+          productIcon.classList.remove('opacity-0');
+          productIcon.classList.add('opacity-100');
+          productIcon.classList.remove('-right-5');
+          productIcon.classList.add('right-2');
+        });
+      }
+      productCard.addEventListener('mouseleave', () => {
+        productIcon.classList.remove('opacity-100');
+        productIcon.classList.add('opacity-0');
+        productIcon.classList.remove('right-2');
+        productIcon.classList.add('-right-5');
+      });
+    });
+  });
+
+  //SLiding the card
+
+  const productAndCollection = () => {
+    const SLIDER = document.querySelector('#sliderCollections');
+    const nextBtn = document.querySelector('#nextBtn');
+    const prevBtn = document.querySelector('#prevBtn');
+
+    //For trending product
+    const SLIDER_TRENDING = document.querySelector('#sliderProductTrending');
+    const nextBtnTrending = document.querySelector('#nextBtnTrending');
+    const prevBtnTrending = document.querySelector('#prevBtnTrending');
+
+    // Define scroll amount (each card width + gap)
+    const scrollAmount = 296;
+
+    scrollCard(prevBtn, nextBtn, SLIDER);
+    scrollCard(prevBtnTrending, nextBtnTrending, SLIDER_TRENDING);
+
+    function scrollCard(prev, next, sliding) {
+      // Function to scroll right
+      next.addEventListener('click', () => {
+        sliding.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      // // Function to scroll left
+      prev.addEventListener('click', () => {
+        sliding.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+    }
+  };
+  productAndCollection();
+</script>
+<!-- End Script for collection and trending product on home page -->
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "featured collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Select your collection"
+    },
+    {
+      "type": "collection_list",
+      "id": "featured_collection_list",
+      "label": "Collection list",
+      "limit": 10,
+      "info": "Choose your best collection"
+    },
+    {
+      "type": "header",
+      "content": "Padding top"
+    },
+    {
+      "type": "select",
+      "id": "featured_collection_paddingY_small",
+      "label": "Padding top and bottom on small screen",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12"
+    },
+    {
+      "type": "select",
+      "id": "featured_collection_paddingY_large",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24"
+    },
+    {
+      "type": "header",
+      "content": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "featured_collection_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}
