@@ -110,11 +110,36 @@
         "featured_collection_paddingY_large": "lg:py-24",
         "featured_collection_bg": "#ffffff"
       }
+    },
+    "trending_product_aCRwCx": {
+      "type": "trending-product",
+      "settings": {
+        "trending_product_title": "Trending products",
+        "trending_product_description": "Follow the most popular trends and get exclusive items from Foesta shop.",
+        "trending_product_paddingY_small": "py-12",
+        "trending_product_paddingY_large": "lg:py-24",
+        "trending_product_bg": "#ffffff",
+        "trending_product_list": [
+          "black-solid-women-skirt-stretch-bodycon-straight-women-skirt-casual-work-ol-office-women-skirt-summer-new-drop-shipping",
+          "european-and-american-spring-and-summer-new-plus-fat-medium-length-business-hip-wrapped-dress",
+          "winter-warm-jeans-mens-brushed-jeans-retro-blue-thickened-loose-straight-pants-brand-business-casual-stretch-washed-denim-pants",
+          "2023-new-mens-stretchy-skinny-jeans-solid-color-slim-fit-casual-pants-fashion-mens-designer-clothes-streetwear-denim-trousers",
+          "deep-v-neck-sexy-summer-dress-women-solid-color-hanging-neck-hollow-white-mini-dress-pleated-party-dress",
+          "sexy-deep-v-neck-low-cut-side-split-silver-collar-bodycon-dress-women-elegant-backless-sleeveless-mini-dress-club-party-vestidos",
+          "skinny-jeans-for-men-painted-stretch-slim-fit-ripped-distressed-pleated-knee-patch-denim-pants-brand-casual-trouser-male",
+          "oversized-women-office-pencil-skirts-2025-elegant-fashion-autumn-high-wiast-black-skirt-korean-style-winter-skinny-corset-skirt",
+          "summer-new-sexy-camisolevsatin-pleated-collarabackless-dress-short-dress-evening-gown-party-gathering-bar-nightclub-womens-wear",
+          "taruxy-irregular-slit-vacation-long-dress-for-women-elegant-contrast-slim-ribbon-dress-back-lace-up-female-strapless-summer-new",
+          "summer-korean-men-casual-straight-cropped-pants-streetwear-fashion-elastic-waist-drawstring-basic-solid-new-thin-slim-trousers",
+          "chronstyle-women-sexy-slim-fit-low-cut-mini-dress-y2k-backless-halter-deep-v-neck-mesh-short-dress-elegant-evening-vestidos-2023"
+        ]
+      }
     }
   },
   "order": [
     "hero_ri3xxF",
     "information_Cpme7p",
-    "featured_collection_fLVxmH"
+    "featured_collection_fLVxmH",
+    "trending_product_aCRwCx"
   ]
 }
