@@ -1,12 +1,16 @@
+{% comment %}
+  Accept: next and prev variable
+{% endcomment %}
+
 <div class="">
   <span
-    id="nextBtn"
+    id="{{ next }}"
     class="bg-gray-100 border absolute z-10 top-1/2 -translate-y-1/2 right-5 lg:right-10 border-gray-100 shadow-3xl w-10 h-10 rounded-full flex justify-center items-center hover:bg-gray-950 hover:text-white cursor-pointer"
   >
     {{ 'icon-chevron.svg' | inline_asset_content }}
   </span>
   <span
-    id="prevBtn"
+    id="{{ prev }}"
     class="bg-gray-100 border absolute z-10 top-1/2 -translate-y-1/2 left-5 lg:left-10 rotate-180 border-gray-100 shadow-3xl w-10 h-10 rounded-full flex justify-center transition duration-150 ease-in-out items-center hover:bg-gray-950 hover:text-white cursor-pointer"
   >
     {{ 'icon-chevron.svg' | inline_asset_content }}
