@@ -1,0 +1,211 @@
+<!-- Treding product -->
+<section
+  style="background-color: {{ section.settings.trending_product_bg }}"
+  id="trendingProductScrolling"
+  class="w-full h-fit relative {{ section.settings.trending_product_paddingY_small }} {{ section.settings.trending_product_paddingY_large }}"
+>
+  <div class="container flex justify-center flex-col items-start gap-10">
+    <div
+      class="flex flex-col w-full mx-auto justify-between items-center gap-4"
+    >
+      <h2 class="text-2xl font-bold text-gray-950 sm:text-4xl">
+        {{ section.settings.trending_product_title }}
+      </h2>
+      <p class="text-base font-normal text-gray-700 text-center">
+        {{ section.settings.trending_product_description }}
+      </p>
+    </div>
+    <div
+      id="sliderProductTrending"
+      class="flex w-full h-[500px] gap-4 snap-x snap-mandatory transition-transform duration-700 ease-in-out overflow-x-scroll scroll-smooth"
+    >
+      {%- if section.settings.trending_product_list != blank -%}
+        {%- for product in section.settings.trending_product_list -%}
+          <div class="relative productCard w-[280px] shrink-0 snap-center">
+            <div class="flex flex-col justify-center items-start gap-2">
+              {{
+                product.featured_image
+                | image_url: width: 1000
+                | image_tag: class: 'w-80 h-80 object-center object-cover rounded-lg'
+              }}
+              <p class="text-lg font-normal text-gray-700">{{ product.title | capitalize }}</p>
+              <div class="flex justify-start items-center gap-3 w-full">
+                <p class="text-base font-bold text-gray-950">{{ product.price | money }}</p>
+                <p class="text-base font-bold text-red-500 line-through">{{ product.price | money }}</p>
+                {%- if product.compare_at_price != blank -%}
+                {%- endif -%}
+              </div>
+              <button
+                class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
+              >
+                Add to cart
+              </button>
+            </div>
+            {% render 'show-icon-card' %}
+          </div>
+        {%- endfor -%}
+      {% else %}
+        {% for item in (1..15) %}
+          <div class="relative productCard w-[280px] shrink-0 snap-center">
+            <div class="flex flex-col justify-center items-start gap-2">
+              {{ 'product-1' | placeholder_svg_tag: 'w-80 h-80 object-center object-cover rounded-lg' }}
+              <p class="text-lg font-normal text-gray-700">Vintage-Inspired Floral Midi</p>
+              <p class="text-base font-bold text-gray-950">$8.99</p>
+              <button
+                class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
+              >
+                Add to cart
+              </button>
+            </div>
+            {% render 'show-icon-card' %}
+          </div>
+        {% endfor %}
+      {%- endif -%}
+    </div>
+  </div>
+  <!-- Make this a component or a render -->
+  {% render 'chevron', next: 'nextBtnTrending', prev: 'prevBtnTrending' %}
+  <!-- End Make this a component or a render -->
+</section>
+<!-- End Treding product -->
+
+{% schema %}
+{
+  "name": "Trending product",
+  "class": "trending_product",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Padding top"
+    },
+    {
+      "type": "text",
+      "id": "trending_product_title",
+      "label": "Trending title",
+      "default": "Trending products"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trending_product_description",
+      "label": "Trending product description"
+    },
+    {
+      "type": "header",
+      "content": "Padding top"
+    },
+    {
+      "type": "select",
+      "id": "trending_product_paddingY_small",
+      "label": "Padding top and bottom on small screen",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12"
+    },
+    {
+      "type": "select",
+      "id": "trending_product_paddingY_large",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24"
+    },
+    {
+      "type": "header",
+      "content": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "trending_product_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Choose your products"
+    },
+    {
+      "type": "product_list",
+      "id": "trending_product_list",
+      "label": "Choose your products"
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "Trending product"
+    }
+  ]
+}
+{% endschema %}
