@@ -1,0 +1,18 @@
+{% comment %}
+  This is the eye and the heart icons that shows when hovered the card product
+{% endcomment %}
+
+<div
+  class="absolute top-2 -right-5 productIcon opacity-0 duration-700 ease-in-out flex justify-center items-center flex-col gap-2"
+>
+  <span
+    class="bg-white p-2 rounded-full justify-center items-center cursor-pointer hover:bg-gray-100 duration-100 ease-in-out"
+  >
+    {{ 'icon-eye.svg' | inline_asset_content }}
+  </span>
+  <span
+    class="bg-white p-2 rounded-full flex justify-center items-center cursor-pointer hover:bg-gray-100 duration-100 ease-in-out"
+  >
+    {{ 'icon-heart-2.svg' | inline_asset_content }}
+  </span>
+</div>
