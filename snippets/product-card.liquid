@@ -1,0 +1,26 @@
+{% comment %}
+  This is the product card.
+  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productButtonURL, productButtonText
+{% endcomment %}
+
+<div class="relative productCard {{ productCardWidth }} shrink-0 snap-center pb-7 rounded-2xl">
+  <div class="flex flex-col justify-center items-center gap-2">
+    {% comment %} {{ 'product-1' | placeholder_svg_tag: 'w-80 h-80 object-center object-cover rounded-lg' }} {% endcomment %}
+    {{ productIMage }}
+    <div class="w-full flex justify-center flex-col items-center gap-2">
+      <p class="text-lg font-normal text-gray-700">{{ productTitle | truncate: 25, '...' }}</p>
+      <div class="flex justify-center items-center gap-3 w-full">
+        <p class="text-base font-bold text-gray-950">{{ productPrice | money }}</p>
+        {%- if productPriceComparison != blank -%}
+          <p class="text-base font-bold text-red-500 line-through">{{ productPriceComparison | money }}</p>
+        {%- endif -%}
+      </div>
+      <button
+        class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
+      >
+        <a href="{{ productButtonURL }}">{{ productButtonText }}</a>
+      </button>
+    </div>
+  </div>
+  {% render 'show-icon-card' %}
+</div>
