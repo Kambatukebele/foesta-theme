@@ -1,1 +1,143 @@
-<section>collection show</section>
+<form class="w-full h-fit py-12 lg:py-24">
+  <div class="container px-4">
+    <div class="min-w-[280px] flex justify-between items-center md:bg-gray-200 md:px-4 md:py-3 md:rounded-sm">
+      <!-- filter on small device -->
+      <div id="filterOnSmall" class="flex justify-start items-center gap-2 bg-gray-200 px-4 py-3 rounded-sm md:hidden">
+        <span class="block w-4 "> {{ 'icon-filter.svg' | inline_asset_content }}</span>
+        <span class="text-base text-gray-950 font-normal">Filter and sort</span>
+      </div>
+      <!-- End filter on small device -->
+      <div class="hidden md:flex md:justify-center md:items-center md:gap-4">
+        <span class="block w-2">{{ 'icon-2bar.svg' | inline_asset_content }}</span>
+        <span class="block w-3.5">{{ 'icon-3bar.svg' | inline_asset_content }}</span>
+        <span class="block w-5">{{ 'icon-4bar.svg' | inline_asset_content }}</span>
+      </div>
+
+      <div class="md:flex md:justify-center md:items-center md:gap-10">
+        <div class="hidden md:flex md:justify-center md:items-center md:gap-1">
+          {%- assign sortBy = collection.sort_by | default: collection.default_sort_by -%}
+          <span>Sort by:</span>
+          <select>
+            {%- for option in collection.sort_options -%}
+              <option
+                value="{{ option.value }}"
+                {%- if option.value == sortBy %}
+                  selected="selected"
+                {% endif -%}
+              >
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+        <span class="text-base text-gray-950 font-medium w-fit">{{ collection.all_products_count }} Products</span>
+      </div>
+    </div>
+    <!-- Product card -->
+    <div class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+      {%- if collection.products != blank -%}
+        {%- for product in collection.products -%}
+          {%- assign productImage = product.featured_image
+            | image_url: width: 1000
+            | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
+          -%}
+          {% render 'product-card',
+            productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full',
+            productIMage: productImage,
+            productTitle: product.title,
+            productPrice: product.price,
+            productPriceComparison: product.compare_at_price,
+            productButtonURL: product.url,
+            productButtonText: 'Add to cart'
+          %}
+        {%- endfor -%}
+      {% else %}
+        {% for item in (1..15) %}
+          {%- assign productImage = 'product-1'
+            | placeholder_svg_tag: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
+          -%}
+          {% render 'product-card',
+            productCardWidth: 'min-w-[280px] rounded-2xl  md:min-w-full',
+            productIMage: productImage,
+            productTitle: 'Product title',
+            productPrice: 34,
+            productPriceComparison: 55,
+            productButtonURL: '',
+            productButtonText: 'Add to cart'
+          %}
+        {% endfor %}
+      {%- endif -%}
+    </div>
+    <!-- End Product card -->
+    <!-- Product drawer card -->
+    <div
+      id="collectionDrawer"
+      class="w-[300px] duration-700 ease-in-out px-4 bg-white shadow-2xl h-screen fixed top-0 -right-[3000px] z-10 flex justify-between items-center flex-col"
+    >
+      <div class="w-full h-20 flex justify-end items-center border-b-gray-200 border-b">
+        <div class="w-full flex flex-col justify-center items-center gap-1">
+          <span>Filter and sort</span>
+          <span>{{ collection.all_products_count }} products</span>
+        </div>
+        <!-- close drawer -->
+        <span id="closeCollectionDrawer" class="block w-8 h-8">{{ 'icon-close.svg' | inline_asset_content }}</span>
+        <!-- End close drawer -->
+      </div>
+      <!-- filter params -->
+      <div class="w-full h-[calc(100vh-10rem)] z-50 flex flex-col gap-3.5 py-5 overflow-y-scroll">
+        <!-- Loop filter params here -->
+        {% for filter in collection.filters %}
+          <div class="flex justify-between items-center border border-gray-200 shadow-sm rounded-lg py-4 px-4">
+            <span>{{ filter.label }}</span>
+            <span class="block w-4 h-4">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
+          </div>
+
+          {{ filter.type }}
+        {% endfor %}
+      </div>
+      <!-- End filter params -->
+      <!-- sub filter params -->
+      <div class="hidden">
+        <div>
+          <span class="block w-8 h-8">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
+          <span>Availability</span>
+        </div>
+        <div>
+          <div>
+            <input type="checkbox">
+            <label>In stock</label>
+          </div>
+          <div>
+            <input type="checkbox">
+            <label>Out of stock</label>
+          </div>
+        </div>
+      </div>
+      <!-- End sub filter params -->
+      <!-- Remove and apply params -->
+      <div class="w-full h-20 flex justify-between items-center border-t border-gray-200">
+        <span class="underline">Remove all</span>
+        <span>Apply</span>
+      </div>
+      <!-- End Remove and apply params -->
+    </div>
+    <!-- Product drawer card -->
+  </div>
+</form>
+
+<script>
+  const filterOneSmall = document.querySelector('#filterOnSmall'); // target the filter and sort on small device
+  const collectionDrawer = document.querySelector('#collectionDrawer'); // target the collection drawer that contains the filter
+  const closeCollectionDrawer = document.querySelector('#closeCollectionDrawer'); //target the close icon to close the collection drawer
+  function openCloseDrawer() {
+    if (collectionDrawer.classList.contains('-right-[3000px]')) {
+      collectionDrawer.classList.remove('-right-[3000px]');
+      collectionDrawer.classList.add('right-0');
+    } else {
+      collectionDrawer.classList.add('-right-[3000px]');
+      collectionDrawer.classList.remove('right-0');
+    }
+  }
+  filterOneSmall.addEventListener('click', openCloseDrawer);
+  closeCollectionDrawer.addEventListener('click', openCloseDrawer);
+</script>
