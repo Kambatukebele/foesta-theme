@@ -21,44 +21,33 @@
     >
       {%- if section.settings.trending_product_list != blank -%}
         {%- for product in section.settings.trending_product_list -%}
-          <div class="relative productCard w-[280px] shrink-0 snap-center">
-            <div class="flex flex-col justify-center items-start gap-2">
-              {{
-                product.featured_image
-                | image_url: width: 1000
-                | image_tag: class: 'w-80 h-80 object-center object-cover rounded-lg'
-              }}
-              <p class="text-lg font-normal text-gray-700">{{ product.title | capitalize }}</p>
-              <div class="flex justify-start items-center gap-3 w-full">
-                <p class="text-base font-bold text-gray-950">{{ product.price | money }}</p>
-                <p class="text-base font-bold text-red-500 line-through">{{ product.price | money }}</p>
-                {%- if product.compare_at_price != blank -%}
-                {%- endif -%}
-              </div>
-              <button
-                class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
-              >
-                <a href="{{ product.url }}">Add to cart</a>
-              </button>
-            </div>
-            {% render 'show-icon-card' %}
-          </div>
+          {%- assign productImage = product.featured_image
+            | image_url: width: 1000
+            | image_tag: class: 'w-80 h-80 object-center object-cover rounded-lg'
+          -%}
+          {% render 'product-card',
+            productCardWidth: 'w-[280px]',
+            productIMage: productImage,
+            productTitle: product.title,
+            productPrice: product.price,
+            productPriceComparison: product.compare_at_price,
+            productButtonURL: product.url,
+            productButtonText: 'Add to cart'
+          %}
         {%- endfor -%}
       {% else %}
         {% for item in (1..15) %}
-          <div class="relative productCard w-[280px] shrink-0 snap-center">
-            <div class="flex flex-col justify-center items-start gap-2">
-              {{ 'product-1' | placeholder_svg_tag: 'w-80 h-80 object-center object-cover rounded-lg' }}
-              <p class="text-lg font-normal text-gray-700">Vintage-Inspired Floral Midi</p>
-              <p class="text-base font-bold text-gray-950">$8.99</p>
-              <button
-                class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
-              >
-                Add to cart
-              </button>
-            </div>
-            {% render 'show-icon-card' %}
-          </div>
+          {%- assign productImage = 'product-1'
+            | placeholder_svg_tag: 'w-80 h-80 object-center object-cover rounded-lg'
+          -%}
+          {% render 'product-card',
+            productIMage: productImage,
+            productTitle: 'Product title',
+            productPrice: 34,
+            productPriceComparison: 55,
+            productButtonURL: '',
+            productButtonText: 'Add to cart'
+          %}
         {% endfor %}
       {%- endif -%}
     </div>
