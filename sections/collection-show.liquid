@@ -2,19 +2,19 @@
   <div class="container px-4">
     <div class="min-w-[280px] flex justify-between items-center md:bg-gray-200 md:px-4 md:py-3 md:rounded-sm">
       <!-- filter on small device -->
-      <div id="filterOnSmall" class="flex justify-start items-center gap-2 bg-gray-200 px-4 py-3 rounded-sm md:hidden">
+      <div id="filterOnSmall" class="flex justify-start items-center gap-2 bg-gray-200 px-4 py-3 rounded-sm lg:hidden">
         <span class="block w-4 "> {{ 'icon-filter.svg' | inline_asset_content }}</span>
         <span class="text-base text-gray-950 font-normal">Filter and sort</span>
       </div>
       <!-- End filter on small device -->
-      <div class="hidden md:flex md:justify-center md:items-center md:gap-4">
+      <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-4">
         <span class="block w-2">{{ 'icon-2bar.svg' | inline_asset_content }}</span>
         <span class="block w-3.5">{{ 'icon-3bar.svg' | inline_asset_content }}</span>
         <span class="block w-5">{{ 'icon-4bar.svg' | inline_asset_content }}</span>
       </div>
 
-      <div class="md:flex md:justify-center md:items-center md:gap-10">
-        <div class="hidden md:flex md:justify-center md:items-center md:gap-1">
+      <div class="lg:flex lg:justify-center lg:items-center lg:gap-10">
+        <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-1">
           {%- assign sortBy = collection.sort_by | default: collection.default_sort_by -%}
           <span>Sort by:</span>
           <select>
@@ -33,42 +33,134 @@
         <span class="text-base text-gray-950 font-medium w-fit">{{ collection.all_products_count }} Products</span>
       </div>
     </div>
-    <!-- Product card -->
-    <div class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-      {%- if collection.products != blank -%}
-        {%- for product in collection.products -%}
-          {%- assign productImage = product.featured_image
-            | image_url: width: 1000
-            | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
-          -%}
-          {% render 'product-card',
-            productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full',
-            productIMage: productImage,
-            productTitle: product.title,
-            productPrice: product.price,
-            productPriceComparison: product.compare_at_price,
-            productButtonURL: product.url,
-            productButtonText: 'Add to cart'
-          %}
+    <div class="lg:flex lg:justify-between lg:items-start">
+      <!-- Filter on large screen -->
+      <div class="hidden lg:block lg:w-1/5 lg:border lg:mt-10">
+        <!-- Loop here -->
+        {%- for filter in collection.filters -%}
+          <div>
+            <div class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:px-1 lg:bg-gray-100">
+              <span class="lg:block">{{ filter.label }}</span>
+              <span class="lg:block">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
+            </div>
+            <!-- filter inputs -->
+            <div class="hidden lg:flex lg:flex-col lg:justify-center lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-fit">
+              <!-- Loop sub param filter on large -->
+              {%- case filter.type -%}
+                {%- when 'list' -%}
+                  {% for filter_value in filter.values %}
+                    <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-2">
+                      <input
+                        type="checkbox"
+                        name="{{ filter_value.param_name }}"
+                        value="{{ filter_value.value }}"
+                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        {% if filter_value.active %}
+                          checked
+                        {% endif -%}
+                        {% if filter_value.count == 0 and filter_value.active == false %}
+                          disabled
+                        {% endif %}
+                      >
+                      <label
+                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        class="hidden lg:block lg:text-base"
+                      >
+                        {{- filter_value.value | capitalize -}}
+                      </label>
+                    </div>
+                  {% endfor %}
+                {%- when 'price_range' -%}
+                  <div class="hidden lg:flex lg:flex-col lg:justify-center lg:items-center gap-3">
+                    <div class="lg:w-full lg:flex lg:justify-center items-end">
+                      <label class="w-20" for="Filter-{{ filter.min_value.param_name }}">From</label>
+                      <div class="lg:w-full lg:flex lg:justify-center lg:items-center gap-3">
+                        <span class="lg:block lg:w-5">{{ cart.currency.symbol }}</span>
+                        <input
+                          class="w-20 block border border-gray-100 rounded-sm px-3"
+                          name="{{ filter.min_value.param_name }}"
+                          id="Filter-{{ filter.min_value.param_name }}"
+                          {% if filter.min_value.value %}
+                            value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                          {% endif %}
+                          type="number"
+                          placeholder="0"
+                          min="0"
+                          max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        >
+                      </div>
+                    </div>
+                    <div class="lg:w-full lg:flex lg:justify-center items-end">
+                      <label class="w-20" for="Filter-{{ filter.max_value.param_name }}">To</label>
+                      <div class="lg:w-full lg:flex lg:justify-center lg:items-center gap-3">
+                        <span class="lg:block lg:w-5">{{ cart.currency.symbol }}</span>
+                        <input
+                          class="w-20 block border border-gray-100 rounded-sm px-3"
+                          name="{{ filter.max_value.param_name }}"
+                          id="Filter-{{ filter.max_value.param_name }}"
+                          {% if filter.max_value.value %}
+                            value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                          {% endif %}
+                          type="number"
+                          placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                          min="0"
+                          max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-group-display__submit">
+                    <input type="submit" value="Apply">
+                  </div>
+              {%- endcase -%}
+              <!-- Loop sub param filter on large -->
+            </div>
+            <!-- End filter inputs -->
+          </div>
         {%- endfor -%}
-      {% else %}
-        {% for item in (1..15) %}
-          {%- assign productImage = 'product-1'
-            | placeholder_svg_tag: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
-          -%}
-          {% render 'product-card',
-            productCardWidth: 'min-w-[280px] rounded-2xl  md:min-w-full',
-            productIMage: productImage,
-            productTitle: 'Product title',
-            productPrice: 34,
-            productPriceComparison: 55,
-            productButtonURL: '',
-            productButtonText: 'Add to cart'
-          %}
-        {% endfor %}
-      {%- endif -%}
+        <div>
+          <input type="submit" value="Apply">
+        </div>
+      </div>
+      <!-- End Filter on large screen -->
+      <!-- Product card -->
+      <div class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:max-w-3/4 lg:mt-10 lg:border">
+        {%- if collection.products != blank -%}
+          {%- for product in collection.products -%}
+            {%- assign productImage = product.featured_image
+              | image_url: width: 1000
+              | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
+            -%}
+            {% render 'product-card',
+              productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full',
+              productIMage: productImage,
+              productTitle: product.title,
+              productPrice: product.price,
+              productPriceComparison: product.compare_at_price,
+              productButtonURL: product.url,
+              productButtonText: 'Add to cart'
+            %}
+          {%- endfor -%}
+        {% else %}
+          {% for item in (1..15) %}
+            {%- assign productImage = 'product-1'
+              | placeholder_svg_tag: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
+            -%}
+            {% render 'product-card',
+              productCardWidth: 'min-w-[280px] rounded-2xl  md:min-w-full',
+              productIMage: productImage,
+              productTitle: 'Product title',
+              productPrice: 34,
+              productPriceComparison: 55,
+              productButtonURL: '',
+              productButtonText: 'Add to cart'
+            %}
+          {% endfor %}
+        {%- endif -%}
+      </div>
+      <!-- End Product card -->
     </div>
-    <!-- End Product card -->
+
     <!-- Product drawer card -->
     <div
       id="collectionDrawer"
@@ -91,8 +183,6 @@
             <span>{{ filter.label }}</span>
             <span class="block w-4 h-4">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
           </div>
-
-          {{ filter.type }}
         {% endfor %}
       </div>
       <!-- End filter params -->
