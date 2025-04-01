@@ -46,12 +46,14 @@
               class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:mb-5 lg:px-1 lg:bg-gray-100"
             >
               <span class="lg:block">{{ filter.label }}</span>
-              <span class="lg:block lg:rotate-90">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
+              <span id="chevron_filter" class="lg:block lg:rotate-90">
+                {{- 'icon-chevron.svg' | inline_asset_content -}}
+              </span>
             </div>
             <!-- filter inputs -->
             <div
               id="subFilterparam"
-              class="hidden lg:hidden lg:flex-col lg:justify-center lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-fit"
+              class="hidden lg:hidden lg:flex-col lg:justify-center lg:transition lg:duration-500 lg:ease-out lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-0 lg:overflow-hidden"
             >
               <!-- Loop sub param filter on large -->
               <!--  -->
@@ -128,11 +130,6 @@
             <!-- End filter inputs -->
           </div>
         {%- endfor -%}
-        {% comment %}
-          <div>
-            <input type="submit" value="Apply">
-          </div>
-        {% endcomment %}
       </div>
       <!-- End Filter on large screen -->
       <!-- Product card -->
@@ -291,15 +288,24 @@
   const showAndHideFilterOnLargeScreen = () => {
     const filterParam = document.querySelectorAll('#filterParam');
     const subFilterparam = document.querySelectorAll('#subFilterparam');
+    const chevronFilter = document.querySelectorAll('#chevron_filter');
     filterParam.forEach((filter_label, i) => {
       filter_label.addEventListener('click', () => {
         subFilterparam.forEach((filter_param, j) => {
           if (i === j) {
             filter_param.classList.remove('lg:hidden');
             filter_param.classList.add('lg:flex');
+            filter_param.classList.remove('lg:h-0');
+            filter_param.classList.remove('lg:overflow-hidden');
+            filter_param.classList.add('lg:h-auto');
+            filter_param.classList.add('lg:overflow-visible');
           } else {
             filter_param.classList.add('lg:hidden');
             filter_param.classList.remove('lg:flex');
+            filter_param.classList.add('lg:h-0');
+            filter_param.classList.add('lg:overflow-hidden');
+            filter_param.classList.remove('lg:h-auto');
+            filter_param.classList.remove('lg:overflow-visible');
           }
         });
       });

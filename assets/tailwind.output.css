@@ -46,6 +46,7 @@
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -812,6 +813,10 @@
     --tw-duration: 150ms;
     transition-duration: 150ms;
   }
+  .duration-300 {
+    --tw-duration: 300ms;
+    transition-duration: 300ms;
+  }
   .duration-700 {
     --tw-duration: 700ms;
     transition-duration: 700ms;
@@ -819,6 +824,10 @@
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
+  }
+  .ease-out {
+    --tw-ease: var(--ease-out);
+    transition-timing-function: var(--ease-out);
   }
   .hover\:bg-black {
     &:hover {
@@ -1113,6 +1122,11 @@
       height: 500px;
     }
   }
+  .lg\:h-auto {
+    @media (width >= 64rem) {
+      height: auto;
+    }
+  }
   .lg\:h-fit {
     @media (width >= 64rem) {
       height: fit-content;
@@ -1180,9 +1194,29 @@
       translate: var(--tw-translate-x) var(--tw-translate-y);
     }
   }
+  .lg\:-rotate-90 {
+    @media (width >= 64rem) {
+      rotate: calc(90deg * -1);
+    }
+  }
+  .lg\:rotate-0 {
+    @media (width >= 64rem) {
+      rotate: 0deg;
+    }
+  }
+  .lg\:rotate-45 {
+    @media (width >= 64rem) {
+      rotate: 45deg;
+    }
+  }
   .lg\:rotate-90 {
     @media (width >= 64rem) {
       rotate: 90deg;
+    }
+  }
+  .lg\:rotate-180 {
+    @media (width >= 64rem) {
+      rotate: 180deg;
     }
   }
   .lg\:grid-cols-2 {
@@ -1278,6 +1312,11 @@
   .lg\:overflow-hidden {
     @media (width >= 64rem) {
       overflow: hidden;
+    }
+  }
+  .lg\:overflow-visible {
+    @media (width >= 64rem) {
+      overflow: visible;
     }
   }
   .lg\:rounded-lg {
@@ -1436,6 +1475,25 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
+  .lg\:transition {
+    @media (width >= 64rem) {
+      transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter;
+      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+      transition-duration: var(--tw-duration, var(--default-transition-duration));
+    }
+  }
+  .lg\:duration-300 {
+    @media (width >= 64rem) {
+      --tw-duration: 300ms;
+      transition-duration: 300ms;
+    }
+  }
+  .lg\:duration-500 {
+    @media (width >= 64rem) {
+      --tw-duration: 500ms;
+      transition-duration: 500ms;
+    }
+  }
   .lg\:duration-700 {
     @media (width >= 64rem) {
       --tw-duration: 700ms;
@@ -1446,6 +1504,12 @@
     @media (width >= 64rem) {
       --tw-ease: var(--ease-in-out);
       transition-timing-function: var(--ease-in-out);
+    }
+  }
+  .lg\:ease-out {
+    @media (width >= 64rem) {
+      --tw-ease: var(--ease-out);
+      transition-timing-function: var(--ease-out);
     }
   }
   .\32 xl\:text-7xl {
