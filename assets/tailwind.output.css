@@ -1058,9 +1058,19 @@
       padding-inline: 1rem;
     }
   }
+  .lg\:my-5 {
+    @media (width >= 64rem) {
+      margin-block: calc(var(--spacing) * 5);
+    }
+  }
   .lg\:mt-10 {
     @media (width >= 64rem) {
       margin-top: calc(var(--spacing) * 10);
+    }
+  }
+  .lg\:mb-5 {
+    @media (width >= 64rem) {
+      margin-bottom: calc(var(--spacing) * 5);
     }
   }
   .lg\:block {
@@ -1168,6 +1178,11 @@
     @media (width >= 64rem) {
       --tw-translate-y: calc(calc(1/2 * 100%) * -1);
       translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  .lg\:rotate-90 {
+    @media (width >= 64rem) {
+      rotate: 90deg;
     }
   }
   .lg\:grid-cols-2 {

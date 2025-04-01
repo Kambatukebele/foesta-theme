@@ -41,12 +41,18 @@
         <!-- Loop here -->
         {%- for filter in collection.filters -%}
           <div>
-            <div class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:px-1 lg:bg-gray-100">
+            <div
+              id="filterParam"
+              class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:mb-5 lg:px-1 lg:bg-gray-100"
+            >
               <span class="lg:block">{{ filter.label }}</span>
-              <span class="lg:block">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
+              <span class="lg:block lg:rotate-90">{{ 'icon-chevron.svg' | inline_asset_content }}</span>
             </div>
             <!-- filter inputs -->
-            <div class="hidden lg:flex lg:flex-col lg:justify-center lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-fit">
+            <div
+              id="subFilterparam"
+              class="hidden lg:hidden lg:flex-col lg:justify-center lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-fit"
+            >
               <!-- Loop sub param filter on large -->
               <!--  -->
               {%- case filter.type -%}
@@ -280,4 +286,24 @@
     });
   };
   filteringData();
+
+  //Show and Hide Filter on large screen
+  const showAndHideFilterOnLargeScreen = () => {
+    const filterParam = document.querySelectorAll('#filterParam');
+    const subFilterparam = document.querySelectorAll('#subFilterparam');
+    filterParam.forEach((filter_label, i) => {
+      filter_label.addEventListener('click', () => {
+        subFilterparam.forEach((filter_param, j) => {
+          if (i === j) {
+            filter_param.classList.remove('lg:hidden');
+            filter_param.classList.add('lg:flex');
+          } else {
+            filter_param.classList.add('lg:hidden');
+            filter_param.classList.remove('lg:flex');
+          }
+        });
+      });
+    });
+  };
+  showAndHideFilterOnLargeScreen();
 </script>
