@@ -162,79 +162,250 @@
       <!-- End Product card -->
     </div>
 
-    <!-- Product drawer card -->
+    {% comment %}
+      <!-- Product drawer card -->
+      <div
+        id="collectionDrawer"
+        class="w-[300px] duration-700 ease-in-out px-4 bg-white shadow-2xl h-screen fixed top-0 -right-[3000px] z-10 flex justify-between items-center flex-col"
+      >
+        <div class="w-full h-20 flex justify-end items-center border-b-gray-200 border-b">
+          <div class="w-full flex flex-col justify-center items-center gap-1">
+            <span>Filter and sort</span>
+            <span>{{ collection.all_products_count }} products</span>
+          </div>
+          <!-- close drawer -->
+          <span id="closeCollectionDrawer" class="block w-8 h-8">{{ 'icon-close.svg' | inline_asset_content }}</span>
+          <!-- End close drawer -->
+        </div>
+        <!-- filter params -->
+        <div class="w-full h-[calc(100vh-10rem)] z-50 flex flex-col gap-3.5 py-5 overflow-y-scroll">
+          <!-- Loop filter params here -->
+          {% for filter in collection.filters %}
+            <div class="flex justify-between items-center border border-gray-200 shadow-sm rounded-lg py-4 px-4">
+              <span>{{ filter.label }}</span>
+              <span class="block w-4 h-4">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
+            </div>
+          {% endfor %}
+        </div>
+        <!-- End filter params -->
+
+        <!-- Remove and apply params -->
+        <div class="w-full h-20 flex justify-between items-center border-t border-gray-200">
+          <span class="underline">Remove all</span>
+          <span>Apply</span>
+        </div>
+        <!-- End Remove and apply params -->
+      </div>
+      <!-- Product drawer card -->
+
+      <!-- sub filter params -->
+      <div class="w-[300px] duration-700 ease-in-out py-5 px-5 bg-white shadow-2xl h-screen fixed top-0 -right-[0px] z-10 flex justify-between items-center flex-col">
+        {% for filter in collection.filters %}
+          {%- case filter.type -%}
+            {%- when 'list' -%}
+              {% for filter_value in filter.values %}
+                <div class="w-full flex flex-col justify-center items-center">
+                  <div class="w-full flex justify-between items-center">
+                    <span class="block w-4 h-4 rotate-180">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
+                    <span class="block">Availability</span>
+                  </div>
+                  <div class="w-full">
+                    <div class="w-full border flex justify-start items-center gap-4">
+                      <input
+                        class="block"
+                        type="checkbox"
+                        name="{{ filter_value.param_name }}"
+                        value="{{ filter_value.value }}"
+                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        {% if filter_value.active %}
+                          checked
+                        {% endif -%}
+                        {% if filter_value.count == 0 and filter_value.active == false %}
+                          disabled
+                        {% endif %}
+                      >
+                      <label
+                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        class="block"
+                      >
+                        {{- filter_value.label | capitalize }}
+                        (
+                        {{- filter_value.count -}}
+                        )
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- End sub filter params -->
+              {% endfor %}
+          {%- endcase -%}
+        {% endfor %}
+      </div>
+    {% endcomment %}
+    <!-- Button to open the collection drawer on small devices -->
+    <!-- Button to open the collection drawer on small devices -->
+    <!-- First-level drawer (Collection Drawer) -->
+    <!-- Button to open the collection drawer on small devices -->
+    <button id="filterOnSmall" class="p-2 bg-gray-200 m-4">Filter and sort</button>
+
+    <!-- First-level drawer (Collection Drawer) -->
     <div
       id="collectionDrawer"
-      class="w-[300px] duration-700 ease-in-out px-4 bg-white shadow-2xl h-screen fixed top-0 -right-[3000px] z-10 flex justify-between items-center flex-col"
+      class="w-[300px] duration-700 ease-in-out px-4 bg-white shadow-2xl h-screen fixed top-0 right-0 transform translate-x-full z-10 flex flex-col justify-between"
     >
-      <div class="w-full h-20 flex justify-end items-center border-b-gray-200 border-b">
+      <!-- Header -->
+      <div class="w-full h-20 flex justify-end items-center border-b border-gray-200">
         <div class="w-full flex flex-col justify-center items-center gap-1">
           <span>Filter and sort</span>
           <span>{{ collection.all_products_count }} products</span>
         </div>
-        <!-- close drawer -->
-        <span id="closeCollectionDrawer" class="block w-8 h-8">{{ 'icon-close.svg' | inline_asset_content }}</span>
-        <!-- End close drawer -->
+        <!-- Close drawer -->
+        <span id="closeCollectionDrawer" class="block w-8 h-8 cursor-pointer">
+          {{ 'icon-close.svg' | inline_asset_content }}
+        </span>
       </div>
-      <!-- filter params -->
+      <!-- Filter parameters (click to open second-level) -->
       <div class="w-full h-[calc(100vh-10rem)] z-50 flex flex-col gap-3.5 py-5 overflow-y-scroll">
-        <!-- Loop filter params here -->
         {% for filter in collection.filters %}
-          <div class="flex justify-between items-center border border-gray-200 shadow-sm rounded-lg py-4 px-4">
+          <div
+            class="flex justify-between items-center border border-gray-200 shadow-sm rounded-lg py-4 px-4 filter-item cursor-pointer"
+            data-filter="{{ filter.label }}"
+          >
             <span>{{ filter.label }}</span>
-            <span class="block w-4 h-4">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
+            <span class="block w-4 h-4">
+              {{ 'icon-arrow-right.svg' | inline_asset_content }}
+            </span>
           </div>
         {% endfor %}
       </div>
-      <!-- End filter params -->
-      <!-- sub filter params -->
-      <div class="hidden">
-        <div>
-          <span class="block w-8 h-8">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
-          <span>Availability</span>
-        </div>
-        <div>
-          <div>
-            <input type="checkbox">
-            <label>In stock</label>
-          </div>
-          <div>
-            <input type="checkbox">
-            <label>Out of stock</label>
-          </div>
-        </div>
-      </div>
-      <!-- End sub filter params -->
-      <!-- Remove and apply params -->
+      <!-- Footer: Remove and apply -->
       <div class="w-full h-20 flex justify-between items-center border-t border-gray-200">
-        <span class="underline">Remove all</span>
-        <span>Apply</span>
+        <span class="underline cursor-pointer">Remove all</span>
+        <span class="cursor-pointer">Apply</span>
       </div>
-      <!-- End Remove and apply params -->
     </div>
-    <!-- Product drawer card -->
+    <!-- End First-level drawer -->
+
+    <!-- Second-level drawer (Sub Filter Drawer) -->
+    <!-- Second-level drawer (Sub Filter Drawer) -->
+    <div
+      id="subFilterDrawer"
+      class="w-[300px] duration-700 ease-in-out py-5 px-5 bg-white shadow-2xl h-screen fixed top-0 right-0 transform translate-x-full z-20 flex flex-col"
+    >
+      <!-- Back button and content -->
+      <button id="backToFilters" type="button" class="mb-4 p-2 bg-gray-100 w-fit">← Back</button>
+      <h2 id="subFilterTitle" class="text-xl font-semibold mb-4">Filter Options</h2>
+      <div id="subFilterWrapper" class="overflow-y-scroll flex-1">
+        <!-- Render each filter's options in its own container -->
+        {% for filter in collection.filters %}
+          <div class="sub-filter-content hidden" data-filter="{{ filter.label }}">
+            {% if filter.type == 'list' %}
+              <div class="mb-6">
+                <h3 class="font-semibold mb-2">{{ filter.label }} Options</h3>
+                {% for filter_value in filter.values %}
+                  <div class="flex items-center gap-2 mb-1">
+                    <input
+                      type="checkbox"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      {% if filter_value.active %}
+                        checked
+                      {% endif %}
+                      {% if filter_value.count == 0 and filter_value.active == false %}
+                        disabled
+                      {% endif %}
+                    >
+                    <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                      {{ filter_value.label | capitalize }} ({{ filter_value.count }})
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- End Second-level drawer -->
   </div>
 </form>
 
 <script>
   //This function helping to open and close the drawer filter on small devices
-  const showFilterDrawerOnSmallDevice = () => {
-    const filterOneSmall = document.querySelector('#filterOnSmall'); // target the filter and sort on small device
-    const collectionDrawer = document.querySelector('#collectionDrawer'); // target the collection drawer that contains the filter
-    const closeCollectionDrawer = document.querySelector('#closeCollectionDrawer'); //target the close icon to close the collection drawer
-    function openCloseDrawer() {
-      if (collectionDrawer.classList.contains('-right-[3000px]')) {
-        collectionDrawer.classList.remove('-right-[3000px]');
-        collectionDrawer.classList.add('right-0');
+  document.addEventListener('DOMContentLoaded', () => {
+    // First-level drawer elements
+    const filterOnSmall = document.querySelector('#filterOnSmall');
+    const collectionDrawer = document.querySelector('#collectionDrawer');
+    const closeCollectionDrawer = document.querySelector('#closeCollectionDrawer');
+
+    // Second-level drawer elements
+    const subFilterDrawer = document.querySelector('#subFilterDrawer');
+    const backToFilters = document.querySelector('#backToFilters');
+    const filterItems = document.querySelectorAll('.filter-item');
+    const subFilterTitle = document.querySelector('#subFilterTitle');
+    const subFilterWrapper = document.querySelector('#subFilterWrapper');
+    const subFilterContents = document.querySelectorAll('.sub-filter-content');
+
+    // Helper functions using Tailwind transform classes
+    function showDrawer(el) {
+      el.classList.remove('translate-x-full');
+      el.classList.add('translate-x-0');
+    }
+    function hideDrawer(el) {
+      el.classList.remove('translate-x-0');
+      el.classList.add('translate-x-full');
+    }
+
+    // Toggle first-level drawer
+    function toggleFirstDrawer() {
+      if (collectionDrawer.classList.contains('translate-x-full')) {
+        showDrawer(collectionDrawer);
       } else {
-        collectionDrawer.classList.add('-right-[3000px]');
-        collectionDrawer.classList.remove('right-0');
+        hideDrawer(collectionDrawer);
       }
     }
-    filterOneSmall.addEventListener('click', openCloseDrawer);
-    closeCollectionDrawer.addEventListener('click', openCloseDrawer);
-  };
-  showFilterDrawerOnSmallDevice();
+
+    // Open first-level drawer on button click
+    filterOnSmall.addEventListener('click', toggleFirstDrawer);
+    closeCollectionDrawer.addEventListener('click', toggleFirstDrawer);
+
+    // Open second-level drawer (overlay) for a specific filter
+    function openSubFilterDrawer(filterLabel) {
+      // Update the sub-filter drawer title
+      subFilterTitle.textContent = filterLabel + ' Options';
+
+      // Hide all sub-filter content containers
+      subFilterContents.forEach((content) => {
+        content.classList.add('hidden');
+      });
+
+      // Show only the container corresponding to the clicked filter
+      const targetContent = subFilterWrapper.querySelector(`.sub-filter-content[data-filter="${filterLabel}"]`);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+      }
+
+      // Instead of hiding the first-level drawer, just overlay the second-level drawer
+      showDrawer(subFilterDrawer);
+    }
+
+    // Close second-level drawer (returning to first-level view)
+    function closeSubFilterDrawer() {
+      hideDrawer(subFilterDrawer);
+    }
+
+    // When a filter item is clicked, open its corresponding sub-filter drawer
+    filterItems.forEach((item) => {
+      item.addEventListener('click', function () {
+        const filterLabel = this.getAttribute('data-filter');
+        openSubFilterDrawer(filterLabel);
+      });
+    });
+
+    // Back button event to close second-level drawer
+    backToFilters.addEventListener('click', closeSubFilterDrawer);
+  });
 
   //This function helping to display products in 2 or 3 or 4 columns by click
   const displayColumnsProductGrid = () => {
