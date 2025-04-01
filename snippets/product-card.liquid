@@ -5,7 +5,6 @@
 
 <div class="relative productCard {{ productCardWidth }} shrink-0 snap-center pb-7 rounded-2xl">
   <div class="flex flex-col justify-center items-center gap-2">
-    {% comment %} {{ 'product-1' | placeholder_svg_tag: 'w-80 h-80 object-center object-cover rounded-lg' }} {% endcomment %}
     {{ productIMage }}
     <div class="w-full flex justify-center flex-col items-center gap-2">
       <p class="text-lg font-normal text-gray-700">{{ productTitle | truncate: 25, '...' }}</p>

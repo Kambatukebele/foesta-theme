@@ -1,5 +1,6 @@
 <form class="w-full h-fit py-12 lg:py-24">
   <div class="container px-4">
+    <!-- Filter bar on small and large screen -->
     <div class="min-w-[280px] flex justify-between items-center md:bg-gray-200 md:px-4 md:py-3 md:rounded-sm">
       <!-- filter on small device -->
       <div id="filterOnSmall" class="flex justify-start items-center gap-2 bg-gray-200 px-4 py-3 rounded-sm lg:hidden">
@@ -7,12 +8,13 @@
         <span class="text-base text-gray-950 font-normal">Filter and sort</span>
       </div>
       <!-- End filter on small device -->
+      <!-- filter 2,3,4 bar to display products grid -->
       <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-4">
-        <span class="block w-2">{{ 'icon-2bar.svg' | inline_asset_content }}</span>
-        <span class="block w-3.5">{{ 'icon-3bar.svg' | inline_asset_content }}</span>
-        <span class="block w-5">{{ 'icon-4bar.svg' | inline_asset_content }}</span>
+        <span class="cursor-pointer block w-2 icon-grid-select">{{ 'icon-2bar.svg' | inline_asset_content }}</span>
+        <span class="cursor-pointer block w-3.5 icon-grid-select">{{ 'icon-3bar.svg' | inline_asset_content }}</span>
+        <span class="cursor-pointer block w-5 icon-grid-select">{{ 'icon-4bar.svg' | inline_asset_content }}</span>
       </div>
-
+      <!-- End filter 2,3,4 bar to display products grid -->
       <div class="lg:flex lg:justify-center lg:items-center lg:gap-10">
         <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-1">
           {%- assign sortBy = collection.sort_by | default: collection.default_sort_by -%}
@@ -35,7 +37,7 @@
     </div>
     <div class="lg:flex lg:justify-between lg:items-start">
       <!-- Filter on large screen -->
-      <div class="hidden lg:block lg:w-1/5 lg:border lg:mt-10">
+      <div class="hidden lg:block lg:w-1/5 lg:shadow lg:mt-10">
         <!-- Loop here -->
         {%- for filter in collection.filters -%}
           <div>
@@ -46,6 +48,7 @@
             <!-- filter inputs -->
             <div class="hidden lg:flex lg:flex-col lg:justify-center lg:items-start lg:gap-3 lg:py-3 lg:px-2 lg:h-fit">
               <!-- Loop sub param filter on large -->
+              <!--  -->
               {%- case filter.type -%}
                 {%- when 'list' -%}
                   {% for filter_value in filter.values %}
@@ -66,7 +69,10 @@
                         for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
                         class="hidden lg:block lg:text-base"
                       >
-                        {{- filter_value.value | capitalize -}}
+                        {{- filter_value.label | capitalize }}
+                        (
+                        {{- filter_value.count -}}
+                        )
                       </label>
                     </div>
                   {% endfor %}
@@ -90,6 +96,7 @@
                         >
                       </div>
                     </div>
+
                     <div class="lg:w-full lg:flex lg:justify-center items-end">
                       <label class="w-20" for="Filter-{{ filter.max_value.param_name }}">To</label>
                       <div class="lg:w-full lg:flex lg:justify-center lg:items-center gap-3">
@@ -109,6 +116,7 @@
                       </div>
                     </div>
                   </div>
+                  {% comment %}  {% endcomment %}
                   <div class="filter-group-display__submit">
                     <input type="submit" value="Apply">
                   </div>
@@ -118,21 +126,26 @@
             <!-- End filter inputs -->
           </div>
         {%- endfor -%}
-        <div>
-          <input type="submit" value="Apply">
-        </div>
+        {% comment %}
+          <div>
+            <input type="submit" value="Apply">
+          </div>
+        {% endcomment %}
       </div>
       <!-- End Filter on large screen -->
       <!-- Product card -->
-      <div class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:max-w-3/4 lg:mt-10 lg:border">
+      <div
+        id="productCards"
+        class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:max-w-3/4 lg:mt-10 lg:grid-cols-4"
+      >
         {%- if collection.products != blank -%}
           {%- for product in collection.products -%}
             {%- assign productImage = product.featured_image
               | image_url: width: 1000
-              | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
+              | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg lg:w-full lg:h-[500px]'
             -%}
             {% render 'product-card',
-              productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full',
+              productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full lg:w-full',
               productIMage: productImage,
               productTitle: product.title,
               productPrice: product.price,
@@ -142,20 +155,9 @@
             %}
           {%- endfor -%}
         {% else %}
-          {% for item in (1..15) %}
-            {%- assign productImage = 'product-1'
-              | placeholder_svg_tag: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg'
-            -%}
-            {% render 'product-card',
-              productCardWidth: 'min-w-[280px] rounded-2xl  md:min-w-full',
-              productIMage: productImage,
-              productTitle: 'Product title',
-              productPrice: 34,
-              productPriceComparison: 55,
-              productButtonURL: '',
-              productButtonText: 'Add to cart'
-            %}
-          {% endfor %}
+          <div class="w-[500px] flex justify-start items-center">
+            <h2 class="text-2xl font-semibold">No products found</h2>
+          </div>
         {%- endif -%}
       </div>
       <!-- End Product card -->
@@ -216,18 +218,42 @@
 </form>
 
 <script>
-  const filterOneSmall = document.querySelector('#filterOnSmall'); // target the filter and sort on small device
-  const collectionDrawer = document.querySelector('#collectionDrawer'); // target the collection drawer that contains the filter
-  const closeCollectionDrawer = document.querySelector('#closeCollectionDrawer'); //target the close icon to close the collection drawer
-  function openCloseDrawer() {
-    if (collectionDrawer.classList.contains('-right-[3000px]')) {
-      collectionDrawer.classList.remove('-right-[3000px]');
-      collectionDrawer.classList.add('right-0');
-    } else {
-      collectionDrawer.classList.add('-right-[3000px]');
-      collectionDrawer.classList.remove('right-0');
+  //This function helping to open and close the drawer filter on small devices
+  const showFilterDrawerOnSmallDevice = () => {
+    const filterOneSmall = document.querySelector('#filterOnSmall'); // target the filter and sort on small device
+    const collectionDrawer = document.querySelector('#collectionDrawer'); // target the collection drawer that contains the filter
+    const closeCollectionDrawer = document.querySelector('#closeCollectionDrawer'); //target the close icon to close the collection drawer
+    function openCloseDrawer() {
+      if (collectionDrawer.classList.contains('-right-[3000px]')) {
+        collectionDrawer.classList.remove('-right-[3000px]');
+        collectionDrawer.classList.add('right-0');
+      } else {
+        collectionDrawer.classList.add('-right-[3000px]');
+        collectionDrawer.classList.remove('right-0');
+      }
     }
-  }
-  filterOneSmall.addEventListener('click', openCloseDrawer);
-  closeCollectionDrawer.addEventListener('click', openCloseDrawer);
+    filterOneSmall.addEventListener('click', openCloseDrawer);
+    closeCollectionDrawer.addEventListener('click', openCloseDrawer);
+  };
+  showFilterDrawerOnSmallDevice();
+
+  //This function helping to display products in 2 or 3 or 4 columns by click
+  const displayColumnsProductGrid = () => {
+    const iconSelect = document.querySelectorAll('.icon-grid-select'); // Capturing the icons
+    const productCards = document.querySelector('#productCards'); // Capturing the section that contains all the product cards
+    const grids = ['lg:grid-cols-2', 'lg:grid-cols-3', 'lg:grid-cols-4']; // Class options for grid layout
+
+    iconSelect.forEach((icon, index) => {
+      icon.addEventListener('click', () => {
+        // Remove any existing grid class
+        grids.forEach((grid) => productCards.classList.remove(grid));
+        // Add the selected grid class
+        if (index >= 0 && index < grids.length) {
+          productCards.classList.add(grids[index]);
+        }
+      });
+    });
+  };
+
+  displayColumnsProductGrid();
 </script>
