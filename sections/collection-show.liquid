@@ -19,7 +19,7 @@
         <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-1">
           {%- assign sortBy = collection.sort_by | default: collection.default_sort_by -%}
           <span>Sort by:</span>
-          <select>
+          <select id="sortSelect">
             {%- for option in collection.sort_options -%}
               <option
                 value="{{ option.value }}"
@@ -115,10 +115,6 @@
                         >
                       </div>
                     </div>
-                  </div>
-                  {% comment %}  {% endcomment %}
-                  <div class="filter-group-display__submit">
-                    <input type="submit" value="Apply">
                   </div>
               {%- endcase -%}
               <!-- Loop sub param filter on large -->
@@ -254,6 +250,34 @@
       });
     });
   };
-
   displayColumnsProductGrid();
+
+  // Filtering data automatically on click
+  const filteringData = () => {
+    //For the inputs with checkbox
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.addEventListener('change', function () {
+        let params = new URLSearchParams(window.location.search);
+
+        if (this.checked) {
+          params.append(this.name, this.value); // Add filter to URL
+        } else {
+          params.delete(this.name); // Remove filter if unchecked
+        }
+
+        window.location.href = window.location.pathname + '?' + params.toString(); // Reload with new URL
+      });
+    });
+    // for the select input
+    document.getElementById('sortSelect').addEventListener('change', function () {
+      let params = new URLSearchParams(window.location.search);
+
+      // Set or update the sort parameter in the URL
+      params.set('sort_by', this.value); // Adjust parameter name as needed
+
+      // Update the URL and reload the page with the new query string
+      window.location.href = window.location.pathname + '?' + params.toString();
+    });
+  };
+  filteringData();
 </script>
