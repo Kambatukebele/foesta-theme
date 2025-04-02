@@ -150,7 +150,7 @@
               productPrice: product.price,
               productPriceComparison: product.compare_at_price,
               productButtonURL: product.url,
-              productButtonText: 'Add to cart'
+              productButtonText: 'Buy now'
             %}
           {%- endfor -%}
         {% else %}
@@ -161,89 +161,6 @@
       </div>
       <!-- End Product card -->
     </div>
-
-    {% comment %}
-      <!-- Product drawer card -->
-      <div
-        id="collectionDrawer"
-        class="w-[300px] duration-700 ease-in-out px-4 bg-white shadow-2xl h-screen fixed top-0 -right-[3000px] z-10 flex justify-between items-center flex-col"
-      >
-        <div class="w-full h-20 flex justify-end items-center border-b-gray-200 border-b">
-          <div class="w-full flex flex-col justify-center items-center gap-1">
-            <span>Filter and sort</span>
-            <span>{{ collection.all_products_count }} products</span>
-          </div>
-          <!-- close drawer -->
-          <span id="closeCollectionDrawer" class="block w-8 h-8">{{ 'icon-close.svg' | inline_asset_content }}</span>
-          <!-- End close drawer -->
-        </div>
-        <!-- filter params -->
-        <div class="w-full h-[calc(100vh-10rem)] z-50 flex flex-col gap-3.5 py-5 overflow-y-scroll">
-          <!-- Loop filter params here -->
-          {% for filter in collection.filters %}
-            <div class="flex justify-between items-center border border-gray-200 shadow-sm rounded-lg py-4 px-4">
-              <span>{{ filter.label }}</span>
-              <span class="block w-4 h-4">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
-            </div>
-          {% endfor %}
-        </div>
-        <!-- End filter params -->
-
-        <!-- Remove and apply params -->
-        <div class="w-full h-20 flex justify-between items-center border-t border-gray-200">
-          <span class="underline">Remove all</span>
-          <span>Apply</span>
-        </div>
-        <!-- End Remove and apply params -->
-      </div>
-      <!-- Product drawer card -->
-
-      <!-- sub filter params -->
-      <div class="w-[300px] duration-700 ease-in-out py-5 px-5 bg-white shadow-2xl h-screen fixed top-0 -right-[0px] z-10 flex justify-between items-center flex-col">
-        {% for filter in collection.filters %}
-          {%- case filter.type -%}
-            {%- when 'list' -%}
-              {% for filter_value in filter.values %}
-                <div class="w-full flex flex-col justify-center items-center">
-                  <div class="w-full flex justify-between items-center">
-                    <span class="block w-4 h-4 rotate-180">{{ 'icon-arrow-right.svg' | inline_asset_content }}</span>
-                    <span class="block">Availability</span>
-                  </div>
-                  <div class="w-full">
-                    <div class="w-full border flex justify-start items-center gap-4">
-                      <input
-                        class="block"
-                        type="checkbox"
-                        name="{{ filter_value.param_name }}"
-                        value="{{ filter_value.value }}"
-                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                        {% if filter_value.active %}
-                          checked
-                        {% endif -%}
-                        {% if filter_value.count == 0 and filter_value.active == false %}
-                          disabled
-                        {% endif %}
-                      >
-                      <label
-                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                        class="block"
-                      >
-                        {{- filter_value.label | capitalize }}
-                        (
-                        {{- filter_value.count -}}
-                        )
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <!-- End sub filter params -->
-              {% endfor %}
-          {%- endcase -%}
-        {% endfor %}
-      </div>
-    {% endcomment %}
-    <!-- Button to open the collection drawer on small devices -->
-    <!-- Button to open the collection drawer on small devices -->
     <!-- First-level drawer (Collection Drawer) -->
     <!-- Button to open the collection drawer on small devices -->
     <button id="filterOnSmall" class="p-2 bg-gray-200 m-4">Filter and sort</button>
@@ -286,7 +203,6 @@
     </div>
     <!-- End First-level drawer -->
 
-    <!-- Second-level drawer (Sub Filter Drawer) -->
     <!-- Second-level drawer (Sub Filter Drawer) -->
     <div
       id="subFilterDrawer"
