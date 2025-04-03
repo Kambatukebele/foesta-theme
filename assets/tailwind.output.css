@@ -236,12 +236,6 @@
   .-right-5 {
     right: calc(var(--spacing) * -5);
   }
-  .-right-\[0px\] {
-    right: calc(0px * -1);
-  }
-  .-right-\[3000px\] {
-    right: calc(3000px * -1);
-  }
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
@@ -602,6 +596,9 @@
   }
   .object-center {
     object-position: center;
+  }
+  .object-top {
+    object-position: top;
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);

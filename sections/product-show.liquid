@@ -1,0 +1,81 @@
+<section>
+  <div>
+    <!-- Images -->
+    <div>
+      <div class="w-full">
+        {{
+          product.featured_image
+          | image_url: width: 1000
+          | image_tag: class: 'w-full h-full object-object object-top'
+        }}
+      </div>
+      <div class="w-full">
+        <div>
+          {% for image in product.images %}
+            {{ image | image_url: width: 1000 | image_tag }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- End Images -->
+    <!-- Text -->
+    <div>
+      <div>
+        <!-- Titles -->
+        <h2>Classic button down shirt</h2>
+        <!-- Prices -->
+        <div>
+          <p>20kc</p>
+          <p>40kc</p>
+        </div>
+        <!-- colors and variants -->
+        <div>
+          <!-- colors name -->
+          <div>black</div>
+          <!-- colors variant -->
+          <div>
+            <span>red</span>
+            <span>red</span>
+            <span>red</span>
+          </div>
+          <!-- size -->
+          <div>
+            <div>Size: M</div>
+            <div>
+              <span>M</span>
+            </div>
+          </div>
+          <!-- Quantity -->
+          <div>
+            <div>Quantity</div>
+            <div>
+              <span>-</span>
+              <span>2</span>
+              <span>+</span>
+            </div>
+          </div>
+          <!-- Buy button -->
+          <div>
+            <button>Buy it now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Text -->
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Show",
+  "class": "product-show",
+  "tag": "section",
+  "blocks": [],
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Show"
+    }
+  ]
+}
+{% endschema %}
