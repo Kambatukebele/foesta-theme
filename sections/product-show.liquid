@@ -1,74 +1,86 @@
-<section>
-  <div>
+<section class="w-full h-fit py-12 lg:py-24">
+  <div class="container">
     <!-- Images -->
-    <div>
-      <div class="w-full">
+    <div class="w-full">
+      <div class="w-full h-full rounded-2xl">
         {{
           product.featured_image
           | image_url: width: 1000
-          | image_tag: class: 'w-full h-full object-object object-top'
+          | image_tag: class: 'w-full h-full object-cover rounded-2xl'
         }}
       </div>
-      <div class="w-full">
-        <div>
-          {% for image in product.images %}
-            {{ image | image_url: width: 1000 | image_tag }}
-          {% endfor %}
-        </div>
+      <div class="w-full flex justify-start items-center my-5 gap-2 overflow-x-scroll whitespace-nowrap">
+        {% for image in product.images %}
+          <div class="w-24 h-24 shrink-0">
+            {{ image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover rounded-xl' }}
+          </div>
+        {% endfor %}
       </div>
     </div>
     <!-- End Images -->
     <!-- Text -->
-    <div>
-      <div>
+    <div class="w-full">
+      <div class="w-full flex flex-col justify-start items-center gap-3.5">
         <!-- Titles -->
-        <h2>Classic button down shirt</h2>
+        <h2 class="text-2xl font-semibold">Classic button down shirt</h2>
         <!-- Prices -->
-        <div>
-          <p>20kc</p>
-          <p>40kc</p>
+        <div class="w-full flex justify-start items-center gap-2">
+          <p class="text-xl font-medium">20kc</p>
+          {% if product.compare_at_price %}
+            <p class="text-xl font-medium line-through text-red-500">40kc</p>
+          {% endif %}
         </div>
         <!-- colors and variants -->
-        <div>
+        <div class="w-full flex flex-col justify-center items-start gap-2">
           <!-- colors name -->
-          <div>black</div>
+          <div class="w-full flex justify-start items-center gap-2">
+            <span class="text-base font-semibold">Color:</span>
+            <span class="text-base font-normal">black</span>
+          </div>
           <!-- colors variant -->
-          <div>
-            <span>red</span>
-            <span>red</span>
-            <span>red</span>
+          <div class="w-full flex justify-start items-center gap-2">
+            <span class="w-6 h-6 bg-black rounded-full block"></span>
+            <span class="w-6 h-6 bg-red-800 rounded-full block"></span>
+            <span class="w-6 h-6 bg-green-800 rounded-full block"></span>
           </div>
           <!-- size -->
-          <div>
-            <div>Size: M</div>
-            <div>
-              <span>M</span>
+          <div class="w-full flex flex-col justify-center items-start gap-2">
+            <div class="w-full flex justify-start items-center gap-2">
+              <span class="text-base font-semibold">Size:</span>
+              <span class="text-base font-normal">Medium</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-2">
+              <span class="w-auto py-2 px-3 bg-black text-white text-sm">Medium</span>
+              <span class="w-auto py-2 px-3 bg-white shadow text-black text-sm">Medium</span>
+              <span class="w-auto py-2 px-3 shadow text-black text-sm">Medium</span>
             </div>
           </div>
           <!-- Quantity -->
-          <div>
-            <div>Quantity</div>
-            <div>
-              <span>-</span>
-              <span>2</span>
-              <span>+</span>
+          <div class="my-5 flex flex-col justify-center items-start gap-2">
+            <span class="text-base font-semibold">Quantity</span>
+            <div class="w-36 flex justify-between px-3 items-center border rounded-3xl py-2">
+              <span class="text-xl block">-</span>
+              <span class="text-base block">2</span>
+              <span class="text-xl block">+</span>
             </div>
           </div>
           <!-- Buy button -->
-          <div>
-            <button>Buy it now</button>
+          <div class="w-full">
+            <a href="" class="block bg-black w-full text-white text-center py-3.5 px-4 rounded-2xl">Buy it now</a>
           </div>
           <!-- Checkout payment proof -->
-          <div>Checkout image</div>
+          {% comment %} <div>Checkout image</div> {% endcomment %}
           <hr>
           <!--  -->
-          <div>
+          {% comment %}
             <div>
-              <span>Description</span>
-              <span>Icon goes here</span>
+              <div>
+                <span>Description</span>
+                <span>Icon goes here</span>
+              </div>
+              <div>text</div>
             </div>
-            <div>text</div>
-          </div>
+          {% endcomment %}
         </div>
       </div>
     </div>
