@@ -1,7 +1,7 @@
 <section class="w-full h-fit py-12 lg:py-24">
-  <div class="container">
+  <div class="container lg:flex lg:justify-center items-start gap-20">
     <!-- Images -->
-    <div class="w-full">
+    <div class="w-full lg:w-1/2">
       <div class="w-full h-full rounded-2xl">
         {{
           product.featured_image
@@ -19,15 +19,15 @@
     </div>
     <!-- End Images -->
     <!-- Text -->
-    <div class="w-full">
-      <div class="w-full flex flex-col justify-start items-center gap-3.5">
+    <div class="w-full lg:w-1/2 lg:py-5">
+      <div class="w-full flex flex-col justify-start items-start gap-3.5">
         <!-- Titles -->
-        <h2 class="text-2xl font-semibold">Classic button down shirt</h2>
+        <h2 class="text-xl font-semibold text-left lg:text-4xl">Classic button down shirt</h2>
         <!-- Prices -->
         <div class="w-full flex justify-start items-center gap-2">
-          <p class="text-xl font-medium">20kc</p>
+          <p class="text-lg font-medium">20kc</p>
           {% if product.compare_at_price %}
-            <p class="text-xl font-medium line-through text-red-500">40kc</p>
+            <p class="text-lg font-medium line-through text-red-500">40kc</p>
           {% endif %}
         </div>
         <!-- colors and variants -->
