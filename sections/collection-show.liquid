@@ -19,9 +19,10 @@
         <div class="hidden lg:flex lg:justify-center lg:items-center lg:gap-1">
           {%- assign sortBy = collection.sort_by | default: collection.default_sort_by -%}
           <span>Sort by:</span>
-          <select id="sortSelect">
+          <select id="sortSelect" class="lg:cursor-pointer lg:focus:outline-none">
             {%- for option in collection.sort_options -%}
               <option
+                class="lg:cursor-pointer"
                 value="{{ option.value }}"
                 {%- if option.value == sortBy %}
                   selected="selected"
