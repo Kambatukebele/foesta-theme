@@ -43,7 +43,7 @@
           <div>
             <div
               id="filterParam"
-              class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:mb-5 lg:px-1 lg:bg-gray-100"
+              class="lg:w-full lg:flex lg:justify-between lg:items-center lg:py-3 lg:px-1 lg:bg-gray-100 lg:cursor-pointer {% if forloop.last == true %} lg:mb-0 {% else %} lg:mb-5 {% endif %}"
             >
               <span class="lg:block">{{ filter.label }}</span>
               <span id="chevron_filter" class="lg:block lg:rotate-90">
