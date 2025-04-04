@@ -17,7 +17,7 @@
         "contact_info_Abz7T4": {
           "type": "contact_info",
           "settings": {
-            "contact_info_title": "kamba",
+            "contact_info_title": "Foesta",
             "contact_info_description": "Find a locations nearest you",
             "contact_info_phone_title": "Hotline",
             "contact_info_phone_number": "(+00) 123 456 789",
@@ -53,8 +53,12 @@
             "information_second_url": "",
             "information_third_text": "My account",
             "information_third_url": "",
+            "information_fourth_text": "Shipping policy",
+            "information_fourth_url": "",
             "information_fifth_text": "My account",
-            "information_fifth_url": ""
+            "information_fifth_url": "",
+            "information_sixth_text": "View catalogue",
+            "information_sixth_url": ""
           }
         },
         "keep_in_touch_b4tFTT": {

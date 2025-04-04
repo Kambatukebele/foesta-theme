@@ -2,42 +2,19 @@ const plusToggles = document.querySelectorAll(".plusToggle");
 const minusToggles = document.querySelectorAll(".minusToggle");
 const displayContent = document.querySelectorAll(".displayFooterContent");
 
-const LOOP_DISPLAY_CONTENT = (plusIndex = "", minusIndex = "") => {
-  displayContent.forEach((contentElement, contentIndex) => {
-    if (plusIndex === contentIndex) {
-      contentElement.classList.remove("hidden");
-      contentElement.classList.remove("opacity-0");
-      contentElement.classList.add("block");
-      contentElement.classList.add("opacity-100");
-    }
-    if (minusIndex === contentIndex) {
-      contentElement.classList.add("hidden");
-      contentElement.classList.add("opacity-0");
-      contentElement.classList.remove("block");
-      contentElement.classList.remove("opacity-100");
-    }
-  });
-};
+plusToggles.forEach((plus, index) => {
+  const minus = minusToggles[index];
+  const content = displayContent[index];
 
-plusToggles.forEach((plusToggle, plusIndex) => {
-  plusToggle.addEventListener("click", () => {
-    LOOP_DISPLAY_CONTENT(plusIndex, "");
-    minusToggles.forEach((minusToggle) => {
-      minusToggle.classList.remove("hidden");
-      minusToggle.classList.add("block");
-      plusToggle.classList.add("hidden");
-      plusToggle.classList.remove("block");
-    });
+  plus.addEventListener("click", () => {
+    plus.classList.replace("block", "hidden");
+    minus.classList.replace("hidden", "block");
+    content.classList.replace("hidden", "block");
   });
-});
-minusToggles.forEach((minusToggle, minusIndex) => {
-  minusToggle.addEventListener("click", () => {
-    LOOP_DISPLAY_CONTENT("", minusIndex);
-    plusToggles.forEach((plusToggle) => {
-      minusToggle.classList.add("hidden");
-      minusToggle.classList.remove("block");
-      plusToggle.classList.remove("hidden");
-      plusToggle.classList.add("block");
-    });
+
+  minus.addEventListener("click", () => {
+    plus.classList.replace("hidden", "block");
+    minus.classList.replace("block", "hidden");
+    content.classList.replace("block", "hidden");
   });
 });
