@@ -15,18 +15,18 @@
       class="hidden lg:text-base lg:flex lg:justify-center lg:items-center lg:gap-3 lg:w"
     >
       <div class="lg:w-24">
-        <select class=" w-full announcement_bar_lang" name="language" id="lang">
-          <option class="" value="english">English</option>
-          <option value="french">French</option>
-          <option value="spanish">Spanish</option>
-          <option value="german">German</option>
+        <select class=" w-full announcement_bar_lang focus:outline-none cursor-pointer" name="language" id="lang">
+          <option class="custom-option" value="english">English</option>
+          <option class="custom-option" value="french">French</option>
+          <option class="custom-option" value="spanish">Spanish</option>
+          <option class="custom-option" value="german">German</option>
         </select>
       </div>
       <div class="lg:w-24 ">
-        <select class="announcement_bar_currency" name="money" id="money">
-          <option value="us">US Dollars $</option>
-          <option value="cz">Czechia CZK kc</option>
-          <option value="Eu">Euro €</option>
+        <select class="announcement_bar_currency focus:outline-none cursor-pointer" name="money" id="money">
+          <option class="custom-option" value="us">US Dollars $</option>
+          <option class="custom-option" value="cz">Czechia CZK kc</option>
+          <option class="custom-option" value="Eu">Euro €</option>
         </select>
       </div>
     </div>
@@ -43,7 +43,13 @@
   .announcement_title, .announcement_bar_lang, .announcement_bar_currency{
     font-size: {{ section.settings.announcement_title_size }}px;
   }
+  /* Css for the option inside the select */
+  .custom-option {
+    color: {{ section.settings.langAndCurrencySelectorTextColor }};
+    background-color: {{ section.settings.langAndCurrencySelectorBgColor }};
+  }
 {% endstyle %}
+
 <!-- Announcement bar -->
 
 {% schema %}
@@ -108,6 +114,24 @@
       "unit": "px",
       "default": 12,
       "info": "Padding bottom"
+    },
+    {
+      "type": "header",
+      "content": "Color inside the Language and currency selector"
+    },
+    {
+      "type": "color",
+      "id": "langAndCurrencySelectorBgColor",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "This add color in the background of the language and currency selector"
+    },
+    {
+      "type": "color",
+      "id": "langAndCurrencySelectorTextColor",
+      "label": "Option color",
+      "default": "#ffffff",
+      "info": "This add the text color in the of the language and currency selector"
     }
   ],
   "blocks": [
@@ -143,7 +167,9 @@
         "announcement_bar_background": "#000000",
         "announcement_bar_color": "#ffffff",
         "announcement_bar_padding_top": 10,
-        "announcement_bar_padding_bottom": 10
+        "announcement_bar_padding_bottom": 10,
+        "langAndCurrencySelectorBgColor": "#000000",
+        "langAndCurrencySelectorTextColor": "#ffffff"
       },
       "blocks": [
         {
