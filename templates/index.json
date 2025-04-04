@@ -18,8 +18,8 @@
             "image": "shopify://shop_images/slider-2.webp",
             "heading_h1": "Winter style delights",
             "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
-            "button_text": "Shop now",
-            "button_url": ""
+            "button_text": "Shop Men's Collection",
+            "button_url": "shopify://collections/mens-fashion"
           }
         },
         "hero_block_JiH4rQ": {
@@ -28,8 +28,8 @@
             "image": "shopify://shop_images/slider-1.webp",
             "heading_h1": "Spring style inspirations",
             "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
-            "button_text": "Shop now",
-            "button_url": ""
+            "button_text": "Shop Women collection",
+            "button_url": "shopify://collections/womans-fashion"
           }
         },
         "hero_block_GP7yhe": {
@@ -38,8 +38,8 @@
             "image": "shopify://shop_images/slider-3.webp",
             "heading_h1": "Summer style sensation",
             "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
-            "button_text": "Shop now",
-            "button_url": ""
+            "button_text": "Shop Dresses Collection",
+            "button_url": "shopify://collections/dresses"
           }
         }
       },
