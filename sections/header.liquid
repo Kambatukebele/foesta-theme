@@ -16,7 +16,7 @@
 <section class="w-full h-full py-3 {% if section.settings.is_enable_header_bottom_border == true -%} border-b border-gray-200 {%- endif %} relative">
   <div class="container grid grid-rows-1 grid-areas-layout">
     <div class="area-1">
-      <a class="w-36 block" href="#">
+      <a class="w-36 block" href="{{ routes.root_url }}">
         {%- if settings.logo != blank -%}
           {{ settings.logo | image_url: width: 200 | image_tag }}
         {% else %}
@@ -28,7 +28,7 @@
     <!-- Menu -->
     <div
       id="menu"
-      class="absolute area-2 bg-gray-100 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[67px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
+      class="absolute area-2 bg-gray-200 z-50 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[60px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
     >
       <ul
         class="flex flex-col justify-start items-start gap-3 lg:flex-row lg:gap-8"
@@ -47,11 +47,13 @@
     <div
       class="flex justify-end area-3 items-center gap-3 lg:gap-5"
     >
-      <span id="searchIcon" class="hidden lg:block lg:w-7 lg:h-7">
+      <span id="searchIcon" class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
         {{ 'icon-search.svg' | inline_asset_content }}
       </span>
-      <span class="hidden lg:block lg:w-7 lg:h-7">{{ 'icon-heart.svg' | inline_asset_content }} </span>
-      <span class="hidden lg:block lg:w-7 lg:h-7">
+      <span class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
+        {{- 'icon-heart.svg' | inline_asset_content }}
+      </span>
+      <span class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
         {{ 'icon-user.svg' | inline_asset_content }}
       </span>
       <span id="cartIcon" class="relative cursor-pointer block w-7 h-7">
@@ -69,13 +71,13 @@
       class="lg:flex lg:justify-center lg:items-center lg:gap-3 lg:border lg:border-gray-200 lg:rounded-lg lg:px-4 lg:py-2 lg:bg-gray-50"
     >
       <span>
-        <input type="Search" placeholder="Search our store">
+        <input class="focus:outline-none" type="Search" placeholder="Search our store">
       </span>
       <span>
         {{ 'icon-search.svg' | inline_asset_content }}
       </span>
     </div>
-    <span id="closeSearch" class="block w-7 h-7">
+    <span id="closeSearch" class="block w-7 h-7 cursor-pointer">
       {{ 'icon-close.svg' | inline_asset_content }}
     </span>
   </div>
