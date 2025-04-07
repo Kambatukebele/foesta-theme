@@ -50,15 +50,24 @@
       <span id="searchIcon" class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
         {{ 'icon-search.svg' | inline_asset_content }}
       </span>
-      <span class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
+      <span class="hidden relative lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
         {{- 'icon-heart.svg' | inline_asset_content }}
+        <small
+          style="background-color: {{ section.settings.background_color_counter }}; color: {{ section.settings.text_color_counter }}"
+          class="absolute  -top-2 -right-1 w-5 h-5 rounded-full flex  justify-center items-center text-sm"
+          >11</small
+        >
       </span>
       <span class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
         {{ 'icon-user.svg' | inline_asset_content }}
       </span>
       <span id="cartIcon" class="relative cursor-pointer block w-7 h-7">
         {{ 'icon-cart.svg' | inline_asset_content }}
-        <small class="absolute  -top-2 -right-1 text-base">0</small>
+        <small
+          style="background-color: {{ section.settings.background_color_counter }}; color: {{ section.settings.text_color_counter }}"
+          class="absolute  -top-2 -right-1 w-5 h-5 rounded-full flex  justify-center items-center text-sm"
+          >11</small
+        >
       </span>
     </div>
   </div>
@@ -134,6 +143,23 @@
       "id": "is_enable_header_bottom_border",
       "label": "Enable bottom header border",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Background color and text color",
+      "info": "This is the background color and the text color on the  whish list and cart counter"
+    },
+    {
+      "type": "color",
+      "id": "background_color_counter",
+      "label": "Background color counter",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color_counter",
+      "label": "Text color counter",
+      "default": "#ffffff"
     }
   ],
   "presets": [
@@ -142,7 +168,9 @@
       "settings": {
         "is_enable_header_bottom_border": true,
         "menu_text_color": "#ffffff",
-        "menu_text_transform": "uppercase"
+        "menu_text_transform": "uppercase",
+        "background_color_counter": "#000000",
+        "text_color_counter": "#ffffff"
       }
     }
   ]
