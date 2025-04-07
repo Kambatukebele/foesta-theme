@@ -1,4 +1,4 @@
-//SLiding the card
+//SLiding or scrolling the card in the trending and collection section
 
 const productAndCollection = () => {
   const SLIDER = document.querySelector("#sliderCollections");
