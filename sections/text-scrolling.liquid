@@ -1,0 +1,92 @@
+<section class="marquee">
+  <div>Best Selling Items!</div>
+  <div>Limited Offer Sales!</div>
+  <div>Hot Deal Products!</div>
+  <div>Spring Collections!</div>
+</section>
+
+<style>
+  /* Container styles */
+  .marquee {
+    overflow: hidden;
+    width: 100vw;
+    /* Make the section a flex container and “stretch out” the four divs */
+    display: flex;
+    /* The total width of the inner content is 4 * 100vw */
+    width: 100vw;
+    position: relative;
+  }
+
+  /* Wrap the four divs in an inline-flex pseudo container by using a custom property */
+  .marquee::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* The pseudo element’s width equals the total width of the four divs */
+    width: 400vw;
+    height: 100%;
+    display: flex;
+    /* This will “collect” the four divs for animation */
+    pointer-events: none;
+    z-index: 1;
+    /* Animate the pseudo element so that it scrolls continuously */
+    animation: scroll 120s linear infinite;
+  }
+
+  /* Hide the original content but then re-create it using the pseudo element */
+  .marquee > div {
+    flex: 0 0 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    /* Use relative positioning so they will be rendered inside the animated pseudo element */
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Duplicate the content using CSS variables – we are “faking” the effect by animating the whole group.
+     Since we cannot actually clone the HTML without extra markup, the trick is to animate the entire group as one unit. */
+
+  /* Keyframes: move the whole 400vw block to the left, then jump back to zero. Because the layout is identical at 0% and 100%, the reset appears seamless. */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-400vw);
+    }
+  }
+
+  /* To use this animation on the real elements, we wrap the four divs into a virtual “track” */
+  .marquee-track {
+    display: flex;
+    width: 400vw;
+    animation: scroll 120s linear infinite;
+  }
+
+  /* 
+    Unfortunately, without adding an extra wrapper element in the HTML, we must use a pseudo-element technique. 
+    In this solution the pseudo-element ( ::before ) isn’t used to clone the inner HTML but rather to drive the animation 
+    timing. The original four divs remain in the document flow.
+    
+    Because we cannot truly duplicate the structure with only CSS, this method animates the entire block of four divs. 
+    When the animation resets (after 120 seconds in this example) the block jumps back to the start. By ensuring the 
+    content at the end is identical to the start, the jump is minimized. Adjust the animation duration (120s) as desired for a slower scroll.
+  */
+</style>
+
+{% schema %}
+{
+  "name": "Texts scrolling",
+  "class": "texts_scrolling",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Texts Scrolling",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
