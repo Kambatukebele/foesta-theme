@@ -1,0 +1,308 @@
+<section class="w-full {{ section.settings.promotion_paddingY_small_device }} {{ section.settings.promotion_paddingY_large_device }}">
+  <div class="container grid gap-4 grid-cols-1 md:grid-cols-2">
+    {% if section.blocks.size > 0 %}
+      {% for promotion in section.blocks %}
+        {% case promotion.type %}
+          {%- when 'promotion_collection' -%}
+            <div
+              class="flex flex-col justify-center items-center relative   {{ section.settings.promotion_collection_rounded }}"
+              {{ promotion.shopify_attributes }}
+            >
+              <div class="w-full group overflow-hidden">
+                {% if promotion.settings.block_promotion_image != blank %}
+                  {{
+                    promotion.settings.block_promotion_image
+                    | image_url: width: 1000
+                    | image_tag:
+                      class: 'w-full h-full object-cover block rounded-xl transform transition-transform duration-300 ease-in-out group-hover:scale-105'
+                  }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover block' }}
+                {% endif %}
+              </div>
+              <div class="w-full flex flex-col justify-center items-center gap-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <h6
+                  style="color: {{section.settings.promotion_collection_text_color }}"
+                  class="text-base font-light w-full text-center"
+                >
+                  {{ promotion.settings.block_promotion_small_text }}
+                </h6>
+                <h3
+                  style="color: {{section.settings.promotion_collection_text_color }}"
+                  class="text-4xl font-medium w-full text-center"
+                >
+                  {{ promotion.settings.block_promotion_large_text }}
+                </h3>
+                <a
+                  style="background-color: {{ section.settings.promotion_collection_button_bg_color }} ;color: {{section.settings.promotion_collection_button_text_color }}"
+                  class="py-2 px-3 rounded-full"
+                  href="{{ promotion.settings.block_promotion_url_btn }}"
+                >
+                  {{ promotion.settings.block_promotion_text_btn }}
+                </a>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    {% else %}
+      {%- for item in (1..2) -%}
+        <div class="border flex flex-col justify-center items-center relative {{ section.settings.promotion_collection_rounded }}">
+          <div class="w-full">
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover block' }}
+          </div>
+          <div class="w-full flex flex-col justify-center items-center gap-3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <h6
+              style="color: {{section.settings.promotion_collection_text_color }}"
+              class="text-base font-light w-full text-center"
+            >
+              Free Shipping over order $150
+            </h6>
+            <h3
+              style="color: {{section.settings.promotion_collection_text_color }}"
+              class="text-4xl font-medium w-full text-center"
+            >
+              Sometype collection
+            </h3>
+            <a
+              style="background-color: {{ section.settings.promotion_collection_button_bg_color }} ;color: {{section.settings.promotion_collection_button_text_color }}"
+              class="py-2 px-3 rounded-full"
+              >Explore now</a
+            >
+          </div>
+        </div>
+      {%- endfor -%}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotion collection",
+  "class": "promotion_collection",
+  "limit": 1,
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Paddings top and bottom"
+    },
+    {
+      "type": "select",
+      "id": "promotion_paddingY_small_device",
+      "label": "Padding top and bottom on small device",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12",
+      "info": "This is the padding top and bottom only for the small device from 320px up until 1023px"
+    },
+    {
+      "type": "select",
+      "id": "promotion_paddingY_large_device",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24",
+      "info": "This is the padding top and bottom only for the large device from 1024px"
+    },
+    {
+      "type": "header",
+      "content": "Texts color"
+    },
+    {
+      "type": "color",
+      "id": "promotion_collection_text_color",
+      "label": "Texts color",
+      "default": "#000000",
+      "info": "This is the color for all the text color for this section"
+    },
+    {
+      "type": "header",
+      "content": "Button color"
+    },
+    {
+      "type": "color",
+      "id": "promotion_collection_button_bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "promotion_collection_button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Corners settings"
+    },
+    {
+      "type": "select",
+      "id": "promotion_collection_rounded",
+      "label": "Corner rounded",
+      "options": [
+        {
+          "label": "None",
+          "value": "rounded-none"
+        },
+        {
+          "label": "Small",
+          "value": "rounded-sm"
+        },
+        {
+          "label": "Medium",
+          "value": "rounded-md"
+        },
+        {
+          "label": "Large",
+          "value": "rounded-lg"
+        },
+        {
+          "label": "Extra large",
+          "value": "rounded-xl"
+        },
+        {
+          "label": "2 Extras large",
+          "value": "rounded-2xl"
+        }
+      ],
+      "default": "rounded-none"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Promotion collection",
+      "type": "promotion_collection",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_promotion_image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Texts"
+        },
+        {
+          "type": "text",
+          "id": "block_promotion_small_text",
+          "label": "Small text",
+          "default": "Free Shipping order"
+        },
+        {
+          "type": "text",
+          "id": "block_promotion_large_text",
+          "label": "Large text",
+          "default": "25% Off Items"
+        },
+        {
+          "type": "text",
+          "id": "block_promotion_text_btn",
+          "label": "Button",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "block_promotion_url_btn",
+          "label": "Enter your URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotion collection",
+      "settings": {
+        "promotion_paddingY_large_device": "lg:py-24",
+        "promotion_paddingY_small_device": "py-12",
+        "promotion_collection_text_color": "#000000",
+        "promotion_collection_button_bg_color": "#000000",
+        "promotion_collection_button_text_color": "#ffffff",
+        "promotion_collection_rounded": "rounded-none"
+      },
+      "blocks": [
+        {
+          "type": "promotion_collection",
+          "settings": {
+            "block_promotion_small_text": "Free Shipping order",
+            "block_promotion_large_text": "25% Off Items",
+            "block_promotion_text_btn": "block_promotion_text_btn"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

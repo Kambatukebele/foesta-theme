@@ -134,12 +134,48 @@
           "chronstyle-women-sexy-slim-fit-low-cut-mini-dress-y2k-backless-halter-deep-v-neck-mesh-short-dress-elegant-evening-vestidos-2023"
         ]
       }
+    },
+    "promotion_collection_iRDETf": {
+      "type": "promotion-collection",
+      "blocks": {
+        "promotion_collection_6eV47q": {
+          "type": "promotion_collection",
+          "settings": {
+            "block_promotion_image": "shopify://shop_images/banner-1.webp",
+            "block_promotion_small_text": "Free Shipping order over $150",
+            "block_promotion_large_text": "Men Collections",
+            "block_promotion_text_btn": "Shop All Men Collections"
+          }
+        },
+        "promotion_collection_EFjD8i": {
+          "type": "promotion_collection",
+          "settings": {
+            "block_promotion_image": "shopify://shop_images/banner-2.webp",
+            "block_promotion_small_text": "New Wekend Sales Offer",
+            "block_promotion_large_text": "25% Off Items",
+            "block_promotion_text_btn": "Explore now"
+          }
+        }
+      },
+      "block_order": [
+        "promotion_collection_6eV47q",
+        "promotion_collection_EFjD8i"
+      ],
+      "settings": {
+        "promotion_paddingY_small_device": "py-12",
+        "promotion_paddingY_large_device": "lg:py-24",
+        "promotion_collection_text_color": "#ffffff",
+        "promotion_collection_button_bg_color": "#000000",
+        "promotion_collection_button_text_color": "#ffffff",
+        "promotion_collection_rounded": "rounded-2xl"
+      }
     }
   },
   "order": [
     "hero_ri3xxF",
     "information_Cpme7p",
     "featured_collection_fLVxmH",
-    "trending_product_aCRwCx"
+    "trending_product_aCRwCx",
+    "promotion_collection_iRDETf"
   ]
 }
