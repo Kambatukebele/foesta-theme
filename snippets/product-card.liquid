@@ -1,6 +1,6 @@
 {% comment %}
   This is the product card.
-  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productButtonURL, productButtonText, sold
+  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productButtonURL, productButtonText, sold, variants
 {% endcomment %}
 
 <div class="relative productCard {{ productCardWidth }} shrink-0 snap-center pb-7 rounded-2xl">
@@ -25,5 +25,9 @@
       {% endif %}
     </div>
   </div>
-  {% render 'show-icon-card' %}
+  {% # hidden icon card %}
+  <span>
+    {% render 'show-icon-card' %}
+  </span>
 </div>
+{% # Render hidden quick view product card %}
