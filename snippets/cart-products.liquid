@@ -1,0 +1,61 @@
+<section
+  id="cart-products"
+  class="w-[290px] h-screen fixed top-0 translate-x-96 bg-white z-50 sm:w-[330px] duration-700 ease-in-out right-0"
+>
+  <div class="">
+    {% # title and close cart %}
+    <div class="w-full h-14 flex px-4 justify-between items-center py-3 z-20 shadow-xl">
+      <span class="text-base font-semibold">Item added to your cart</span>
+      <span id="closeCartProducts" class="block w-7 h-7 cursor-pointer">
+        {{ 'icon-close.svg' | inline_asset_content }}
+      </span>
+    </div>
+    {% # Products here %}
+    <div class="w-full px-4 h-[calc(100vh-200px)] py-4 flex flex-col just-center items-center gap-3 overflow-y-scroll">
+      {% # Loop product here %}
+      {% for item in (1..10) %}
+        <div class="w-full flex justify-center gap-4">
+          <div class="shrink-0 w-[100px] border">
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+          </div>
+          <div class="w-[150px] flex flex-col justify-center items-start gap-1">
+            <h3 class="text-base font-semibold">Vintage-inspired Floral Midi Dress</h3>
+            <div class="w-full flex justify-between items-center">
+              <h5 class="text-base font-normal">
+                <span class="font-semibold">Color:</span>
+                Black
+              </h5>
+              <h5 class="text-base font-normal">
+                <span class="font-semibold">Size:</span>
+                Medium
+              </h5>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+              <p class="text-base font-semibold text-black">$14</p>
+              <p class="text-base font-semibold text-red-700 line-through">$14</p>
+            </div>
+            <div class="w-full flex justify-between items-center gap-2">
+              <div class="w-28 border flex justify-between items-center px-2 py-1 rounded-md">
+                <span class="block text-lg">-</span>
+                <span class="block text-base">1</span>
+                <span class="block text-lg">+</span>
+              </div>
+              <a class="block underline text-base ">Remove</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% # Footer subtotal %}
+    <div class="w-full absolute bottom-0 right-0 h-36 z-20 shadow flex flex-col justify-center items-start px-4 gap-5 bg-white">
+      <div class="w-full flex justify-between items-center">
+        <span class="text-2xl font-semibold">Subtotal</span>
+        <span class="text-base font-normal">$158</span>
+      </div>
+      <div class="w-full flex justify-between items-center">
+        <a class="w-28 border text-center py-3 rounded-lg">View Cart</a>
+        <a class="w-28 border text-center py-3 rounded-lg bg-black text-white">Check Out</a>
+      </div>
+    </div>
+  </div>
+</section>

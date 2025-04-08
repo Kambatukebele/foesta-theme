@@ -9,11 +9,13 @@
     --color-red-50: oklch(0.971 0.013 17.38);
     --color-red-500: oklch(0.637 0.237 25.331);
     --color-red-600: oklch(0.577 0.245 27.325);
+    --color-red-700: oklch(0.505 0.213 27.518);
     --color-red-800: oklch(0.444 0.177 26.899);
     --color-orange-700: oklch(0.553 0.195 38.402);
     --color-yellow-700: oklch(0.554 0.135 66.442);
     --color-green-800: oklch(0.448 0.119 151.328);
     --color-blue-50: oklch(0.97 0.014 254.604);
+    --color-blue-600: oklch(0.546 0.245 262.881);
     --color-blue-700: oklch(0.488 0.243 264.376);
     --color-gray-50: oklch(0.985 0.002 247.839);
     --color-gray-100: oklch(0.967 0.003 264.542);
@@ -263,6 +265,12 @@
   .-right-1 {
     right: calc(var(--spacing) * -1);
   }
+  .-right-72 {
+    right: calc(var(--spacing) * -72);
+  }
+  .-right-96 {
+    right: calc(var(--spacing) * -96);
+  }
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
@@ -396,11 +404,23 @@
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
   .h-20 {
     height: calc(var(--spacing) * 20);
   }
   .h-24 {
     height: calc(var(--spacing) * 24);
+  }
+  .h-36 {
+    height: calc(var(--spacing) * 36);
+  }
+  .h-44 {
+    height: calc(var(--spacing) * 44);
   }
   .h-80 {
     height: calc(var(--spacing) * 80);
@@ -420,6 +440,9 @@
   .h-\[calc\(100vh-10rem\)\] {
     height: calc(100vh - 10rem);
   }
+  .h-\[calc\(100vh-200px\)\] {
+    height: calc(100vh - 200px);
+  }
   .h-fit {
     height: fit-content;
   }
@@ -428,6 +451,15 @@
   }
   .h-screen {
     height: 100vh;
+  }
+  .w-0 {
+    width: calc(var(--spacing) * 0);
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
@@ -477,8 +509,17 @@
   .w-80 {
     width: calc(var(--spacing) * 80);
   }
+  .w-\[100px\] {
+    width: 100px;
+  }
+  .w-\[150px\] {
+    width: 150px;
+  }
   .w-\[280px\] {
     width: 280px;
+  }
+  .w-\[290px\] {
+    width: 290px;
   }
   .w-\[300px\] {
     width: 300px;
@@ -513,6 +554,11 @@
   .border-collapse {
     border-collapse: collapse;
   }
+  .translate-6 {
+    --tw-translate-x: calc(var(--spacing) * 6);
+    --tw-translate-y: calc(var(--spacing) * 6);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .-translate-x-1 {
     --tw-translate-x: calc(var(--spacing) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -523,6 +569,14 @@
   }
   .translate-x-0 {
     --tw-translate-x: calc(var(--spacing) * 0);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-x-6 {
+    --tw-translate-x: calc(var(--spacing) * 6);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-x-96 {
+    --tw-translate-x: calc(var(--spacing) * 96);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .translate-x-full {
@@ -608,6 +662,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
@@ -898,6 +955,9 @@
   .text-red-500 {
     color: var(--color-red-500);
   }
+  .text-red-700 {
+    color: var(--color-red-700);
+  }
   .text-white {
     color: var(--color-white);
   }
@@ -946,6 +1006,9 @@
   .shadow-xl {
     --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-blue-600 {
+    --tw-shadow-color: var(--color-blue-600);
   }
   .outline {
     outline-style: var(--tw-outline-style);
@@ -1036,6 +1099,26 @@
   .sm\:w-80 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 80);
+    }
+  }
+  .sm\:w-\[310px\] {
+    @media (width >= 40rem) {
+      width: 310px;
+    }
+  }
+  .sm\:w-\[320px\] {
+    @media (width >= 40rem) {
+      width: 320px;
+    }
+  }
+  .sm\:w-\[330px\] {
+    @media (width >= 40rem) {
+      width: 330px;
+    }
+  }
+  .sm\:w-\[380px\] {
+    @media (width >= 40rem) {
+      width: 380px;
     }
   }
   .sm\:grid-cols-2 {
