@@ -1,3 +1,36 @@
+//Activate sticky header on scroll
+function activateStickyHeader() {
+    const announcementBar = document.querySelector("#announcement"); // Targeting the announcement bar
+    const header = document.querySelector("#header"); // Targeting the header
+    
+    let scrollY = 0;
+    window.addEventListener("scroll", () => {
+        scrollY = window.scrollY;
+        if (scrollY > 100) {
+            announcementBar.classList.add("hidden")
+            header.classList.add("fixed");
+            header.classList.add("top-0");
+            header.classList.add("left-0");
+            header.classList.add("right-0");
+            header.classList.add("z-50");
+        } else {
+            announcementBar.classList.remove("hidden")
+            header.classList.remove("fixed");
+            header.classList.remove("top-0");
+            header.classList.remove("left-0");
+            header.classList.remove("right-0");
+            header.classList.remove("z-50");
+        }
+        
+        
+        
+    })
+    
+}
+
+activateStickyHeader();
+
+
 // Add to product to cart and open drawer
 function addProductToCart(){
     // Toggle Cart Drawer
