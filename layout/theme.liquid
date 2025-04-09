@@ -49,7 +49,11 @@
 
   <body>
     {%- sections 'header-group' -%}
-    {{ content_for_layout }}
+    <!-- Cart Drawer -->
+    {% render 'cart-drawer' %}
+    <main>
+      {{ content_for_layout }}
+    </main>
     {%- sections 'footer-group' -%}
     {{ 'header.js' | asset_url | script_tag }}
     {{ 'hero.js' | asset_url | script_tag }}
