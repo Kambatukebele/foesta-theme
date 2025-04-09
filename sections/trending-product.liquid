@@ -31,9 +31,8 @@
             productTitle: product.title,
             productPrice: product.price,
             productPriceComparison: product.compare_at_price,
-            productButtonURL: product.url,
-            productButtonText: 'Add to cart',
-            variants: product.variants
+            productVariantId: product.variants.first.id,
+            productButtonText: 'Add to carts'
           %}
         {%- endfor -%}
       {% else %}
@@ -58,8 +57,6 @@
   <!-- End Make this a component or a render -->
 </section>
 <!-- End Treding product -->
-
-{% comment %} Product card javascript {% endcomment %}
 
 {% schema %}
 {

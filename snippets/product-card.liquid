@@ -1,6 +1,6 @@
 {% comment %}
   This is the product card.
-  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productButtonURL, productButtonText, sold, variants
+  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productVariantId, productButtonText, sold, variants
 {% endcomment %}
 
 <div class="relative productCard {{ productCardWidth }} shrink-0 snap-center pb-7 rounded-2xl">
@@ -15,9 +15,11 @@
         {%- endif -%}
       </div>
       <button
+        data-variant-id="{{ productVariantId }}"
+        id="add-to-cart-btn"
         class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
       >
-        <a href="{{ productButtonURL }}">{{ productButtonText }}</a>
+        {{ productButtonText }}
       </button>
       <!-- show if product is sold -->
       {% if sold == false %}

@@ -55,7 +55,7 @@
         <small
           style="background-color: {{ section.settings.background_color_counter }}; color: {{ section.settings.text_color_counter }}"
           class="absolute  -top-2 -right-1 w-5 h-5 rounded-full flex  justify-center items-center text-sm"
-          >11</small
+          >0</small
         >
       </span>
       <span class="hidden lg:block lg:w-7 lg:h-7 lg:cursor-pointer">
@@ -64,10 +64,10 @@
       <span id="cartIcon" class="relative cursor-pointer block w-7 h-7">
         {{ 'icon-cart.svg' | inline_asset_content }}
         <small
+          id="cart-count"
           style="background-color: {{ section.settings.background_color_counter }}; color: {{ section.settings.text_color_counter }}"
           class="absolute  -top-2 -right-1 w-5 h-5 rounded-full flex  justify-center items-center text-sm"
-          >11</small
-        >
+        ></small>
       </span>
     </div>
   </div>
