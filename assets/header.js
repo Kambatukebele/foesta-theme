@@ -34,19 +34,7 @@ const ToggleSearch = () => {
   });
 };
 
-// Toggle Cart item
-const ToggleCartItem = () =>{
-  const cartIcon = document.querySelector("#cartIcon"); // Targeted the cart icon inside the header.liquid
-  const cartProducts = document.querySelector("#cart-products");
-  const closeCartProducts = document.querySelector("#closeCartProducts");
-  cartIcon.addEventListener("click", () =>{
-    cartProducts.classList.remove("translate-x-96")
-  });
-  closeCartProducts.addEventListener("click", () =>{
-    cartProducts.classList.add("translate-x-96")
-  })
-}
 
 ToggleMenu();
 ToggleSearch();
-ToggleCartItem();
+

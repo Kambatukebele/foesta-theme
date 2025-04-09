@@ -1,5 +1,19 @@
-// Add to product to cart 
+// Add to product to cart and open drawer
 function addProductToCart(){
+    // Toggle Cart Drawer
+    const cartIcon = document.querySelector("#cartIcon"); // Targeted the cart icon inside the header.liquid
+    const cartDrawer = document.querySelector("#cart-drawer");
+    const closeCartDrawer = document.querySelector("#closeCartProducts");
+    function openCloseCartDrawer () {        
+        cartIcon.addEventListener("click", () =>{
+            cartDrawer.classList.remove("translate-x-96")
+        });
+        closeCartDrawer.addEventListener("click", () =>{
+            cartDrawer.classList.add("translate-x-96")
+        })
+        
+    }
+    openCloseCartDrawer();
     // Function to update the cart count badge
     function updateCartCount(){
         const counter = document.getElementById('cart-count');
@@ -34,7 +48,7 @@ function addProductToCart(){
             })
                 .then((res) => res.json())
                 .then(data => {
-                    console.log('Product added to cart: ', data);
+                    cartDrawer.classList.remove("translate-x-96"); // This opens the drawer when product is added
                     updateCartCount(); //This refresh count after add
                 })
                 .catch(err => {
