@@ -1,0 +1,283 @@
+<section class="w-full {{ section.settings.video_paddingY_small }}  {{ section.settings.video_paddingY_large }}">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 sm:gap-0">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {%- case block.type -%}
+          {%- when 'text' -%}
+            <div class="w-full h-[600px] flex flex-col justify-center items-center py-4 gap-6">
+              {% if block.settings.block_image != blank %}
+                {{ block.settings.block_image | image_url: width: 300 | image_tag: class: 'w-44 h-44 object-cover' }}
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-44 h-44 object-cover' }}
+              {% endif %}
+              <div class="w-full flex flex-col justify-center items-center px-4 gap-3">
+                <h3 class="text-4xl font-semibold text-center">{{ block.settings.block_heading_text }}</h3>
+                <p class="text-base font-normal text-center">{{ block.settings.block_paragraph_text }}</p>
+              </div>
+              <a
+                style="background-color: {{ block.settings.block_button_bg_color }}; color: {{ block.settings.block_button_text_color }}"
+                href="{{ block.settings.block_button_url }}"
+                class="py-3 px-6 rounded-md cursor-pointer"
+              >
+                {{- block.settings.block_button_text -}}
+              </a>
+            </div>
+          {%- when 'video' -%}
+            <div class="w-full h-full sm:h-[600px]">
+              <div class="relative w-full aspect-video bg-black group cursor-pointer" id="youtube-video-wrapper">
+                {{
+                  block.settings.video_image_placeholder
+                  | image_url: width: 1000
+                  | image_tag: class: 'w-full h-full object-cover'
+                }}
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-14 h-14 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.518-3.722A1 1 0 007 8.236v7.528a1 1 0 001.234.97l6.518-1.946a1 1 0 000-1.94z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+        {%- endcase -%}
+      {% endfor %}
+    {% else %}
+      <div class="w-full flex flex-col justify-center items-center">
+        {{ 'product-1' | placeholder_svg_tag: 'w-44 h-44 object-cover' }}
+        <div class="w-full flex flex-col justify-center items-center px-4">
+          <h3 class="text-4xl font-semibold text-center">Some title go here</h3>
+          <p class="text-base font-normal text-center">Some paragraph will be sitting here too</p>
+        </div>
+        <a>View latest collection</a>
+      </div>
+      <!-- video -->
+      <div class="w-full">
+        <video class="w-full h-full" autoplay muted>
+          <source src="https://youtu.be/iHrVo5fvmzE?si=d29qNdyUTAF0JHIz" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    {% endif %}
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const wrapper = document.getElementById('youtube-video-wrapper');
+
+    wrapper.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute(
+        'src',
+        'https://www.youtube.com/embed/{{ section.blocks.last.settings.block_video }}?autoplay=1&rel=0'
+      );
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allowfullscreen', 'true');
+      iframe.className = 'w-full h-full';
+
+      wrapper.innerHTML = '';
+      wrapper.appendChild(iframe);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "video",
+  "tag": "section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Padding top and bottom on small and large screen"
+    },
+    {
+      "type": "select",
+      "id": "video_paddingY_small",
+      "label": "Padding top and bottom on small screen",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12"
+    },
+    {
+      "type": "select",
+      "id": "video_paddingY_large",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "text",
+      "type": "text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "text",
+          "id": "block_heading_text",
+          "label": "Heading",
+          "default": "Some title go here",
+          "placeholder": "Please enter your heading here",
+          "info": "This is the heading text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "block_paragraph_text",
+          "label": "Paragraph",
+          "default": "Some Paragraph will be written here",
+          "info": "This is the paragraph text"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "color",
+          "id": "block_button_bg_color",
+          "label": "Button background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "block_button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "block_button_text",
+          "label": "Button text",
+          "placeholder": "Place your text here",
+          "default": "View more"
+        },
+        {
+          "type": "url",
+          "id": "block_button_url",
+          "label": "Button URL"
+        }
+      ]
+    },
+    {
+      "name": "Video",
+      "type": "video",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Video and image placeholder"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_image_placeholder",
+          "label": "Image placeholder",
+          "info": "This is just the placeholder for your video"
+        },
+        {
+          "type": "text",
+          "id": "block_video",
+          "label": "Youtube Video",
+          "info": "Copy the embed link from your link iframe"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "settings": {
+        "video_paddingY_large": "lg:py-24",
+        "video_paddingY_small": "py-12"
+      },
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

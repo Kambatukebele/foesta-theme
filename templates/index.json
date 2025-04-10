@@ -144,7 +144,8 @@
             "block_promotion_image": "shopify://shop_images/banner-1.webp",
             "block_promotion_small_text": "Free Shipping order over $150",
             "block_promotion_large_text": "Men Collections",
-            "block_promotion_text_btn": "Shop All Men Collections"
+            "block_promotion_text_btn": "Shop All Men Collections",
+            "block_promotion_url_btn": ""
           }
         },
         "promotion_collection_EFjD8i": {
@@ -153,7 +154,8 @@
             "block_promotion_image": "shopify://shop_images/banner-2.webp",
             "block_promotion_small_text": "New Wekend Sales Offer",
             "block_promotion_large_text": "25% Off Items",
-            "block_promotion_text_btn": "Explore now"
+            "block_promotion_text_btn": "Explore now",
+            "block_promotion_url_btn": ""
           }
         }
       },
@@ -169,6 +171,38 @@
         "promotion_collection_button_text_color": "#ffffff",
         "promotion_collection_rounded": "rounded-2xl"
       }
+    },
+    "video_VJpdie": {
+      "type": "video",
+      "blocks": {
+        "text_wYxJja": {
+          "type": "text",
+          "settings": {
+            "block_image": "shopify://shop_images/round.webp",
+            "block_heading_text": "Hot Deals You Can’t Miss",
+            "block_paragraph_text": "Buy any products & take the gift voucher",
+            "block_button_bg_color": "#000000",
+            "block_button_text_color": "#ffffff",
+            "block_button_text": "View Men's Collection",
+            "block_button_url": "shopify://collections/mens-fashion"
+          }
+        },
+        "video_J9hB86": {
+          "type": "video",
+          "settings": {
+            "video_image_placeholder": "shopify://shop_images/banner-2.webp",
+            "block_video": "suEUu3CYoxs?si=hEwcf3KKYXfKWA-v"
+          }
+        }
+      },
+      "block_order": [
+        "text_wYxJja",
+        "video_J9hB86"
+      ],
+      "settings": {
+        "video_paddingY_small": "py-12",
+        "video_paddingY_large": "lg:py-24"
+      }
     }
   },
   "order": [
@@ -176,6 +210,7 @@
     "information_Cpme7p",
     "featured_collection_fLVxmH",
     "trending_product_aCRwCx",
-    "promotion_collection_iRDETf"
+    "promotion_collection_iRDETf",
+    "video_VJpdie"
   ]
 }
