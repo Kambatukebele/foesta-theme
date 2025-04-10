@@ -1,6 +1,6 @@
 <section
   id="cart-drawer"
-  class="w-[290px] h-screen fixed top-0 translate-x-96 bg-white z-50 sm:w-[330px] duration-700 ease-in-out right-0"
+  class="w-[300px] bg-gray-50 h-screen fixed top-0 translate-x-96 z-50 sm:w-[330px] duration-700 ease-in-out right-0"
 >
   <div class="">
     {% # title and close cart %}
@@ -13,57 +13,21 @@
     {% # Products here %}
     <div
       id="cart-items-container"
-      class="w-full px-4 h-[calc(100vh-200px)] py-4 flex flex-col just-center items-center gap-3 overflow-y-scroll"
+      class="w-full px-1 h-[calc(100vh-200px)] py-4 flex flex-col just-center items-center gap-3 overflow-y-scroll"
     >
       {% # Loop product here %}
-      {% comment %}
-        <div class="w-full flex justify-center gap-4">
-          <div class="shrink-0 w-[100px]">
-            {{ item.image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover rounded-md' }}
-          </div>
-          <div class="w-[150px] flex flex-col justify-center items-start gap-1">
-            <h3 class="text-base font-semibold">{{ item.title | truncate: '20' }}</h3>
-            <div class="w-full flex justify-between items-center">
-              <h5 class="text-base font-normal">
-                <span class="font-semibold">Color:</span>
-                Black
-              </h5>
-              <h5 class="text-base font-normal">
-                <span class="font-semibold">Size:</span>
-                Medium
-              </h5>
-            </div>
-            <div class="w-full flex justify-start items-center gap-3">
-              <p class="text-base font-semibold text-black">{{ item.price | money }}</p>
-              <p class="text-base font-semibold text-red-700 line-through">
-                {% if item.original_line_price != item.price %}
-                  {{ item.original_line_price | money }}
-                {% endif %}
-              </p>
-            </div>
-            <div class="w-full flex justify-between items-center gap-2">
-              <div class="w-28 border flex justify-between items-center px-2 py-1 rounded-md">
-                <span class="block text-lg">-</span>
-                <span class="block text-base">1</span>
-                <span class="block text-lg">+</span>
-              </div>
-              <a href="{{ item.url_to_remove }}" class="block underline text-base ">Remove</a>
-            </div>
-          </div>
-        </div>
-      {% endcomment %}
-      {% comment %}
-        <div class="w-full flex flex-col justify-center items-start gap-3">
-          <span>You cart is empty</span>
-          <a href="" class="underline">Continue shopping</a>
-        </div>
-      {% endcomment %}
+      <div id="empty-cart-message" class="hidden text-center py-10">
+        <p class="text-lg font-semibold mb-4">You have 0 products in your cart.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="underline text-blue-600 hover:text-blue-800">
+          Continue Shopping
+        </a>
+      </div>
     </div>
     {% # Footer subtotal %}
     <div class="w-full absolute bottom-0 right-0 h-36 z-20 shadow flex flex-col justify-center items-start px-4 gap-5 bg-white">
       <div class="w-full flex justify-between items-center">
         <span class="text-2xl font-semibold">Subtotal</span>
-        <span class="text-base font-normal">$158</span>
+        <span id="cart-total-amount" class="text-base font-normal">$0.00</span>
       </div>
       <div class="w-full flex justify-between items-center">
         <a class="w-28 border text-center py-3 rounded-lg">View Cart</a>
