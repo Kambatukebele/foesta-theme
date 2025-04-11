@@ -1,12 +1,96 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "About Us Page",
   "sections": {
     "main": {
-      "type": "main-page"
+      "type": "main-page",
+      "settings": {}
     },
     "about": {
-      "type": "about-us-section"
+      "type": "about-us-section",
+      "blocks": {
+        "images_mWWEyM": {
+          "type": "images",
+          "settings": {
+            "about_us_section_main_image": "shopify://shop_images/about.webp",
+            "about_us_section_small_image": "shopify://shop_images/round.webp"
+          }
+        },
+        "texts_w7cmw4": {
+          "type": "texts",
+          "settings": {
+            "about_us_section_small_heading": "Welcome To Our Online Store",
+            "about_us_section_large_heading": "Discover Our Journey Redefining Online Shopping.",
+            "about_us_section_paragraph": "\"At Foesta, we're passionate about bringing you the latest trends and timeless classics in fashion. Our journey began with a vision to redefine the online shopping experience, offering a curated selection of high-quality clothing, accessories, and lifestyle products that reflect your unique style. What sets us apart is our dedication to providing exceptional customer service and a seamless shopping experience from start to finish."
+          }
+        }
+      },
+      "block_order": [
+        "images_mWWEyM",
+        "texts_w7cmw4"
+      ],
+      "settings": {
+        "about_us_section_paddingY_small_device": "py-12",
+        "about_us_section_paddingY_large_device": "lg:py-24"
+      }
+    },
+    "faq_HCQAQC": {
+      "type": "faq",
+      "blocks": {
+        "question_and_response_CXGFGP": {
+          "type": "question_and_response",
+          "settings": {
+            "faq_block_question": "Answers to Your Style Dilemmas",
+            "faq_block_response": "\"At Foesta, we're passionate about bringing you the latest trends and timeless classics in fashion. Our journey began with a vision to redefine the online shopping experience, offering a curated selection"
+          }
+        },
+        "question_and_response_X6aRrV": {
+          "type": "question_and_response",
+          "settings": {
+            "faq_block_question": "Frequently Asked Questions About Fashion",
+            "faq_block_response": "Inform your customers about your brand. Make announcements, describe a product, or welcome customers to your store."
+          }
+        },
+        "question_and_response_9CQddd": {
+          "type": "question_and_response",
+          "settings": {
+            "faq_block_question": "Common Queries in Style Clarified",
+            "faq_block_response": "Inform your customers about your brand. Make announcements, describe a product, or welcome customers to your store."
+          }
+        },
+        "question_and_response_bKA9b8": {
+          "type": "question_and_response",
+          "settings": {
+            "faq_block_question": "Top Questions About Fashion Addressed",
+            "faq_block_response": "Inform your customers about your brand. Make announcements, describe a product, or welcome customers to your store."
+          }
+        }
+      },
+      "block_order": [
+        "question_and_response_CXGFGP",
+        "question_and_response_X6aRrV",
+        "question_and_response_9CQddd",
+        "question_and_response_bKA9b8"
+      ],
+      "settings": {
+        "faq_section_paddingY_small_device": "py-12",
+        "faq_section_paddingY_large_device": "lg:py-24",
+        "faq_image": "shopify://shop_images/faq_1100x_912928f3-d0f7-4c24-8da4-277f2103fa25.webp",
+        "faq_small_heading": "FAQ",
+        "faq_large_heading": "Need Help? Check Out Our FAQ Section for Foesta Shoppers."
+      }
     }
   },
-  "order": ["main", "about"]
+  "order": [
+    "main",
+    "about",
+    "faq_HCQAQC"
+  ]
 }
