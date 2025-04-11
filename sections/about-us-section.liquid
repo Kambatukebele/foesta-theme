@@ -1,4 +1,222 @@
-<div class="py-12 px-6">
-  <h1 class="text-3xl font-bold mb-4">About Us</h1>
-  <p class="text-lg">We are a passionate team building awesome Shopify stores...</p>
-</div>
+<section class="w-full h-fit {{ section.settings.about_us_section_paddingY_small_device }} {{ section.settings.about_us_section_paddingY_large_device }}">
+  <div class="container">
+    <div class="relative">
+      <!-- Main image -->
+      <div class="w-full h-full my-10 lg:h-[570px]">
+        {%- if section.blocks.first.settings.about_us_section_main_image -%}
+          {{
+            section.blocks.first.settings.about_us_section_main_image
+            | image_url: width: 1000
+            | image_tag: class: 'w-full h-full object-cover rounded-2xl'
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover rounded-2xl' }}
+        {%- endif -%}
+      </div>
+      <!-- Small image -->
+      <div class="w-28 h-28 absolute -bottom-4 left-0">
+        {%- if section.blocks.first.settings.about_us_section_small_image -%}
+          {{
+            section.blocks.first.settings.about_us_section_small_image
+            | image_url: width: 1000
+            | image_tag: class: 'w-full h-full object-cover rounded-2xl'
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'block w-full h-full object-cover' }}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="w-full flex flex-col justify-center items-start gap-3.5 lg:flex-row lg:gap-6">
+      <div class="w-full flex flex-col justify-center items-start gap-2.5 lg:w-1/2">
+        <h4 class="text-lg font-semibold">
+          {% if section.blocks.last.settings.about_us_section_small_heading != blank %}
+            {{ section.blocks.last.settings.about_us_section_small_heading }}
+          {% else %}
+            Lorem ipsum dolor sit amet consectetur
+          {% endif %}
+        </h4>
+        <h1 class="text-2xl font-semibold">
+          {% if section.blocks.last.settings.about_us_section_large_heading != blank %}
+            {{ section.blocks.last.settings.about_us_section_large_heading }}
+          {% else %}
+            Lorem ipsum dolor sit amet consectetur adipiscing elit, lacus curae malesuada cras sociosqu ac egestas
+            tortor
+          {% endif %}
+        </h1>
+      </div>
+      <div class="lg:w-1/2">
+        <p class="text-xl font-medium">
+          {% if section.blocks.last.settings.about_us_section_paragraph != blank %}
+            {{ section.blocks.last.settings.about_us_section_paragraph }}
+          {% else %}
+            Lorem ipsum dolor sit amet consectetur adipiscing elit, lacus curae malesuada cras sociosqu ac egestas
+            tortor, nunc sagittis nibh interdum per mi. Ad tempus dapibus curabitur egestas nisl cras ultrices rutrum
+            faucibus netus, pretium sociosqu aliquam magnis lacinia aenean proin purus. Magna conubia eleifend
+            pellentesque eros netus id, auctor luctus mattis neque vestibulum fames sed, eget porta tellus platea leo.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About us section",
+  "class": "about-us-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Paddings top and bottom"
+    },
+    {
+      "type": "select",
+      "id": "about_us_section_paddingY_small_device",
+      "label": "Padding top and bottom on small device",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12",
+      "info": "This is the padding top and bottom only for the small device from 320px up until 1023px"
+    },
+    {
+      "type": "select",
+      "id": "about_us_section_paddingY_large_device",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24",
+      "info": "This is the padding top and bottom only for the large device from 1024px"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Images",
+      "type": "images",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Main image"
+        },
+        {
+          "type": "image_picker",
+          "id": "about_us_section_main_image",
+          "label": "Main image"
+        },
+        {
+          "type": "header",
+          "content": "Small image"
+        },
+        {
+          "type": "image_picker",
+          "id": "about_us_section_small_image",
+          "label": "Small image"
+        }
+      ]
+    },
+    {
+      "name": "Texts",
+      "type": "texts",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Headings"
+        },
+        {
+          "type": "text",
+          "id": "about_us_section_small_heading",
+          "label": "Small heading",
+          "placeholder": "Enter your small heading here",
+          "default": "Lorem ipsum dolor sit amet"
+        },
+        {
+          "type": "text",
+          "id": "about_us_section_large_heading",
+          "label": "Large heading",
+          "placeholder": "Enter your large heading here",
+          "default": "Lorem ipsum dolor sit amet consectetur adipiscing elit faucibus iaculis taciti"
+        },
+        {
+          "type": "header",
+          "content": "Paragraph"
+        },
+        {
+          "type": "textarea",
+          "id": "about_us_section_paragraph",
+          "label": "Large heading",
+          "default": "Lorem ipsum dolor sit amet consectetur adipiscing elit nisl pulvinar donec, scelerisque porttitor auctor fringilla sagittis blandit torquent est curabitur. Molestie magna blandit primis erat at mollis in auctor hendrerit, pharetra sociosqu facilisi id nunc taciti odio per magnis cum, diam praesent natoque enim vulputate consequat nulla dictum. Pulvinar duis purus tortor vestibulum dis risus facilisis, per quisque fringilla tincidunt diam porttitor, fusce posuere mattis curae nisi nam."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

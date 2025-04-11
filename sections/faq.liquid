@@ -1,0 +1,240 @@
+<section class="w-full h-fit {{ section.settings.faq_section_paddingY_small_device }} {{ section.settings.faq_section_paddingY_large_device }}">
+  <div class="container flex flex-col justify-center items-start gap-6 lg:flex-row lg:items-center">
+    <!-- Image -->
+    <div class="w-full h-full rounded-2xl lg:w-[600px]">
+      {% if section.settings.faq_image != blank %}
+        {{
+          section.settings.faq_image
+          | image_url: width: 1000
+          | image_tag: class: 'w-full h-full object-cover rounded-2xl'
+        }}
+      {% else %}
+        {{ 'product-2' | placeholder_svg_tag: 'w-full h-full object-cover rounded-2xl' }}
+      {% endif %}
+    </div>
+    <!-- Faq -->
+    <div class="w-full flex flex-col justify-center items-start gap-3.5 lg:w-1/2">
+      <div class="w-full flex flex-col justify-center items-start gap-3.5">
+        <h5 class="text-xl font-semibold">
+          {% if section.settings.faq_small_heading != blank %}
+            {{ section.settings.faq_small_heading }}
+          {% endif %}
+        </h5>
+        <h2 class="text-3xl font-semibold">
+          {% if section.settings.faq_large_heading != blank %}
+            {{ section.settings.faq_large_heading }}
+          {% endif %}
+        </h2>
+      </div>
+      <div class="w-full flex flex-col justify-center items-start gap-3.5">
+        <!-- loop here -->
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {%- when 'question_and_response' -%}
+                <div class="w-full h-fit flex flex-col justify-center items-start gap-2.5 py-3 px-2 border-gray-200 border rounded-md {{ block.shopify_attributes }}">
+                  <!-- Question and icon -->
+                  <div class="w-full flex justify-between items-center z-50">
+                    <span class="block w-full text-xl font-medium">
+                      {% if block.settings.faq_block_question != blank %}
+                        {{ block.settings.faq_block_question }}
+                      {% endif %}
+                    </span>
+                    <div class="w-28 flex justify-end">
+                      <span id="faq-minus" class="hidden cursor-pointer">
+                        {{- 'icon-minus.svg' | inline_asset_content -}}
+                      </span>
+                      <span id="faq-plus" class="block cursor-pointer">
+                        {{- 'icon-plus.svg' | inline_asset_content -}}
+                      </span>
+                    </div>
+                  </div>
+                  <!-- Response -->
+                  <div id="faq-content" class="text-lg font-normal h-0 overflow-hidden duration-700 ease-in-out">
+                    {% if block.settings.faq_block_response != blank %}
+                      {{ block.settings.faq_block_response }}
+                    {% endif %}
+                  </div>
+                </div>
+              {%- else -%}
+            {%- endcase -%}
+          {% endfor %}
+        {% else %}
+          {% for item in (1..4) %}
+            <div class="w-full h-fit flex flex-col justify-center items-start gap-2.5 py-3 px-2 border-gray-200 border rounded-md">
+              <!-- Question and icon -->
+              <div class="w-full flex justify-between items-center">
+                <span class="block w-full text-xl font-medium">Answers to your style dilemmas</span>
+                <div class="w-28 flex justify-end">
+                  <span id="faq-minus" class="hidden cursor-pointer">
+                    {{- 'icon-minus.svg' | inline_asset_content -}}
+                  </span>
+                  <span id="faq-plus" class="block cursor-pointer">{{ 'icon-plus.svg' | inline_asset_content }}</span>
+                </div>
+              </div>
+              <!-- Response -->
+              <div id="faq-content" class="text-lg font-normal hidden">
+                "At Foesta, we're passionate about bringing you the latest trends and timeless classics in fashion. Our
+                journey began with a vision to redefine the online shopping experience, offering a curated selection
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Faq",
+  "class": "faq",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Paddings top and bottom"
+    },
+    {
+      "type": "select",
+      "id": "faq_section_paddingY_small_device",
+      "label": "Padding top and bottom on small device",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12",
+      "info": "This is the padding top and bottom only for the small device from 320px up until 1023px"
+    },
+    {
+      "type": "select",
+      "id": "faq_section_paddingY_large_device",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24",
+      "info": "This is the padding top and bottom only for the large device from 1024px"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Headings"
+    },
+    {
+      "type": "text",
+      "id": "faq_small_heading",
+      "label": "Small Heading",
+      "default": "Lorem ipsum",
+      "placeholder": "Ex: FAQ"
+    },
+    {
+      "type": "text",
+      "id": "faq_large_heading",
+      "label": "Large Heading",
+      "default": "Lorem ipsum dolor sit amet consectetur",
+      "placeholder": "Ex:Check our faq"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Question and Response",
+      "type": "question_and_response",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "faq_block_question",
+          "label": "Question",
+          "placeholder": "Write your question here ...",
+          "default": "Are you from earth?"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_block_response",
+          "label": "Response",
+          "placeholder": "Write your Here here ...",
+          "default": "Lorem ipsum dolor sit amet consectetur adipiscing elit mattis, eros volutpat ad metus fermentum proin dignissim lacinia, cursus pretium libero placerat velit bibendum faucibus. Tristique litora augue luctus pulvinar "
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faq"
+    }
+  ]
+}
+{% endschema %}

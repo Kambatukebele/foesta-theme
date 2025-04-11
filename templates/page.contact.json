@@ -2,8 +2,11 @@
   "name": "Contact Us Page",
   "sections": {
     "main": {
+      "type": "main-page"
+    },
+    "contact": {
       "type": "contact-us-section"
     }
   },
-  "order": ["main"]
+  "order": ["main", "contact"]
 }
