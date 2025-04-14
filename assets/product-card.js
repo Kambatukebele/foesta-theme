@@ -1,7 +1,20 @@
 const productCards = document.querySelectorAll(".productCard");
 const productIcons = document.querySelectorAll(".productIcon");
-const quickViewProduct = document.querySelector("#quick-view-product");
-const closeQuickViewProduct = document.querySelector("#closeQuickViewProduct");
+const quickViewProducts = document.querySelector("#quick-view-product");
+const closeQuickViewProducts = document.querySelector("#closeQuickViewProduct");
+
+// function renderQuickViewProduct(icons, productViews, index) {
+//   productViews.forEach((productView, p_index) =>{
+//     if(index === p_index){
+//       icons[index].addEventListener("click", () =>{
+//         productView.classList.replace("hidden", "block");
+//       }) 
+//     }else{
+//       productView.classList.replace("block", "hidden");
+//     }              
+//   })
+// }
+
 
 productCards.forEach((productCard, index) => {
   productIcons.forEach((productIcon, k_index) => {
@@ -11,22 +24,19 @@ productCards.forEach((productCard, index) => {
         productIcon.classList.add("lg:opacity-100");
         productIcon.classList.remove("-lg:right-5");
         productIcon.classList.add("lg:right-2");
+        // Show Quic product on click
+        renderQuickViewProduct(productIcons, quickViewProducts, index) 
       });
-
-      // Show Quic product on click
-      productIcon.addEventListener("click", () =>{        
-        quickViewProduct.classList.replace("hidden", "block");        
+      productCard.addEventListener("mouseleave", () => {
+        productIcon.classList.remove("lg:opacity-100");
+        productIcon.classList.add("lg:opacity-0");
+        productIcon.classList.remove("lg:right-2");
+        productIcon.classList.add("-lg:right-5");
+        // Show Quic product on click
+        // renderQuickViewProduct(productIcons, quickViewProducts, index) 
       });
-      //hide quick product on click
-      closeQuickViewProduct.addEventListener("click", () =>{
-        quickViewProduct.classList.replace("block", "hidden");
-      })
     }
-    productCard.addEventListener("mouseleave", () => {
-      productIcon.classList.remove("lg:opacity-100");
-      productIcon.classList.add("lg:opacity-0");
-      productIcon.classList.remove("lg:right-2");
-      productIcon.classList.add("-lg:right-5");
-    });
   });
 });
+
+
