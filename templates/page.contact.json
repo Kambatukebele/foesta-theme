@@ -15,7 +15,43 @@
     },
     "contact": {
       "type": "contact-us-section",
-      "settings": {}
+      "blocks": {
+        "contact_details_yfaB8G": {
+          "type": "contact_details",
+          "settings": {
+            "contact_us_details_key": "Phone",
+            "contact_us_details_value": "(372) 587-2335"
+          }
+        },
+        "contact_details_fNc88g": {
+          "type": "contact_details",
+          "settings": {
+            "contact_us_details_key": "Email",
+            "contact_us_details_value": "info@foesta.com"
+          }
+        },
+        "contact_details_GpWady": {
+          "type": "contact_details",
+          "settings": {
+            "contact_us_details_key": "Address",
+            "contact_us_details_value": "P.O. Box 283 8562 Fusce Rd.Frederick Nebraska 20620"
+          }
+        }
+      },
+      "block_order": [
+        "contact_details_yfaB8G",
+        "contact_details_fNc88g",
+        "contact_details_GpWady"
+      ],
+      "settings": {
+        "contact_us_section_paddingY_small_device": "py-12",
+        "contact_us_section_paddingY_large_device": "lg:py-24",
+        "contact_us_heading": "Get in touch",
+        "contact_us_button_text": "Send noe",
+        "contact_us_button_text_color": "#ffffff",
+        "contact_us_button_text_bg_color": "#000000",
+        "contact_us_button_text_bg_hover_color": "#217fde"
+      }
     }
   },
   "order": [

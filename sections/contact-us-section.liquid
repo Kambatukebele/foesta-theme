@@ -1,4 +1,218 @@
-<div class="py-12 px-6">
-  <h1 class="text-3xl font-bold mb-4">Contact Us</h1>
-  <p class="text-lg">We are a passionate team building awesome Shopify stores...</p>
-</div>
+<section class="w-full h-fit {{ section.settings.contact_us_section_paddingY_small_device }} {{ section.settings.contact_us_section_paddingY_large_device }}">
+  <div class="container px-4 flex flex-col justify-center items-start gap-8 lg:flex-row lg:gap-4 lg:w-5xl">
+    <div class="w-full h-fit py-5 flex flex-col justify-center items-start gap-8">
+      <h2 class="text-3xl font-semibold">
+        {{ section.settings.contact_us_heading }}
+      </h2>
+      <div class="w-full flex justify-start items-center flex-wrap gap-2.5 lg:flex-col lg:items-start lg:gap-10">
+        <!-- Loop contact here -->
+        {%- if section.blocks.size > 0 -%}
+          {%- for details in section.blocks -%}
+            {%- case details.type -%}
+              {%- when 'contact_details' -%}
+                <div {{ details.shopify_attributes }} class="flex flex-col w-auto px-1">
+                  <span class="text-xl font-medium">{{ details.settings.contact_us_details_key }}:</span>
+                  <span class="text-base font-normal">{{ details.settings.contact_us_details_value }}</span>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        {%- else -%}
+          {% for item in (1..3) %}
+            <div class="flex flex-col w-auto px-1">
+              <span class="text-xl font-medium">Phone:</span>
+              <span class="text-base font-normal">+430 000 000 000</span>
+            </div>
+          {% endfor %}
+        {%- endif -%}
+      </div>
+    </div>
+    <form class="shadow px-4 w-full flex flex-col justify-center items-start gap-3.5 py-10 rounded-md">
+      <input class="w-full border border-gray-200 rounded-md py-4 px-2" type="text" name="name" placeholder="Name:">
+      <input class="w-full border border-gray-200 rounded-md py-4 px-2" type="email" name="email" placeholder="Email:">
+      <input
+        class="w-full border border-gray-200 rounded-md py-4 px-2"
+        type="text"
+        name="phone"
+        placeholder="Phone Number:"
+      >
+      <textarea
+        rows="10"
+        class="w-full border border-gray-200 rounded-md py-4 px-2"
+        name="message"
+        placeholder="Message:"
+      ></textarea>
+      <button
+        style="background-color:{{ section.settings.contact_us_button_text_bg_color }};color:{{ section.settings.contact_us_button_text_color }};"
+        class="w-full border border-gray-200 rounded-md py-4 px-2 cursor-pointer transition-all duration-100 ease-in-out hover:[{{ section.settings.contact_us_button_text_bg_hover_color }}]"
+      >
+        {{ section.settings.contact_us_button_text }}
+      </button>
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact us",
+  "class": "contact_us",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Paddings top and bottom"
+    },
+    {
+      "type": "select",
+      "id": "contact_us_section_paddingY_small_device",
+      "label": "Padding top and bottom on small device",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12",
+      "info": "This is the padding top and bottom only for the small device from 320px up until 1023px"
+    },
+    {
+      "type": "select",
+      "id": "contact_us_section_paddingY_large_device",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24",
+      "info": "This is the padding top and bottom only for the large device from 1024px"
+    },
+    {
+      "type": "header",
+      "content": "Heading text"
+    },
+    {
+      "type": "text",
+      "id": "contact_us_heading",
+      "label": "Heading text",
+      "placeholder": "Get in touch",
+      "default": "Get in touch"
+    },
+    {
+      "type": "header",
+      "content": "Button form"
+    },
+    {
+      "type": "text",
+      "id": "contact_us_button_text",
+      "label": "Heading text",
+      "placeholder": "Send noe",
+      "default": "Send noe"
+    },
+    {
+      "type": "color",
+      "id": "contact_us_button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "contact_us_button_text_bg_color",
+      "label": "Button background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "contact_us_button_text_bg_hover_color",
+      "label": "Button background hover color",
+      "default": "#010203"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Contact details",
+      "type": "contact_details",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Contact details"
+        },
+        {
+          "type": "text",
+          "id": "contact_us_details_key",
+          "label": "Contact details name",
+          "default": "Phone",
+          "placeholder": "ex: Phone, email, address"
+        },
+        {
+          "type": "text",
+          "id": "contact_us_details_value",
+          "label": "Contact details value",
+          "default": "234 345 567",
+          "placeholder": "ex: Phone, email, address"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
