@@ -12,9 +12,14 @@
     "main": {
       "type": "main-article",
       "settings": {}
+    },
+    "article": {
+      "type": "article-section",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "article"
   ]
 }

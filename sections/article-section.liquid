@@ -1,0 +1,114 @@
+<section class="w-full h-fit py-12 lg:py-24">
+  <div class="container">
+    <!-- image -->
+    <div class="w-full h-[300px] sm:h-[500px]">
+      {{
+        article.image
+        | image_url: width: 800
+        | image_tag: class: 'w-full h-full object-top object-cover rounded-2xl'
+      }}
+    </div>
+    <!-- title, date and author -->
+    <div class="w-full my-10 lg:w-5xl lg:mx-auto">
+      <div class="w-full flex flex-col justify-center items-start gap-3.5">
+        <h2 class="font-semibold text-4xl">{{ article.title }}</h2>
+        <div class="w-full flex justify-start items-center gap-5">
+          <div class="w-fit flex justify-center items-center gap-2.5">
+            <span class="block w-5 h-5">{{ 'icon-user.svg' | inline_asset_content }}</span>
+            <span>{{ article.author }}</span>
+          </div>
+          <div class="w-fit flex justify-center items-center gap-2.5">
+            <span class="block w-5 h-5">{{ 'icon-calendar.svg' | inline_asset_content }}</span>
+            <span>{{ article.published_at | date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content -->
+    <div class="lg:w-5xl lg:mx-auto">
+      {{ article.content }}
+    </div>
+    <!-- Prev and next -->
+    <div class="w-full my-10 flex justify-between items-center lg:w-5xl lg:mx-auto">
+      <a href="{{ blog.previous_article }}" class="underline text-base">Previous article</a>
+      <a href="{{ blog.next_article }}" class="underline text-base">Next article</a>
+    </div>
+    {% if article.comments_enabled? == true %}
+      <!-- Comments view -->
+      <div class="w-full h-fit py-5 my-10 flex flex-col gap-6 justify-center items-start lg:w-5xl lg:mx-auto">
+        {%- if article.comments_count != 0 -%}
+          <div>
+            <h4 class="text-3xl font-semibold">{{ article.comments_count }} commnents</h4>
+          </div>
+        {%- endif -%}
+        {% if article.comments.size > 0 %}
+          {% paginate article.comments by 12 %}
+            {% for comment in article.comments %}
+              <div class="w-full h-fit flex flex-col justify-center items-start gap-3.5">
+                <div class="w-full flex justify-start items-center gap-2.5">
+                  <span class="font-medium text-base">{{ comment.author }}</span>
+                  <span class="font-medium text-base">{{ comment.created_at }}</span>
+                </div>
+                <div class="w-full">
+                  <!-- comment go here -->
+                  <p>
+                    {{ comment.content }}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          {% endpaginate %}
+        {% endif %}
+      </div>
+      <!-- Comments form -->
+      <div class="w-full my-10 flex flex-col justify-center items-start gap-5 lg:w-5xl lg:mx-auto">
+        <div>
+          <h4 class="text-3xl font-semibold">Leave a comment</h4>
+        </div>
+        <div class="w-full flex flex-col justify-center items-start rounded-md">
+          {% form 'new_comment', article %}
+            {% if form.errors %}
+              <div class="text-red-600 my-5">
+                <p>There were errors with your submission:</p>
+                <ul>
+                  {% for field in form.errors %}
+                    <li>{{ field | capitalize }}: {{ form.errors[field] }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% elsif form.posted_successfully? %}
+              <p class="text-green-600 my-5">Thanks! Your comment was submitted for review.</p>
+            {% endif %}
+
+            <input
+              class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+              type="text"
+              name="comment[author]"
+              required
+              placeholder="Name:"
+            >
+            <input
+              class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+              type="email"
+              name="comment[email]"
+              required
+              placeholder="Email:"
+            >
+            <textarea
+              rows="10"
+              class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+              name="comment[body]"
+              required
+              placeholder="Comment*:"
+            ></textarea>
+            <button
+              class="w-full border bg-black text-white border-gray-200 rounded-md py-4 px-2 cursor-pointer transition-all duration-100 ease-in-out hover:[{{ section.settings.contact_us_button_text_bg_hover_color }}]"
+            >
+              Post comment
+            </button>
+          {% endform %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
