@@ -26,28 +26,56 @@
         {%- endif -%}
       </div>
     </div>
-    <form class="shadow px-4 w-full flex flex-col justify-center items-start gap-3.5 py-10 rounded-md">
-      <input class="w-full border border-gray-200 rounded-md py-4 px-2" type="text" name="name" placeholder="Name:">
-      <input class="w-full border border-gray-200 rounded-md py-4 px-2" type="email" name="email" placeholder="Email:">
-      <input
-        class="w-full border border-gray-200 rounded-md py-4 px-2"
-        type="text"
-        name="phone"
-        placeholder="Phone Number:"
-      >
-      <textarea
-        rows="10"
-        class="w-full border border-gray-200 rounded-md py-4 px-2"
-        name="message"
-        placeholder="Message:"
-      ></textarea>
-      <button
-        style="background-color:{{ section.settings.contact_us_button_text_bg_color }};color:{{ section.settings.contact_us_button_text_color }};"
-        class="w-full border border-gray-200 rounded-md py-4 px-2 cursor-pointer transition-all duration-100 ease-in-out hover:[{{ section.settings.contact_us_button_text_bg_hover_color }}]"
-      >
-        {{ section.settings.contact_us_button_text }}
-      </button>
-    </form>
+    <div class="shadow px-4 w-full flex flex-col justify-center items-start gap-3.5 py-10 rounded-md">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="text-green-600 mb-4">Thanks for reaching out! We’ll get back to you soon.</p>
+        {% elsif form.errors %}
+          <div class="text-red-600 mb-4">
+            <p>There were issues with your submission:</p>
+            <ul>
+              {% for field in form.errors %}
+                <li>{{ field | capitalize }}: {{ form.errors[field] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <input
+          class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+          type="text"
+          name="contact[name]"
+          required
+          placeholder="Name:"
+        >
+        <input
+          class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+          type="email"
+          name="contact[email]"
+          required
+          placeholder="Email:"
+        >
+        <input
+          class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+          type="text"
+          name="contact[phone]"
+          required
+          placeholder="Phone Number:"
+        >
+        <textarea
+          rows="10"
+          class="w-full border border-gray-200 rounded-md py-4 px-2 mb-5"
+          name="contact[body]"
+          required
+          placeholder="Message:"
+        ></textarea>
+        <button
+          style="background-color:{{ section.settings.contact_us_button_text_bg_color }};color:{{ section.settings.contact_us_button_text_color }};"
+          class="w-full border border-gray-200 rounded-md py-4 px-2 cursor-pointer transition-all duration-100 ease-in-out hover:[{{ section.settings.contact_us_button_text_bg_hover_color }}]"
+        >
+          {{ section.settings.contact_us_button_text }}
+        </button>
+      {% endform %}
+    </div>
   </div>
 </section>
 
