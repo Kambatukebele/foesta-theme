@@ -1,7 +1,3 @@
-//Sticky header
-console.log(window.scrollY);
-
-
 // Toggle menu on mobile
 const ToggleMenu = () => {
   const hamburgerMenu = document.querySelector("#hamburgerMenu");

@@ -51,14 +51,13 @@ function activateStickyHeader() {
       if (!container || !counter) return;
   
       counter.textContent = cart.item_count;
-      container.innerHTML = "";
+      // container.innerHTML = "";
   
       if (cart.items.length === 0) {
         if (emptyCartMessage) emptyCartMessage.classList.remove("hidden");
         if (cartDrawer) cartDrawer.classList.add("translate-x-96"); // optional: close drawer if empty
       } else {
         if (emptyCartMessage) emptyCartMessage.classList.add("hidden");
-  
         const itemHTML = cart.items.map(item => `
           <div class="cart-item w-full h-fit py-2 flex justify-center gap-4" data-line-item-key="${item.key}">
             <div class="shrink-0 w-[100px] h-[160px]">
@@ -147,7 +146,7 @@ function activateStickyHeader() {
         const newQty = isPlus ? currentQty + 1 : currentQty - 1;
         if (newQty < 1) return;
   
-        fetch("/cart/change.js", {
+         fetch("/cart/change.js", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id: lineItemKey, quantity: newQty })

@@ -16,8 +16,9 @@
       class="w-full px-1 h-[calc(100vh-200px)] py-4 flex flex-col just-center items-center gap-3 overflow-y-scroll"
     >
       {% # Loop product here %}
+      {% # End Loop product here %}
       <div id="empty-cart-message" class="hidden text-center py-10">
-        <p class="text-lg font-semibold mb-4">You have 0 products in your cart.</p>
+        <p class="text-xl font-semibold mb-4">You have 0 products in your cart.</p>
         <a href="{{ routes.all_products_collection_url }}" class="underline text-blue-600 hover:text-blue-800">
           Continue Shopping
         </a>
@@ -30,8 +31,8 @@
         <span id="cart-total-amount" class="text-base font-normal">$0.00</span>
       </div>
       <div class="w-full flex justify-between items-center">
-        <a class="w-28 border text-center py-3 rounded-lg">View Cart</a>
-        <a class="w-28 border text-center py-3 rounded-lg bg-black text-white">Check Out</a>
+        <a class="w-28 border text-center py-3 rounded-lg cursor-pointer">View Cart</a>
+        <a class="w-28 border text-center py-3 rounded-lg bg-black text-white cursor-pointer">Check Out</a>
       </div>
     </div>
   </div>
