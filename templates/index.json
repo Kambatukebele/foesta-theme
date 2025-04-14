@@ -145,7 +145,7 @@
             "block_promotion_small_text": "Free Shipping order over $150",
             "block_promotion_large_text": "Men Collections",
             "block_promotion_text_btn": "Shop All Men Collections",
-            "block_promotion_url_btn": ""
+            "block_promotion_url_btn": "shopify://collections/mens-fashion"
           }
         },
         "promotion_collection_EFjD8i": {
@@ -155,7 +155,7 @@
             "block_promotion_small_text": "New Wekend Sales Offer",
             "block_promotion_large_text": "25% Off Items",
             "block_promotion_text_btn": "Explore now",
-            "block_promotion_url_btn": ""
+            "block_promotion_url_btn": "shopify://collections/dresses"
           }
         }
       },
