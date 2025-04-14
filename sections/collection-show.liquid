@@ -1,4 +1,4 @@
-<form class="w-full h-fit py-12 lg:py-24">
+<div class="w-full h-fit py-12 lg:py-24">
   <div class="container px-4">
     <!-- Filter bar on small and large screen -->
     <div class="min-w-[280px] flex justify-between items-center md:bg-gray-200 md:px-4 md:py-3 md:rounded-sm">
@@ -139,21 +139,27 @@
         class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:max-w-3/4 lg:mt-10 lg:grid-cols-4"
       >
         {%- if collection.products != blank -%}
-          {%- for product in collection.products -%}
-            {%- assign productImage = product.featured_image
-              | image_url: width: 1000
-              | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg lg:w-full lg:h-[500px]'
-            -%}
-            {% render 'product-card',
-              productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full lg:w-full',
-              productIMage: productImage,
-              productTitle: product.title,
-              productPrice: product.price,
-              productPriceComparison: product.compare_at_price,
-              productButtonURL: product.url,
-              productButtonText: 'Buy now'
-            %}
-          {%- endfor -%}
+          {% paginate collection.products by 16 %}
+            {%- for product in collection.products -%}
+              {%- assign productImage = product.featured_image
+                | image_url: width: 1000
+                | image_tag:
+                  class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg lg:w-full lg:h-[350px]'
+              -%}
+              {% render 'product-card',
+                productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full lg:w-full',
+                productIMage: productImage,
+                productTitle: product.title,
+                productPrice: product.price,
+                productPriceComparison: product.compare_at_price,
+                productButtonURL: product.url,
+                productButtonText: 'Buy now'
+              %}
+            {%- endfor -%}
+            <div class="paginateDEFAULT w-full lg:w-5xl my-10 flex justify-center items-center gap-5">
+              {{- paginate | default_pagination -}}
+            </div>
+          {% endpaginate %}
         {% else %}
           <div class="w-[500px] flex justify-start items-center">
             <h2 class="text-2xl font-semibold">No products found</h2>
@@ -164,7 +170,7 @@
     </div>
     <!-- First-level drawer (Collection Drawer) -->
     <!-- Button to open the collection drawer on small devices -->
-    <button id="filterOnSmall" class="p-2 bg-gray-200 m-4">Filter and sort</button>
+    {% comment %} <button id="filterOnSmall" class="p-2 bg-gray-200 m-4">Filter and sort</button> {% endcomment %}
 
     <!-- First-level drawer (Collection Drawer) -->
     <div
@@ -246,7 +252,17 @@
     </div>
     <!-- End Second-level drawer -->
   </div>
-</form>
+</div>
+
+<style>
+  .current {
+    background: red;
+    width: auto;
+    padding: 3px 10px;
+    border-radius: 5px;
+    color: white;
+  }
+</style>
 
 <script>
   //This function helping to open and close the drawer filter on small devices
