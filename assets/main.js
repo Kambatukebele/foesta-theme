@@ -175,6 +175,125 @@ function activateStickyHeader() {
       }
     });
   }
-  
   addProductToCart();
+// Display Icons on product card
+function displayIconsOnProductCard() {
+  const productCards = document.querySelectorAll(".productCard"); // productCart
+  const productIcons = document.querySelectorAll(".productIcon"); // show and hide all icons
+  const eyeIcons = document.querySelectorAll("#icon-eye"); // eye icon
+  const buttons = document.querySelectorAll("#add-to-cart-btn")
+  
+  //Show eye and heart icons on hover
+  productCards.forEach((productCard, index) => {
+    productIcons.forEach((productIcon, k_index) => {
+      if (index === k_index) {
+        productCard.addEventListener("mouseenter", (e) => {          
+          productIcon.classList.remove("lg:opacity-0");
+          productIcon.classList.add("lg:opacity-100");
+          productIcon.classList.remove("-lg:right-5");
+          productIcon.classList.add("lg:right-2");
+          quickViewProduct(e);
+          
+        });
+        productCard.addEventListener("mouseleave", () => {
+          productIcon.classList.remove("lg:opacity-100");
+          productIcon.classList.add("lg:opacity-0");
+          productIcon.classList.remove("lg:right-2");
+          productIcon.classList.add("-lg:right-5");
+          
+        });
+      }
+    });
+  });
+}
+displayIconsOnProductCard();
+// Quick view product
+function quickViewProduct(event) {
+  /*
+          * Show Quick product on click
+          * Targeting the eye icon on each card 
+          */
+  const eyeIcon = event.target.lastElementChild.firstElementChild.firstElementChild //eye icon
+  const handle = event.target.firstElementChild.lastElementChild.lastElementChild.attributes[1].value // data-handle value
+
+  eyeIcon.addEventListener("click", () =>{
+    const quickViewModal = document.querySelector("#quick-view-modal");
+    // Fetch the product with the help of the handle to target the corresponding product
+    fetch(`/products/${handle}.js`)
+    .then(res => res.json())
+    .then(product =>{
+      console.log(product);
+      
+       quickViewModal.innerHTML = `
+        <div
+          class="w-full block h-screen py-12 z-50 fixed top-0 left-0 right-0 bottom-0 overflow-y-scroll bg-gray-50"
+        >
+          <div class="w-full h-full lg:h-screen relative py-12">
+            <div class="container lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 flex flex-col bg-white  justify-center items-start gap-3 py-12 px-5 rounded-lg md:flex-row lg:max-w-[1024px] lg:gap-5">
+              <div class="w-full shadow">
+                <img src="${product.images[0]}" alt="${product.title}"/>
+              </div>
+             
+              <div class="w-full flex flex-col justify-center items-start gap-3.5">
+                
+                <h2 class="text-2xl font-semibold text-black">${product.title}</h2>
+                <div class="w-full flex justify-start items-center gap-2">
+                  <p class="text-base font-semibold">$${(product.variants[0].price / 100).toFixed(2)}</p>
+                  <p class="text-base font-semibold text-red-500 line-through">$14</p>
+                </div>
+                
+                <div class="w-full flex flex-col justify-start items-start gap-2.5">
+                  <div class="w-full flex justify-start items-center gap-1.5">
+                    <span class="text-base font-semibold">Color:</span>
+                    <span class="text-base font-normal">Black</span>
+                  </div>
+                  <div>
+                    <span class="w-6 h-6 border rounded-full flex justify-center items-center">
+                      <span class="w-4 h-4 block border rounded-full bg-black"></span>
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="w-full flex flex-col justify-center items-start gap-2">
+                  <div class="w-full flex justify-start items-start gap-2">
+                    <span class="text-base font-semibold">Size:</span>
+                    <span class="text-base font-normal">Medium</span>
+                  </div>
+                  <div class="flex justify-start items-center gap-2">
+                    <span class="border px-3 py-3 rounded-md bg-black text-white">Medium</span>
+                    <span class="border px-3 py-3 rounded-md bg-transparent text-gray-900">Large</span>
+                    <span class="border px-3 py-3 rounded-md bg-transparent text-gray-900">small</span>
+                  </div>
+                </div>
+               
+                <div class="w-full flex flex-col justify-center items-start gap-3">
+                  <div class="w-28 border flex justify-between items-center px-2 py-1 rounded-md">
+                    <span class="block text-lg">-</span>
+                    <span class="block text-base">1</span>
+                    <span class="block text-lg">+</span>
+                  </div>
+                  <div class="w-full">
+                    <button class="w-full text-center bg-black py-3 px-6 text-white rounded-md">Add To Cart</button>
+                  </div>
+                </div>
+               
+                <div class="w-full my-2">
+                  <a class="block w-full text-center bg-black py-3 px-6 text-white rounded-md">Buy it now</a>
+                </div>
+                <a href="" class="text-base font-semibold underline">View full details</a>
+              </div>
+
+              
+              <span id="closeQuickViewProduct" class="block w-7 h-7 cursor-pointer absolute -top-10 right-5">
+                Close
+              </span>
+            </div>
+          </div>
+        </div>
+       `
+    }).join("");            
+  })
+  
+}
+
   

@@ -31,8 +31,9 @@
             productTitle: product.title,
             productPrice: product.price,
             productPriceComparison: product.compare_at_price,
+            productHandle: product.handle,
             productVariantId: product.variants.first.id,
-            productButtonText: 'Add to carts'
+            productButtonText: 'Add to cart'
           %}
         {%- endfor -%}
       {% else %}
@@ -57,6 +58,13 @@
   <!-- End Make this a component or a render -->
 </section>
 <!-- End Treding product -->
+
+<script>
+  {% comment %} fetch('/products/${handle}.js') {% endcomment %}
+  {% comment %} fetch('/products/black-solid-women-skirt-stretch-bodycon-straight-women-skirt-casual-work-ol-office-women-skirt-summer-new-drop-shipping.js').then(response => response.json()).then(product =>{
+
+  }); {% endcomment %}
+</script>
 
 {% schema %}
 {

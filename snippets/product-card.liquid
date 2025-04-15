@@ -1,6 +1,6 @@
 {% comment %}
   This is the product card.
-  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productVariantId, productButtonText, sold, variants
+  Accept: productCardWidth: by default put at 280px,  productIMage,  productTitle, productPrice, productPriceComparison, productHandle, productVariantId, productButtonText, sold, variants
 {% endcomment %}
 
 <div class="relative productCard {{ productCardWidth }} shrink-0 snap-center pb-7 rounded-2xl">
@@ -16,6 +16,7 @@
       </div>
       <button
         data-variant-id="{{ productVariantId }}"
+        data-handle="{{ productHandle }}"
         id="add-to-cart-btn"
         class="text-base font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
       >
@@ -33,3 +34,6 @@
   </span>
 </div>
 {% # Render hidden quick view product card %}
+<section id="quick-view-modal">
+  <!-- Quic view modal go here with help of javascript -->
+</section>
