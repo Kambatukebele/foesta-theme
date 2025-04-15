@@ -93,6 +93,8 @@
         "information_block_HP8nze"
       ],
       "settings": {
+        "information_paddingY_small": "py-2",
+        "information_paddingY_large": "lg:py-12",
         "information_bg_color": "#ffffff"
       }
     },

@@ -15,12 +15,7 @@
     },
     "blog": {
       "type": "blog-section",
-      "settings": {
-        "latest_blog_paddingY_small": "py-12",
-        "latest_blog_paddingY_large": "lg:py-24",
-        "latest_blog_heading": "",
-        "latest_blog_paragraph": ""
-      }
+      "settings": {}
     }
   },
   "order": [
