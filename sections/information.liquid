@@ -1,5 +1,5 @@
 <!-- Information -->
-<section class="w-full h-fit border-b-gray-200 border-b">
+<section class="w-full h-fit border-b-gray-200 border-b {{ section.settings.information_paddingY_small }} {{ section.settings.information_paddingY_large }}">
   <div
     class="container grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
   >
@@ -33,8 +33,95 @@
 {
   "name": "Information",
   "class": "information",
-  "limit": 1,
   "settings": [
+    {
+      "type": "header",
+      "content": "Information padding top and bottom"
+    },
+    {
+      "type": "select",
+      "id": "information_paddingY_small",
+      "label": "Padding top and bottom on small screen",
+      "options": [
+        {
+          "label": "4px",
+          "value": "py-1"
+        },
+        {
+          "label": "8px",
+          "value": "py-2"
+        },
+        {
+          "label": "12px",
+          "value": "py-3"
+        },
+        {
+          "label": "16px",
+          "value": "py-4"
+        },
+        {
+          "label": "20px",
+          "value": "py-5"
+        },
+        {
+          "label": "24px",
+          "value": "py-6"
+        },
+        {
+          "label": "28px",
+          "value": "py-7"
+        },
+        {
+          "label": "32px",
+          "value": "py-8"
+        },
+        {
+          "label": "32px",
+          "value": "py-9"
+        },
+        {
+          "label": "36px",
+          "value": "py-10"
+        },
+        {
+          "label": "40px",
+          "value": "py-11"
+        },
+        {
+          "label": "44px",
+          "value": "py-12"
+        }
+      ],
+      "default": "py-12"
+    },
+    {
+      "type": "select",
+      "id": "information_paddingY_large",
+      "label": "Padding top and bottom on Large screen",
+      "options": [
+        {
+          "label": "44px",
+          "value": "lg:py-12"
+        },
+        {
+          "label": "56px",
+          "value": "lg:py-14"
+        },
+        {
+          "label": "64px",
+          "value": "lg:py-16"
+        },
+        {
+          "label": "80px",
+          "value": "lg:py-20"
+        },
+        {
+          "label": "96px",
+          "value": "lg:py-24"
+        }
+      ],
+      "default": "lg:py-24"
+    },
     {
       "type": "header",
       "content": "Information settings"
@@ -75,7 +162,17 @@
   ],
   "presets": [
     {
-      "name": "Information"
+      "name": "Information",
+      "settings": {
+        "information_paddingY_small": "py-12",
+        "information_paddingY_large": "lg:py-24",
+        "information_bg_color": "#ffffff"
+      },
+      "blocks": [
+        {
+          "type": "information_block"
+        }
+      ]
     }
   ]
 }
