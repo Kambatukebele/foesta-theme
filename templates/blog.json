@@ -15,7 +15,17 @@
     },
     "blog": {
       "type": "blog-section",
-      "settings": {}
+      "settings": {
+        "blog_select_blog_for_home_page_only": "",
+        "blog_paddingY_small": "py-1",
+        "blog_posts_count": 12,
+        "blog_paddingY_large": "lg:py-12",
+        "blog_heading": "",
+        "blog_paragraph": "",
+        "blog_button_bg_color": "#000000",
+        "blog_button_text_color": "#ffffff",
+        "blog_button_text": "Read more"
+      }
     }
   },
   "order": [
