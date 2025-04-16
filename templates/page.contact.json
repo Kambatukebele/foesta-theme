@@ -50,7 +50,8 @@
         "contact_us_button_text": "Send noe",
         "contact_us_button_text_color": "#ffffff",
         "contact_us_button_text_bg_color": "#000000",
-        "contact_us_button_text_bg_hover_color": "#217fde"
+        "contact_us_button_text_bg_hover_color": "#217fde",
+        "contact_us_section_maps": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10236.243198015029!2d14.427428377532097!3d50.10386894254719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94c3980b607d%3A0x15e7ceef95925faf!2sHole%C5%A1ovice%2C%20170%2000%20Prague%207!5e0!3m2!1sen!2scz!4v1744795468889!5m2!1sen!2scz\" width=\"1500\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
       }
     }
   },
