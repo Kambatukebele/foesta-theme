@@ -7,7 +7,7 @@
     <div class="w-full flex flex-col justify-center items-start gap-10">
       <!-- Loop here -->
       {% if blog.articles.size > 0 %}
-        {% paginate blog.articles by 1 %}
+        {% paginate blog.articles by section.settings.blog_posts_count %}
           <div class="w-full grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {% for blog in blog.articles %}
               <div class="shadow h-fit rounded-md w-full mx-auto sm:w-full sm:mx-0">
@@ -144,12 +144,6 @@
       "label": "Select blog"
     },
     {
-      "type": "number",
-      "id": "posts_count",
-      "label": "Number of posts",
-      "default": 3
-    },
-    {
       "type": "header",
       "content": "Padding top and bottom on small and large screen"
     },
@@ -208,6 +202,17 @@
         }
       ],
       "default": "py-12"
+    },
+    {
+      "type": "header",
+      "content": "Pagination",
+      "info": "Number of posts per page"
+    },
+    {
+      "type": "number",
+      "id": "blog_posts_count",
+      "label": "Number of posts per page",
+      "default": 12
     },
     {
       "type": "select",
