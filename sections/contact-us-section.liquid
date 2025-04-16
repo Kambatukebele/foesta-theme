@@ -26,7 +26,7 @@
         {%- endif -%}
       </div>
     </div>
-    <div class="shadow px-4 w-full flex flex-col justify-center items-start gap-3.5 py-10 rounded-md">
+    <div class="px-4 w-full flex flex-col justify-center items-start gap-3.5 py-10 rounded-md">
       {% form 'contact' %}
         {% if form.posted_successfully? %}
           <p class="text-green-600 mb-4">Thanks for reaching out! We’ll get back to you soon.</p>
@@ -77,6 +77,9 @@
       {% endform %}
     </div>
   </div>
+</section>
+<section class="w-full h-fit py-12">
+  <div class="container rounded-3xl block">{{ section.settings.contact_us_section_maps }}</div>
 </section>
 
 {% schema %}
@@ -213,6 +216,12 @@
       "id": "contact_us_button_text_bg_hover_color",
       "label": "Button background hover color",
       "default": "#010203"
+    },
+    {
+      "type": "html",
+      "id": "contact_us_section_maps",
+      "label": "Copy your html google maps address here",
+      "info": "Go to your google maps, add your address and click on the left and click share with embed a map. copie the iframe code."
     }
   ],
   "blocks": [
