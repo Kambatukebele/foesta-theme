@@ -274,6 +274,21 @@
         "video_paddingY_small": "py-12",
         "video_paddingY_large": "lg:py-24"
       }
+    },
+    "blog_section_F7DdjW": {
+      "type": "blog-section",
+      "name": "Blog",
+      "settings": {
+        "blog_select_blog_for_home_page_only": "news",
+        "posts_count": 3,
+        "blog_paddingY_small": "py-12",
+        "blog_paddingY_large": "lg:py-24",
+        "blog_heading": "Our Latest Blog",
+        "blog_paragraph": "Follow the most popular trends and get exclusive items from Foesta shop.",
+        "blog_button_bg_color": "#000000",
+        "blog_button_text_color": "#ffffff",
+        "blog_button_text": "Read more"
+      }
     }
   },
   "order": [
@@ -283,6 +298,7 @@
     "trending_product_aCRwCx",
     "text_scrolling_KJ47aD",
     "promotion_collection_iRDETf",
-    "video_VJpdie"
+    "video_VJpdie",
+    "blog_section_F7DdjW"
   ]
 }
