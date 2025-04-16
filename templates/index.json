@@ -137,6 +137,75 @@
         ]
       }
     },
+    "text_scrolling_KJ47aD": {
+      "type": "text-scrolling",
+      "blocks": {
+        "scrolling_element_LHxCDa": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "Best Selling Items!"
+          }
+        },
+        "scrolling_element_YhFHHN": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "Women collections"
+          }
+        },
+        "scrolling_element_6D99Qx": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "Limited Offer Sales!"
+          }
+        },
+        "scrolling_element_PTtime": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "Hot Deal Products!"
+          }
+        },
+        "scrolling_element_rchKyY": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "Best Selling items!"
+          }
+        },
+        "scrolling_element_Bxz6YW": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "50% OFF on all items"
+          }
+        },
+        "scrolling_element_JAUNaN": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "10% OFF man collections"
+          }
+        },
+        "scrolling_element_itpahV": {
+          "type": "scrolling_element",
+          "settings": {
+            "scrolling_element_text": "New year deal"
+          }
+        }
+      },
+      "block_order": [
+        "scrolling_element_LHxCDa",
+        "scrolling_element_YhFHHN",
+        "scrolling_element_6D99Qx",
+        "scrolling_element_PTtime",
+        "scrolling_element_rchKyY",
+        "scrolling_element_Bxz6YW",
+        "scrolling_element_JAUNaN",
+        "scrolling_element_itpahV"
+      ],
+      "name": "Texts Scrolling",
+      "settings": {
+        "text_scrolling_background_color": "#efefef",
+        "text_scrolling_text_color": "#313131",
+        "text_scrolling_animation_duration": 100
+      }
+    },
     "promotion_collection_iRDETf": {
       "type": "promotion-collection",
       "blocks": {
@@ -212,6 +281,7 @@
     "information_Cpme7p",
     "featured_collection_fLVxmH",
     "trending_product_aCRwCx",
+    "text_scrolling_KJ47aD",
     "promotion_collection_iRDETf",
     "video_VJpdie"
   ]
