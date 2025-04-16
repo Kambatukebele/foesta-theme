@@ -222,7 +222,32 @@ function quickViewProduct(event) {
     fetch(`/products/${handle}.js`)
     .then(res => res.json())
     .then(product =>{
-      console.log(product);
+      // console.log(product);
+      // const colorToImage = {};
+
+      // product.variants.forEach(variant => {
+      //   const color = variant.option1; // assuming color is the first option
+      //   if (!colorToImage[color] && variant.featured_image) {
+      //     colorToImage[color] = variant.featured_image.src;
+      //   }
+      // });
+      // console.log(colorToImage);
+      // Render swatches
+      // const container = document.getElementById('quick-view-colors');
+      // for (const [color, image] of Object.entries(colorToImage)) {
+      //   const div = document.createElement('div');
+      //   div.className = 'color-swatch';
+      //   div.innerHTML = `
+      //     <div style="
+      //       width: 30px; height: 30px; border-radius: 50%;
+      //       background-image: url('${image}');
+      //       background-size: cover; background-position: center;
+      //     " title="${color}"></div>
+      //     <small>${color}</small>
+      //   `;
+      //   container.appendChild(div);
+      // }
+      
       
        quickViewModal.innerHTML = `
         <div
@@ -231,38 +256,44 @@ function quickViewProduct(event) {
           <div class="w-full h-full lg:h-screen relative py-12">
             <div class="container lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 flex flex-col bg-white  justify-center items-start gap-3 py-12 px-5 rounded-lg md:flex-row lg:max-w-[1024px] lg:gap-5">
               <div class="w-full shadow">
-                <img src="${product.images[0]}" alt="${product.title}"/>
+                <img src="${product.featured_image}" alt="${product.title}"/>
               </div>
              
               <div class="w-full flex flex-col justify-center items-start gap-3.5">
                 
                 <h2 class="text-2xl font-semibold text-black">${product.title}</h2>
                 <div class="w-full flex justify-start items-center gap-2">
-                  <p class="text-base font-semibold">$${(product.variants[0].price / 100).toFixed(2)}</p>
-                  <p class="text-base font-semibold text-red-500 line-through">$14</p>
+                  <p class="text-base font-semibold">$${(product.price / 100).toFixed(2)}</p>
+                  ${
+                    product.compare_at_price ? `<p class="text-base font-semibold text-red-500 line-through">
+                    ${(product.compare_at_price / 100).toFixed(2)}
+                  </p>` : ``
+                  }
+                  
                 </div>
                 
                 <div class="w-full flex flex-col justify-start items-start gap-2.5">
                   <div class="w-full flex justify-start items-center gap-1.5">
-                    <span class="text-base font-semibold">Color:</span>
-                    <span class="text-base font-normal">Black</span>
+                    <span class="text-base font-semibold">${product.options[0].name}:</span>
+                    <span class="text-base font-normal">${product.options[0].values[0]}</span>
                   </div>
-                  <div>
-                    <span class="w-6 h-6 border rounded-full flex justify-center items-center">
-                      <span class="w-4 h-4 block border rounded-full bg-black"></span>
-                    </span>
+                  <div class="w-full flex justify-start items-center gap-2">
+                    ${product.options[0].values.map((value, index) =>{
+                      return `<span class="border cursor-pointer px-3 py-3 rounded-md bg-black text-white">${value}</span>`
+                    }).join("")}
+                    
                   </div>
                 </div>
                 
                 <div class="w-full flex flex-col justify-center items-start gap-2">
                   <div class="w-full flex justify-start items-start gap-2">
-                    <span class="text-base font-semibold">Size:</span>
-                    <span class="text-base font-normal">Medium</span>
+                    <span class="text-base font-semibold">${product.options[1].name}:</span>
+                    <span class="text-base font-normal">${product.options[1].values[0]}</span>
                   </div>
                   <div class="flex justify-start items-center gap-2">
-                    <span class="border px-3 py-3 rounded-md bg-black text-white">Medium</span>
-                    <span class="border px-3 py-3 rounded-md bg-transparent text-gray-900">Large</span>
-                    <span class="border px-3 py-3 rounded-md bg-transparent text-gray-900">small</span>
+                    ${product.options[1].values.map((value, index) => {
+                      return `<span class="border cursor-pointer px-3 py-3 rounded-md bg-black text-white">${value}</span>`
+                    }).join("")}
                   </div>
                 </div>
                
