@@ -48,6 +48,9 @@
   </head>
 
   <body>
+    {% # Render hidden quick view product card %}
+    {% render 'quick-view-modal' %}
+    {% # Home page %}
     {%- sections 'header-group' -%}
     <!-- Cart Drawer -->
     {% render 'cart-drawer' %}
