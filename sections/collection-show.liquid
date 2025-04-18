@@ -33,9 +33,36 @@
             {%- endfor -%}
           </select>
         </div>
-        <span class="text-base text-gray-950 font-medium w-fit">{{ collection.all_products_count }} Products</span>
+        <span class="text-base text-gray-950 font-medium w-fit">{{ collection.products_count }} Products</span>
       </div>
     </div>
+    <!-- This will display filter to remove filters -->
+    {%- if collection.filters -%}
+      {% assign has_active_filters = false %}
+      <div class="my-5 w-full flex flex-col justify-center items-start gap-2">
+        <div class="w-full flex justify-start items-center flex-wrap gap-2">
+          {% for filter in collection.filters %}
+            {% for value in filter.active_values %}
+              {% assign has_active_filters = true %}
+              <a
+                href="{{ value.url_to_remove }}"
+                class="flex justify-between items-center px-4 py-2 gap-2 rounded-lg bg-transparent border border-gray-200"
+              >
+                <span>
+                  {{ value.label }}
+                </span>
+                <span class="w-5 h-5 block">{{ 'icon-close.svg' | inline_asset_content }}</span>
+              </a>
+            {% endfor %}
+          {% endfor %}
+        </div>
+        {% if has_active_filters %}
+          <a href="{{ collection.url }}" class="w-fit px-3 py-2 block rounded-md bg-black text-white">Remove all</a>
+        {% endif %}
+      </div>
+    {%- endif -%}
+
+    <!-- End This will display filter to remove filters -->
     <div class="lg:flex lg:justify-between lg:items-start">
       <!-- Filter on large screen -->
       <div class="hidden lg:block lg:w-1/5 lg:shadow lg:mt-10">
@@ -254,7 +281,11 @@
     <!-- End Second-level drawer -->
   </div>
 </div>
-
+{% for filter in collection.filters %}
+  {% for value in filter.values %}
+    {% comment %} {{ value.count }} {% endcomment %}
+  {% endfor %}
+{% endfor %}
 <style>
   .current {
     background: red;
