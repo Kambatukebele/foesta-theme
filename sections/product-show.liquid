@@ -1,7 +1,7 @@
-<section class="w-full h-fit py-12 lg:py-24">
-  <div class="container lg:flex lg:justify-center items-start gap-20">
+<section class="w-full h-fit flex flex-col justify-center items-start gap-20 py-12 lg:py-24">
+  <div class="container md:flex md:justify-center md:items-start md:gap-5 lg:w-5xl">
     <!-- Images -->
-    <div class="w-full lg:w-1/2">
+    <div class="w-full md:max-w-1/2 md:w-full">
       <div class="w-full h-full rounded-2xl">
         {{
           product.featured_image
@@ -9,25 +9,31 @@
           | image_tag: class: 'w-full h-full object-cover rounded-2xl'
         }}
       </div>
-      <div class="w-full flex justify-start items-center my-5 gap-2 overflow-x-scroll whitespace-nowrap">
+      <div class="w-full flex justify-start items-center my-10 gap-2 overflow-x-scroll whitespace-nowrap">
         {% for image in product.images %}
-          <div class="w-24 h-24 shrink-0">
-            {{ image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover rounded-xl' }}
+          <div class="w-20 h-20 shrink-0 sm:w-48 sm:h-48 md:w-20 md:h-20">
+            {{ image | image_url: width: 300 | image_tag: class: 'w-full h-full object-cover rounded-xl' }}
           </div>
         {% endfor %}
       </div>
     </div>
     <!-- End Images -->
     <!-- Text -->
-    <div class="w-full lg:w-1/4 lg:py-5">
-      <div class="w-full flex flex-col justify-start items-start gap-3.5">
+    <div class="w-full md:max-w-1/2 md:w-full">
+      <div class="w-full flex flex-col justify-start items-start gap-3.5 md:w-[360px]">
+        <!-- Breadcrumbs -->
+        <div class="flex justify-start items-center gap-2">
+          <a href="{{ shop.url }}" class="text-gray-500 block">Home</a>
+          <span class="hidden sm:w-2 sm:h-2 sm:block sm:bg-gray-300 sm:rounded-full"></span>
+          <h5>{{ product.title }}</h5>
+        </div>
         <!-- Titles -->
-        <h2 class="text-xl font-semibold text-left lg:text-4xl">Classic button down shirt</h2>
+        <h2 class="text-3xl font-semibold text-left lg:text-4xl">{{ product.title }}</h2>
         <!-- Prices -->
         <div class="w-full flex justify-start items-center gap-2">
-          <p class="text-lg font-medium">20kc</p>
+          <p class="text-xl font-medium">{{ product.price | money }}</p>
           {% if product.compare_at_price %}
-            <p class="text-lg font-medium line-through text-red-500">40kc</p>
+            <p class="text-xl font-medium line-through text-red-500">{{ product.compare_at_price | money }}</p>
           {% endif %}
         </div>
         <!-- colors and variants -->
@@ -35,7 +41,7 @@
           <!-- colors name -->
           <div class="w-full flex justify-start items-center gap-2">
             <span class="text-base font-semibold">Color:</span>
-            <span class="text-base font-normal">black</span>
+            <span class="text-base font-normal">Black</span>
           </div>
           <!-- colors variant -->
           <div class="w-full flex justify-start items-center gap-2">
@@ -55,38 +61,95 @@
               <span class="w-auto py-2 px-3 shadow text-black text-sm">Medium</span>
             </div>
           </div>
-          <!-- Quantity -->
-          <div class="my-5 flex flex-col justify-center items-start gap-2">
-            <span class="text-base font-semibold">Quantity</span>
-            <div class="w-36 flex justify-between px-3 items-center border rounded-3xl py-2">
-              <span class="text-xl block">-</span>
-              <span class="text-base block">2</span>
-              <span class="text-xl block">+</span>
+          <div class="w-full my-5 flex flex-col justify-start items-center gap-3.5">
+            <!-- Quantity -->
+            <div class="w-full flex flex-col justify-center items-start gap-2">
+              <span class="text-base font-semibold">Quantity</span>
+              <div class="w-36 flex justify-between px-3 items-center border rounded-3xl py-2">
+                <span class="text-xl block">-</span>
+                <span class="text-base block">2</span>
+                <span class="text-xl block">+</span>
+              </div>
             </div>
-          </div>
-          <!-- Buy button -->
-          <div class="w-full">
-            <a href="" class="block bg-black w-full text-white text-center py-3.5 px-4 rounded-2xl">Buy it now</a>
+            <!-- Add to cart -->
+            <div class="w-full flex flex-col justify-center items-start gap-2">
+              <button class="block bg-transparent border w-full text-black text-center py-3 px-4 rounded-full cursor-pointer">
+                Add To Cart
+              </button>
+            </div>
+            <!-- Buy button -->
+            <div class="w-full">
+              <a href="" class="block bg-black w-full text-white text-center py-3 px-4 rounded-full">Buy it now</a>
+            </div>
           </div>
           <!-- Checkout payment proof -->
-          {% comment %} <div>Checkout image</div> {% endcomment %}
+          <div class="my-5 w-full flex flex-col justify-center items-start gap-3">
+            <span class="text-sm font-normal">Guarateed safe Checkout</span>
+            {% render 'card-payment' %}
+          </div>
           <hr>
-          <!--  -->
-          {% comment %}
-            <div>
-              <div>
-                <span>Description</span>
-                <span>Icon goes here</span>
-              </div>
-              <div>text</div>
+          <!-- Description -->
+          <div class="w-full">
+            <div class="w-full flex justify-between items-center">
+              <span class="text-xl font-semibold">Description</span>
+              <span>{{ 'icon-arrow-down.svg' | inline_asset_content }}</span>
             </div>
-          {% endcomment %}
+            <div class="text-base font-normal w-full h-fit hidden">
+              Introducing our Trendy Denim Jacket with Patches, a must-have statement piece that effortlessly combines
+              vintage-inspired style with contemporary flair. Crafted from high-quality denim fabric, this jacket exudes
+              durability and timeless charm, making it a versatile addition to any wardrobe.
+
+              Embrace the spirit of individuality and self-expression with our jacket adorned with an array of stylish
+              patches, from retro-inspired motifs to playful designs. Each patch adds a unique touch to the jacket,
+              allowing you to showcase your personality and creativity with every wear.
+
+              The classic silhouette of the denim jacket is enhanced by modern details such as distressed accents and a
+              relaxed fit, giving it a casual yet on-trend look that's perfect for everyday wear. Whether you're pairing
+              it with jeans for a double denim ensemble or layering it over a dress for a feminine twist, this jacket
+              adds an effortlessly cool vibe to any outfit.
+
+              Designed for comfort and versatility, this jacket features practical elements such as buttoned cuffs,
+              chest pockets, and a button-up front closure. The timeless appeal of denim ensures that this jacket will
+              never go out of style, making it a wardrobe staple that you'll reach for season after season.
+
+              Whether you're channeling retro vibes or adding
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!-- End Text -->
   </div>
+  <!-- Recommended products -->
+
+  <div class="container">
+    <div>
+      <h3 class="text-3xl font-semibold text-center">Recommended products</h3>
+      <div class="w-full mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:max-w-3/4 lg:mt-10 lg:grid-cols-4 lg:grid-rows-subgrid">
+        {%- assign productImage = product.featured_image
+          | image_url: width: 1000
+          | image_tag: class: 'w-[280px] h-80 sm:w-80 object-center object-cover rounded-lg lg:w-full lg:h-[350px]'
+        -%}
+        {% for item in (1..4) %}
+          {% render 'product-card',
+            productCardWidth: 'rounded-2xl min-w-[280px] md:min-w-full lg:w-full',
+            productIMage: productImage,
+            productTitle: product.title,
+            productPrice: product.price,
+            productPriceComparison: product.compare_at_price,
+            productHandle: product.handle,
+            productButtonURL: product.url,
+            productButtonText: 'Buy now'
+          %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </section>
+
+{%- for variant in product.variants -%}
+  {{ variant.title }}
+{%- endfor -%}
 
 {% schema %}
 {

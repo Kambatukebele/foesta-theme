@@ -1,10 +1,1 @@
-<section class="w-full h-fit py-10 bg-gray-100 lg:py-24">
-  <div class="container flex flex-col justify-center items-center">
-    <h1 class="text-xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">{{ product.title }}</h1>
-    <div class="flex justify-center items-center gap-2">
-      <a href="{{ shop.url }}">Home</a>
-      <span class="w-2 h-2 block bg-gray-300 rounded-full"></span>
-      <h5>{{ product.title }}</h5>
-    </div>
-  </div>
-</section>
+{% render 'main-section', title: product.title, breadcrumbsOne: 'Home', breadcrumbsTwo: product.title %}

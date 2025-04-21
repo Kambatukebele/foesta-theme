@@ -14,13 +14,23 @@
           <p class="text-base font-bold text-red-500 line-through">{{ productPriceComparison | money }}</p>
         {%- endif -%}
       </div>
-      <button
-        data-variant-id="{{ productVariantId }}"
-        data-handle="{{ productHandle }}"
-        class="add-to-cart-btn text-base  font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
-      >
-        {{ productButtonText }}
-      </button>
+      {%- if productButtonURL == empty -%}
+        <button
+          data-variant-id="{{ productVariantId }}"
+          data-handle="{{ productHandle }}"
+          class="add-to-cart-btn text-base  font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
+        >
+          {{ productButtonText }}
+        </button>
+      {%- else -%}
+        <a
+          href="{{ productButtonURL }}"
+          class="text-base  font-normal bg-black text-white py-3 px-10 rounded-full cursor-pointer"
+        >
+          {{- productButtonText -}}
+        </a>
+      {%- endif -%}
+
       <!-- show if product is sold -->
       {% if sold == false %}
         <span class="w-fit bg-red-600 text-white py-1 px-6 rounded-sm absolute top-3 right-3">Sold</span>
