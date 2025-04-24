@@ -27,21 +27,64 @@
       </div>
       {% render 'icon-menus' %}
       <!-- Menu -->
+      {% comment %} top-[60px] -left-[1300px] overflow-hidden {% endcomment %}
       <div
         id="menu"
-        class="absolute area-2 bg-gray-200 z-50 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[60px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
+        class="absolute area-2 bg-gray-100 z-50 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[60px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
       >
         <ul
-          class="flex flex-col justify-start items-start gap-3 lg:flex-row lg:gap-8"
+          class="w-full flex flex-col justify-start items-start gap-4 lg:flex-row lg:gap-8"
         >
-          {%- for main-menu in section.settings.menu.links -%}
-            <li
-              style="color:{{ section.settings.menu_text_color }}"
-              class="text-base font-normal {{ section.settings.menu_text_transform }}"
-            >
-              <a href="{{ main-menu.url }}">{{ main-menu.title }}</a>
+          <!-- loop the menu list here -->
+          {%- for menu in section.settings.menu.links -%}
+            <li class="w-full h-fit">
+              <div class="w-full h-fit">
+                <div class="w-full h-fit flex justify-between items-center py-2">
+                  <a href="{{ menu.url }}" class="text-lg">{{ menu.title }}</a>
+                  {%- if menu.links.size > 0 -%}
+                    <div class="flex justify-center items-center w-10">
+                      <span class="text-xl block plusMenus">+</span>
+                      <span class="text-xl hidden minusMenus">-</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- if menu.links.size > 0 -%}
+                  <div class="w-full subMenuLists hidden">
+                    <!-- loop the first level menu here -->
+                    {%- for subMenu in menu.links -%}
+                      <div class="w-full">
+                        <div class="w-full h-fit flex justify-between items-center py-2">
+                          <a href="{{ subMenu.url }}" style="text-indent:1em" class="text-base">
+                            {{ subMenu.title }}
+                          </a>
+                          {%- if subMenu.links.size > 0 -%}
+                            <div class="flex justify-center items-center w-10">
+                              <span class="text-xl block plusSubMenus">+</span>
+                              <span class="text-xl hidden minusSubMenus">-</span>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                        {%- if subMenu.links.size > 0 -%}
+                          <div class="secondLevelSubMenuLists w-full hidden flex-col gap-1.5 my-2">
+                            <!-- Loop the second level menu here -->
+                            {%- for secondLevelSubMenu in subMenu.links -%}
+                              <a href="{{ secondLevelSubMenu.url }}" style="text-indent:2em" class="block py-1">
+                                {{ secondLevelSubMenu.title }}
+                              </a>
+                            {%- endfor -%}
+                            <!-- End Loop the second level menu here -->
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    {%- endfor -%}
+                    <!-- End loop the first level menu here -->
+                  </div>
+                {%- endif -%}
+              </div>
             </li>
           {%- endfor -%}
+
+          <!-- end loop the menu list here -->
         </ul>
       </div>
       <!-- Icons -->
