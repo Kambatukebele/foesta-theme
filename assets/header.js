@@ -26,6 +26,23 @@ const ToggleMenu = () => {
     const minusSubMenus = document.querySelectorAll(".minusSubMenus"); // targeting the minus on the first level menu
     const secondLevelSubMenuLists = document.querySelectorAll(".secondLevelSubMenuLists"); // targeting the second level submenu lists
 
+    // This const menuHoverLargeScreen is going to show mega menu on hover
+    const menuHoverLargeScreen = document.querySelectorAll(".menuHoverLargeScreen");
+    const megaMenu = document.querySelector("#megaMenu"); // this select the mega menu to display on larger screen
+
+    menuHoverLargeScreen[1].addEventListener("mouseenter", () =>{
+      console.log("mouse enter successfully");
+      megaMenu.classList.remove("lg:translate-y-11", "lg:opacity-0");      
+      megaMenu.classList.add("lg:translate-y-0", "lg:opacity-100");      
+    })
+    megaMenu.addEventListener("mouseleave", () =>{
+      console.log("mouse enter successfully");
+      megaMenu.classList.add("lg:translate-y-11", "lg:opacity-0");      
+      megaMenu.classList.remove("lg:translate-y-0", "lg:opacity-100");      
+    })
+    // End This const menuHoverLargeScreen is going to show mega menu on hover
+    
+
     // Show the first submenu lists
     plusMenus.forEach((plus, index) =>{
       minusMenus.forEach((minus, min_index) =>{

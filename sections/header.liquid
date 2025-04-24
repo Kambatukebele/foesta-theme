@@ -27,27 +27,27 @@
       </div>
       {% render 'icon-menus' %}
       <!-- Menu -->
-      {% comment %} top-[60px] -left-[1300px] overflow-hidden {% endcomment %}
+      {% comment %} top-[60px] lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none {% endcomment %}
       <div
         id="menu"
         class="absolute area-2 bg-gray-100 z-50 h-screen duration-700 ease-in-out flex flex-col justify-start items-start gap-10 w-full top-[60px] -left-[1300px] overflow-hidden p-8 lg:static lg:h-0 lg:flex-row lg:items-center lg:top-0 lg:py-5 lg:px-0 lg:justify-center lg:bg-transparent lg:order-none"
       >
         <ul
-          class="w-full flex flex-col justify-start items-start gap-4 lg:flex-row lg:gap-8"
+          class="w-full flex flex-col justify-start items-start gap-4 lg:flex-row"
         >
           <!-- loop the menu list here -->
           {%- for menu in section.settings.menu.links -%}
             <li class="w-full h-fit">
               <div class="w-full h-fit">
-                <div class="w-full h-fit flex justify-between items-center py-2">
+                <div class="w-full h-fit flex justify-between items-center py-2 lg:py-0">
                   <a
                     href="{{ menu.url }}"
-                    class="text-lg {{ section.settings.menu_text_color }} {{ section.settings.menu_text_transform }}"
+                    class="menuHoverLargeScreen text-base {{ section.settings.menu_text_color }} {{ section.settings.menu_text_transform }}"
                   >
                     {{- menu.title -}}
                   </a>
                   {%- if menu.links.size > 0 -%}
-                    <div class="flex justify-center items-center w-10">
+                    <div class="flex justify-center items-center w-10 lg:hidden">
                       <span class="text-xl block plusMenus">+</span>
                       <span class="text-xl hidden minusMenus">-</span>
                     </div>
@@ -147,8 +147,70 @@
         {{ 'icon-close.svg' | inline_asset_content }}
       </span>
     </div>
+    <!-- Mega menu -->
+    {%- if section.settings.is_enable_header_mega_menu == true -%}
+      {%- if section.settings.menu.links -%}
+        <div
+          {% comment %} lg:translate-y-11 lg:opacity-0 {% endcomment %}
+          id="megaMenu"
+          class="hidden lg:block lg:w-full bg-white shadow-2xl rounded-b-2xl lg:h-[400px] lg:z-50 lg:absolute lg:top-16 lg:translate-y-11 lg:opacity-0 lg:duration-700 lg:ease-in-out"
+        >
+          <div class="lg:container lg:flex lg:justify-between lg:items-center">
+            <!-- Texts -->
+            <div class="lg:w-1/2 lg:h-96 lg:grid lg:grid-cols-4 lg:items-start lg:pt-10">
+              <!-- Loop text menu here -->
+              {%- for menu in section.settings.menu.links -%}
+                {%- for menuCollection in menu.links limit: 4 -%}
+                  <div class="lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-start lg:gap-5">
+                    <h5 class="lg:text-base lg:font-semibold">
+                      <a href="">{{ menuCollection.title }}</a>
+                    </h5>
+                    {%- if menuCollection.links.size > 0 -%}
+                      <div class="lg:w-full lg:flex lg:flex-col jlg:ustify-center lg:items-start lg:gap-3.5">
+                        {%- for subMenu in menuCollection.links -%}
+                          <a href="{{ subMenu.url }}" class="lg:text-base lg:font-normal lg:block">
+                            {{- subMenu.title -}}
+                          </a>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endfor -%}
+            </div>
+            <!-- Images -->
+            <div class="lg:w-1/2 lg:h-96 lg:flex lg:justify-end lg:items-center lg:gap-5">
+              {%- if section.settings.mega_menu_product_list != empty -%}
+                {%- for megaMenuProduct in section.settings.mega_menu_product_list -%}
+                  <div class="lg:w-72 lg:h-72 lg:border lg:border-gray-100 lg:rounded-xl">
+                    {{
+                      megaMenuProduct.featured_image
+                      | image_url: width: 1000
+                      | image_tag: class: 'lg:w-full lg:h-full lg:object-cover lg:rounded-xl'
+                    }}
+                    <span class="my-3 font-semibold block">
+                      {{ megaMenuProduct.title }}
+                    </span>
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                <div class="lg:w-72 lg:h-72 lg:border lg:border-gray-100 lg:rounded-xl">
+                  {{ 'product-1' | placeholder_svg_tag: 'lg:w-full lg:h-full lg:object-cover lg:rounded-xl' }}
+                  <span class="my-3 font-semibold block">Title product</span>
+                </div>
+                <div class="lg:w-72 lg:h-72 lg:border lg:border-gray-100 lg:rounded-xl">
+                  {{ 'product-4' | placeholder_svg_tag: 'lg:w-full lg:h-full lg:object-cover lg:rounded-xl' }}
+                  <span class="my-3 font-semibold block">Title product</span>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </section>
+
 <!-- End Header -->
 
 {% schema %}
@@ -218,6 +280,23 @@
       "id": "text_color_counter",
       "label": "Text color counter",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_enable_header_mega_menu",
+      "label": "Enable Mega menu",
+      "default": true
+    },
+    {
+      "type": "product_list",
+      "label": "Mega menu product image",
+      "id": "mega_menu_product_list",
+      "limit": 2,
+      "info": "Select 2 products to display on the mega menu"
     }
   ],
   "presets": [
@@ -228,7 +307,8 @@
         "menu_text_color": "#ffffff",
         "menu_text_transform": "uppercase",
         "background_color_counter": "#000000",
-        "text_color_counter": "#ffffff"
+        "text_color_counter": "#ffffff",
+        "is_enable_header_mega_menu": true
       }
     }
   ]
