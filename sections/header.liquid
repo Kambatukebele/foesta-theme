@@ -40,7 +40,12 @@
             <li class="w-full h-fit">
               <div class="w-full h-fit">
                 <div class="w-full h-fit flex justify-between items-center py-2">
-                  <a href="{{ menu.url }}" class="text-lg">{{ menu.title }}</a>
+                  <a
+                    href="{{ menu.url }}"
+                    class="text-lg {{ section.settings.menu_text_color }} {{ section.settings.menu_text_transform }}"
+                  >
+                    {{- menu.title -}}
+                  </a>
                   {%- if menu.links.size > 0 -%}
                     <div class="flex justify-center items-center w-10">
                       <span class="text-xl block plusMenus">+</span>
@@ -54,7 +59,11 @@
                     {%- for subMenu in menu.links -%}
                       <div class="w-full">
                         <div class="w-full h-fit flex justify-between items-center py-2">
-                          <a href="{{ subMenu.url }}" style="text-indent:1em" class="text-base">
+                          <a
+                            href="{{ subMenu.url }}"
+                            style="text-indent:1em"
+                            class="text-base {{ section.settings.menu_text_color }}"
+                          >
                             {{ subMenu.title }}
                           </a>
                           {%- if subMenu.links.size > 0 -%}
@@ -68,7 +77,11 @@
                           <div class="secondLevelSubMenuLists w-full hidden flex-col gap-1.5 my-2">
                             <!-- Loop the second level menu here -->
                             {%- for secondLevelSubMenu in subMenu.links -%}
-                              <a href="{{ secondLevelSubMenu.url }}" style="text-indent:2em" class="block py-1">
+                              <a
+                                href="{{ secondLevelSubMenu.url }}"
+                                style="text-indent:2em"
+                                class="block py-1 {{ section.settings.menu_text_color }}"
+                              >
                                 {{ secondLevelSubMenu.title }}
                               </a>
                             {%- endfor -%}
