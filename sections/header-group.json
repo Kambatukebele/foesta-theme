@@ -13,18 +13,6 @@
   "sections": {
     "announcement": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_jQef8r": {
-          "type": "announcement",
-          "settings": {
-            "announcement_title": "30% OFF. Code: THIRTY",
-            "announcement_title_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_jQef8r"
-      ],
       "settings": {
         "announcement_title_size": 14,
         "announcement_bar_background": "#fa0505",
