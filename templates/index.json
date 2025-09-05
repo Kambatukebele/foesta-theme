@@ -16,7 +16,7 @@
           "type": "hero_block",
           "settings": {
             "image": "shopify://shop_images/slider-2.webp",
-            "heading_h1": "Winter style delights",
+            "heading_h1": "Winter style delights 25",
             "body_description": "Having plain clothing makes you look ordinary. we can assist you in choosing the right dresses with foesta",
             "button_text": "Shop Men's Collection",
             "button_url": "shopify://collections/mens-fashion"
@@ -280,8 +280,8 @@
       "name": "Blog",
       "settings": {
         "blog_select_blog_for_home_page_only": "news",
-        "posts_count": 3,
         "blog_paddingY_small": "py-12",
+        "blog_posts_count": 12,
         "blog_paddingY_large": "lg:py-24",
         "blog_heading": "Our Latest Blog",
         "blog_paragraph": "Follow the most popular trends and get exclusive items from Foesta shop.",

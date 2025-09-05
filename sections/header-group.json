@@ -27,7 +27,7 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "menu_text_color": "#0a0a0a",
+        "menu_text_color": "#f90000",
         "menu_text_transform": "uppercase",
         "is_enable_header_bottom_border": true,
         "background_color_counter": "#000000",
