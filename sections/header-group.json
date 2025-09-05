@@ -27,10 +27,12 @@
       ],
       "settings": {
         "announcement_title_size": 14,
-        "announcement_bar_background": "#0a0a0a",
+        "announcement_bar_background": "#fa0505",
         "announcement_bar_color": "#f7f7f7",
         "announcement_bar_padding_top": 10,
-        "announcement_bar_padding_bottom": 10
+        "announcement_bar_padding_bottom": 10,
+        "langAndCurrencySelectorBgColor": "#000000",
+        "langAndCurrencySelectorTextColor": "#ffffff"
       }
     },
     "header": {
@@ -39,7 +41,11 @@
         "menu": "main-menu",
         "menu_text_color": "#0a0a0a",
         "menu_text_transform": "uppercase",
-        "is_enable_header_bottom_border": true
+        "is_enable_header_bottom_border": true,
+        "background_color_counter": "#000000",
+        "text_color_counter": "#ffffff",
+        "is_enable_header_mega_menu": true,
+        "mega_menu_product_list": []
       }
     }
   },
